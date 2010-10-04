@@ -10,6 +10,7 @@ void GLWidget::initializeGL()
 {
   glClearColor(0.4f, 0.4f, 0.8f, 1.0f);
   glEnable(GL_DEPTH_TEST);
+  gluLookAt(0.2,0.2,0.2,0,0,0,0,1,0);
   scene.Init();
 }
 void GLWidget::resizeGL (int width, int height)
