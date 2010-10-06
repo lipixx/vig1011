@@ -29,7 +29,21 @@ void Model::updateBoundingBox()
 void Model::Render()
 {
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares
+  for(unsigned int cara = 0; cara < faces.size(); cara++) {
 
+    glBegin (GL_POLYGON);
+
+    Color color = Scene().matlib.material(faces[cara].material).kd;
+    glColor3f(color.r,color.g,color.b);
+
+    for (unsigned int vertex = 0; vertex < faces[cara].vertices.size(); vertex++)
+    {
+      Point p = vertices[faces[cara].vertices[vertex]].coord;
+      glVertex3f(p.x,p.y,p.z);
+    }
+
+    glEnd();
+  }
 }
 
 // Netela les dades de l'objecte per a poder carregar un nou model
@@ -54,12 +68,12 @@ Lectura d'un fitxer OBJ
 Cont� fragments de codi de obj_2_ply.c (C) Greg Turk
 
 -----------------------------------------------------------------------
-Copyright (c) 1998 Georgia Institute of Technology.  All rights reserved.   
+Copyright (c) 1998 Georgia Institute of Technology.  All rights reserved.
 
-Permission to use, copy, modify and distribute this software and its   
-documentation for any purpose is hereby granted without fee, provided   
-that the above copyright notice and this permission notice appear in   
-all copies of this software and that you do not sell the software.   
+Permission to use, copy, modify and distribute this software and its
+documentation for any purpose is hereby granted without fee, provided
+that the above copyright notice and this permission notice appear in
+all copies of this software and that you do not sell the software.
 */
 
 
@@ -103,10 +117,10 @@ nindex - third number (normal vector index)
   for (ptr = word; *ptr != '\0'; ptr++) {
     if (*ptr == '/') {
       if (tp == null)
-	tp = ptr + 1;
+        tp = ptr + 1;
       else
-	np = ptr + 1;
-      
+        np = ptr + 1;
+
       *ptr = '\0';
     }
   }
@@ -119,7 +133,7 @@ nindex - third number (normal vector index)
 void Model::make_face ( char **words, int nwords, int currentMaterial )
 {
   Face face;
-  for (int i = 0; i < nwords; i++) 
+  for (int i = 0; i < nwords; i++)
   {
     int vindex;
     int nindex;
@@ -128,7 +142,7 @@ void Model::make_face ( char **words, int nwords, int currentMaterial )
     if ((words[i][0]>='0')&&(words[i][0]<='9'))
     {
       get_indices (words[i], &vindex, &tindex, &nindex);
-      
+
       #if 0
       printf ("vtn: %d %d %d\n", vindex, tindex, nindex);
       #endif
@@ -136,27 +150,27 @@ void Model::make_face ( char **words, int nwords, int currentMaterial )
       /* store the vertex index */
 
       if (vindex > 0)       /* indices are from one, not zero */
-	face.vertices.push_back(vindex - 1);
+        face.vertices.push_back(vindex - 1);
       else if (vindex < 0)  /* negative indices mean count backwards */
-	face.vertices.push_back(vertices.size() + vindex);
-      else 
+        face.vertices.push_back(vertices.size() + vindex);
+      else
       {
-	fprintf (stderr, "Zero indices not allowed: '%s'\n", str_orig);
-	exit (-1);
+        fprintf (stderr, "Zero indices not allowed: '%s'\n", str_orig);
+        exit (-1);
       }
 
       /*
-	if ((tindex != 0 || nindex != 0) && warning == 0) {
-	fprintf (stderr, "\n");
-	fprintf (stderr, "Warning: textures and normals currently ignored.\n");
-	fprintf (stderr, "\n");
-	warning = 1;
-	}
+        if ((tindex != 0 || nindex != 0) && warning == 0) {
+        fprintf (stderr, "\n");
+        fprintf (stderr, "Warning: textures and normals currently ignored.\n");
+        fprintf (stderr, "\n");
+        warning = 1;
+        }
       */
     }
   }
   face.material = currentMaterial;
-  
+
   faces.push_back(face);
 }
 
@@ -167,21 +181,21 @@ char *fetch_line ( FILE *fp )
   char *ptr2;
   char *result;
   //char *comment_ptr;
-  
+
   /* read in a line */
   result = fgets (str, BIG_STRING, fp);
-  
+
   /* return NULL if we're at the end-of-file */
   if (result == NULL)
     return ((char *) -1);
-  
+
   /* convert line-feed and tabs into spaces */
   /* (this guarentees that there will be a space before the */
   /*  null character at the end of the string) */
-  
+
   str[BIG_STRING-2] = ' ';
   str[BIG_STRING-1] = '\0';
-  
+
   for (ptr = str; *ptr != '\0'; ptr++) {
     if (*ptr == '\t') {
       *ptr = ' ';
@@ -196,14 +210,14 @@ char *fetch_line ( FILE *fp )
   for (ptr = str, ptr2 = str_orig; *ptr != '\0'; ptr++, ptr2++)
     *ptr2 = *ptr;
   *ptr2 = '\0';
-  
+
   /* look to see if this is a comment line (first non-space is '#') */
-  
+
   for (ptr = str; *ptr != '\0'; ptr++) {
     if (*ptr == '#') {
       ptr++;
       while (*ptr == ' ')
-	ptr++;
+        ptr++;
       return (ptr);
     }
     else if (*ptr != ' ') {
@@ -238,10 +252,10 @@ int fetch_words ( void )
   }
 
   /* find the words in the line */
-  
+
   ptr = str;
   num_words = 0;
-  
+
   while (*ptr != '\0') {
     /* jump over leading spaces */
     while (*ptr == ' ')
@@ -250,20 +264,20 @@ int fetch_words ( void )
     /* break if we reach the end */
     if (*ptr == '\0')
       break;
-    
+
     /* allocate more room for words if necessary */
     if (num_words >= max_words) {
       max_words += 10;
       words = (char **) realloc (words, sizeof (char *) * max_words);
     }
-    
+
     /* save pointer to beginning of word */
     words[num_words++] = ptr;
-    
+
     /* jump over non-spaces */
     while (*ptr != ' ')
       ptr++;
-    
+
     /* place a null character here to mark the end of the word */
     *ptr++ = '\0';
   }
@@ -285,11 +299,11 @@ string getPath(const string& filename)
 }
 
 // llegeix tots els fitxers .mtl i els afegeix a matlib
-void read_mtllib( char **words, int nwords, MaterialLib& matlib, 
-		  const string& filename )
+void read_mtllib( char **words, int nwords, MaterialLib& matlib,
+                  const string& filename )
 {
   string path = getPath(filename);
-  for (int i = 0; i < nwords; i++) 
+  for (int i = 0; i < nwords; i++)
   {
     int size = strlen(words[i])-1;
     while (size && (words[i][size]=='\n' || words[i][size]=='\r') ) words[i][size--]=0;
@@ -298,14 +312,14 @@ void read_mtllib( char **words, int nwords, MaterialLib& matlib,
 }
 
 // Llegeix un fitxer .obj
-//  Si el fitxer referencia fitxers de materials (.mtl), tambe es llegeixen. 
+//  Si el fitxer referencia fitxers de materials (.mtl), tambe es llegeixen.
 //  Tots els elements del fitxer es llegeixen com a un unic objecte.
-//  
+//
 
 void Model::readObj(const char* filename, MaterialLib& matlib)
 {
-  int currentMaterial = -1;  
-  
+  int currentMaterial = -1;
+
   FILE *fp = fopen(filename,"rb");
   if (!fp)
   {
@@ -313,70 +327,70 @@ void Model::readObj(const char* filename, MaterialLib& matlib)
   }
   else {
     netejaDades();
-    while (true) 
+    while (true)
     {
       char *comment_ptr = fetch_line (fp);
-      
+
       if (comment_ptr == (char *) -1)  /* end-of-file */
-	break;
-    
+        break;
+
       /* did we get a comment? */
       if (comment_ptr) {
       //make_comment (comment_ptr);
-	continue;
+        continue;
       }
-    
+
       /* if we get here, the line was not a comment */
       int nwords = fetch_words();
-      
+
       /* skip empty lines */
       if (nwords == 0)
-	continue;
-    
+        continue;
+
       char *first_word = words[0];
-      
-      if (!strcmp (first_word, "v")) 
+
+      if (!strcmp (first_word, "v"))
       {
-	if (nwords < 4) 
-	{
-	  fprintf (stderr, "Too few coordinates: '%s'", str_orig);
-	  exit (-1);
-	}
-	float x = atof (words[1]);
-	float y = atof (words[2]);
-	float z = atof (words[3]);
-	
-	if (nwords == 5) 
-	{
-	  float w = atof (words[4]);
-	  x/=w;
-	  y/=w;
-	  z/=w;
-	}
-	
-	//addVertex(Vertex(Point(x,y,z)));
-	vertices.push_back(Vertex(Point(x,y,z)));
+        if (nwords < 4)
+        {
+          fprintf (stderr, "Too few coordinates: '%s'", str_orig);
+          exit (-1);
+        }
+        float x = atof (words[1]);
+        float y = atof (words[2]);
+        float z = atof (words[3]);
+
+        if (nwords == 5)
+        {
+          float w = atof (words[4]);
+          x/=w;
+          y/=w;
+          z/=w;
+        }
+
+        //addVertex(Vertex(Point(x,y,z)));
+        vertices.push_back(Vertex(Point(x,y,z)));
       }
       else if (!strcmp (first_word, "vn")) {
       }
       else if (!strcmp (first_word, "vt")) {
       }
       else if (!strcmp (first_word, "f")) {
-	make_face (&words[1], nwords-1, currentMaterial);
+        make_face (&words[1], nwords-1, currentMaterial);
       }
-      // added 
+      // added
       else if (!strcmp (first_word, "mtllib")) {
-	read_mtllib (&words[1], nwords-1, matlib, filename);
+        read_mtllib (&words[1], nwords-1, matlib, filename);
       }
       else if (!strcmp (first_word, "usemtl")) {
-	int size = strlen(words[1])-1;
-	while (size && (words[1][size]=='\n' || words[1][size]=='\r') ) words[1][size--]=0;
-	currentMaterial = matlib.index(words[1]);
+        int size = strlen(words[1])-1;
+        while (size && (words[1][size]=='\n' || words[1][size]=='\r') ) words[1][size--]=0;
+        currentMaterial = matlib.index(words[1]);
       }
       // fadded
       else {
-	//fprintf (stderr, "Do not recognize: '%s'\n", str_orig);
-      }  
+        //fprintf (stderr, "Do not recognize: '%s'\n", str_orig);
+      }
     }
   }
   computeNormals();
