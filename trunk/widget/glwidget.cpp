@@ -4,6 +4,21 @@
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
+    dist = 10;
+    zFar = -5;
+    zNear = 5;
+    angleX = -15;
+    angleY = 30;
+
+    fovy = 10;
+    aspect = 1;
+   // aspect = width/height;
+
+    VRP.x=0;
+    VRP.y=0;
+    VRP.z=0;
+
+
 }
 
 void GLWidget::initializeGL()
@@ -21,6 +36,19 @@ void GLWidget::paintGL( void )
 {
   // Esborrem els buffers
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(fovy,aspect,zNear,zFar);
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+  gluLookAt(10,10,10,VRP.x,VRP.y,VRP.z,0,1,0);
+
+
+  glRotatef(80,1,0,0);
+ // glRotatef(30,0,1,0); -- TODO
+
 
   // dibuixar eixos aplicacio
   glDisable(GL_LIGHTING);
