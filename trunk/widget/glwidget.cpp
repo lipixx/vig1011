@@ -16,7 +16,7 @@ void GLWidget::setDefaultCamera()
     angleY = -30;
   //  angleZ = 0;
 
-    fovy = 1;
+    fovy = 70;
     aspect = width()/height();
 
     VRP.x=0;

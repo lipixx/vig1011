@@ -38,8 +38,11 @@ void Scene::construirBase ()
 
 void Scene::Render()
 {
-  // Cal pintar tots els objectes de l'escena que es troben al vector
+  int numObjs = lobjectes.size();
 
+  // Cal pintar tots els objectes de l'escena que es troben al vector
+  for (int i=0;i<numObjs;i++)
+      lobjectes[i].Render(lmodels);
 }
 
 void Scene::AddModel(Model &o)
