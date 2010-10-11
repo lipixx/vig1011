@@ -12,7 +12,10 @@ Objecte::~Objecte(void)
 
 void Objecte::Render(std::vector<Model> &lmodels)
 {
+  Model m = lmodels[this->getModelId()];
+
   // Cal pintar la geometria de l'objecte transformada de la forma adequada
+  m.Render();
 
 }
 
