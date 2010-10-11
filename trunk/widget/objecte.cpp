@@ -14,9 +14,24 @@ void Objecte::Render(std::vector<Model> &lmodels)
 {
   Model m = lmodels[this->getModelId()];
 
+ //(nom, model, pos,scale,orientation)
+  Box caixa = m.boundingBox();
+
+  float sx = caixa.maxb.x-caixa.minb.x;
+  float sy = caixa.maxb.y-caixa.minb.y;
+  float sz = caixa.maxb.z-caixa.minb.z;
+
+  glMatrixMode(GL_MODELVIEW);
+  glPushMatrix();
+
+  glTranslatef(pos.x,pos.y,pos.z);
+  glRotatef(orientation,0,1,0);
+  glScalef(sx/(sx*scale),1,sz/(sz*scale));
+  glTranslatef(-(caixa.maxb.x+caixa.minb.x)/2,-caixa.minb.y,-(caixa.maxb.z+caixa.minb.z)/2);
+
   // Cal pintar la geometria de l'objecte transformada de la forma adequada
   m.Render();
-
+  glPopMatrix();
 }
 
 std::string Objecte::getNom()
