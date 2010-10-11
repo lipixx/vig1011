@@ -31,6 +31,8 @@ void Scene::construirBase ()
   face.material = 0;
   b.faces.push_back(face);
 
+  b.updateBoundingBox();
+
   AddModel(b);
   Objecte oref("Base", 0, Point(0,0,0), 1, 0);
   AddObjecte(oref);
