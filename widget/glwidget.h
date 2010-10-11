@@ -18,6 +18,7 @@ public:
 protected:
     void initializeGL ();
 
+    void setDefaultCamera();
     void paintGL ();
     void resizeGL (int width, int height);
 
@@ -26,7 +27,7 @@ protected:
     virtual void mouseMoveEvent (QMouseEvent *e);
     virtual void keyPressEvent (QKeyEvent *event);
 
-    double dist, anterior, posterior, radi, angleX, angleY, anglecam, ra;
+    double dist, zNear, zFar, radi, angleX, angleY, fovy, aspect;
     Point VRP;
     Scene scene;
 
