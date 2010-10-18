@@ -24,6 +24,8 @@ void Objecte::Render(std::vector<Model> &lmodels)
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
 
+  //Atenció, mirar si ho podem posar a una altra banda perquè sinó ho hem de
+  //calcular cada vegada
   glTranslatef(pos.x,pos.y,pos.z);
   glRotatef(orientation,0,1,0);
   glScalef(sx/(sx*scale),1,sz/(sz*scale));

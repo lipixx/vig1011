@@ -7,6 +7,9 @@
 #include <QFileDialog>
 #include "point.h"
 #include "scene.h"
+#define PI 3.141592654
+#define RAD2DEG 180/PI
+#define DEG2RAD PI*180
 
 class GLWidget : public QGLWidget
 {
@@ -27,7 +30,7 @@ protected:
     virtual void mouseMoveEvent (QMouseEvent *e);
     virtual void keyPressEvent (QKeyEvent *event);
 
-    double dist, zNear, zFar, radi, angleX, angleY, fovy, aspect;
+    double dist, zNear, zFar, radi, angleX, angleY, angleZ, fovy, aspect;
     Point VRP;
     Scene scene;
 
