@@ -20,8 +20,6 @@ public:
 
 protected:
     void initializeGL ();
-
-    void setDefaultCamera();
     void paintGL ();
     void resizeGL (int width, int height);
 
@@ -39,6 +37,9 @@ protected:
     InteractiveAction DoingInteractive;
 
     int   xClick, yClick;
+
+private:
+     void setDefaultCamera();
 
  public slots:
      void LoadObject ();

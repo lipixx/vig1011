@@ -3,26 +3,19 @@
 
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
-{
-    setDefaultCamera();
-}
+{}
 
 void GLWidget::setDefaultCamera()
 {
-    radi = 10;
-    dist = 3*radi;
-    zFar = dist+2*radi;
+    scene.calculaEsfera(VRP,radi);
+    dist = 2*radi;
+    zFar = 3*radi;
     zNear = radi;
     angleX = 15;
     angleY = -30;
     angleZ = 0;
-
     fovy = (float) 2*atanf(radi/dist)*RAD2DEG;
     aspect = (float) width()/height();
-
-    VRP.x=0;
-    VRP.y=0;
-    VRP.z=0;
 }
 
 void GLWidget::initializeGL()
@@ -30,14 +23,16 @@ void GLWidget::initializeGL()
   glClearColor(0.4f, 0.4f, 0.8f, 1.0f);
   glEnable(GL_DEPTH_TEST);
   scene.Init();
+  setDefaultCamera();
 }
+
 void GLWidget::resizeGL (int width, int height)
 {
   glViewport (0, 0, width, height);
   aspect = (float) width/height;
+
   //if (aspect < 1) //Si w < h
   //fovy=atan(tan(fovy*DEG2RAD/2)/aspect)*RAD2DEG*2;
-
 }
 
 void GLWidget::paintGL( void )

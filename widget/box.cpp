@@ -8,6 +8,7 @@ Box::Box(const Point& minimum, const Point& maximum)
 
 void Box::update(const Point& p)
 {
+  //cout << "Box::" << "min actual:"<< minb << "max actual:"<< maxb << "p: "<<p<< endl;
   if (p.x < minb.x) minb.x=p.x;
   if (p.y < minb.y) minb.y=p.y;
   if (p.z < minb.z) minb.z=p.z;
