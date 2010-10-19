@@ -61,8 +61,15 @@ float Objecte::getOrientation()
    return orientation;
 }
 
-Box& Objecte::getCapsaObjecte()
+Box& Objecte::getCapsaObjecte(Model &model)
 {
+    Box modelBox = model.boundingBox();
     Box &capsaObj = *(new Box(Point(0,0,0),Point(0,0,0)));
+
+    //1.Agafem la bounding box del model, i mitjançant
+    //2.Preparem la matriu (posició, scale i orientation) per transformar la bounding del model
+    //3.La transformem
+    //4.Cerquem els punts major i menor de la Box transformada
+
     return capsaObj;
 }

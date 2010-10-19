@@ -55,7 +55,7 @@ void Scene::calculaEsfera(Point &centreEscena, float &radi)
 
     for (int i=0;i<numObjs;i++)
     {
-        b = lobjectes[i].getCapsaObjecte();
+        b = lobjectes[i].getCapsaObjecte(lmodels[lobjectes[i].getModelId()]);
         capsaEscena.update(b.minb);
         capsaEscena.update(b.maxb);
     }

@@ -16,7 +16,7 @@ class Objecte
   int model;   // identificador del model
   Point pos;    // posicio sobre el terra
   float scale;	   // mida en unitats
-  float orientation;  //orientació respecte Y
+  float orientation;  //orientaciÃ³ respecte Y
 
  public:
   Objecte(std::string nom, int idmod, Point p, float scl, float ori);
@@ -29,7 +29,7 @@ class Objecte
   float getScale();
   float getOrientation();
 
-  Box& getCapsaObjecte();
+  Box& getCapsaObjecte(Model &model);
 };
 
 #endif
