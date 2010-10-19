@@ -31,6 +31,7 @@ protected:
     virtual void keyPressEvent (QKeyEvent *event);
 
     double dist, zNear, zFar, radi, angleX, angleY, angleZ, fovy, aspect;
+
     Point VRP;
     Scene scene;
 

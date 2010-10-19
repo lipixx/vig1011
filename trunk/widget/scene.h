@@ -3,7 +3,7 @@
 #include "objecte.h"
 #include "model.h"
 #include <QtOpenGL/qgl.h>
-
+#include <box.h>
 
 class Scene
 {
@@ -13,8 +13,7 @@ class Scene
   // i un altre amb instàncies seves (instàncies o referències a objectes).
   std::vector<Model> lmodels;
   std::vector<Objecte> lobjectes;
-  
-  
+
  public:
   static MaterialLib matlib;	  // col·lecció de materials
 
@@ -25,6 +24,9 @@ class Scene
   void Render();
   void AddModel(Model &);
   void AddObjecte(Objecte &);
+
+  void calculaEsfera(Point &centreEscena, float &radi);
+
 };
 
 #endif

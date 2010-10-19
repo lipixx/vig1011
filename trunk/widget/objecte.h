@@ -28,6 +28,8 @@ class Objecte
   Point getPosition();
   float getScale();
   float getOrientation();
+
+  Box& getCapsaObjecte();
 };
 
 #endif
