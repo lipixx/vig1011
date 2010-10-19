@@ -12,6 +12,9 @@ Objecte::~Objecte(void)
 
 void Objecte::Render(std::vector<Model> &lmodels)
 {
+  //L'objecte té les dades de "modificació" que aplicarem
+  //al model del seu objecte: scale, position, orientation
+  //per tant agafarem el model i farem la transformació
   Model m = lmodels[this->getModelId()];
 
  //(nom, model, pos,scale,orientation)
@@ -24,14 +27,11 @@ void Objecte::Render(std::vector<Model> &lmodels)
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
 
-  //Atenció, mirar si ho podem posar a una altra banda perquè sinó ho hem de
-  //calcular cada vegada
   glTranslatef(pos.x,pos.y,pos.z);
   glRotatef(orientation,0,1,0);
   glScalef(sx/(sx*scale),1,sz/(sz*scale));
   glTranslatef(-(caixa.maxb.x+caixa.minb.x)/2,-caixa.minb.y,-(caixa.maxb.z+caixa.minb.z)/2);
 
-  // Cal pintar la geometria de l'objecte transformada de la forma adequada
   m.Render();
   glPopMatrix();
 }
@@ -61,3 +61,8 @@ float Objecte::getOrientation()
    return orientation;
 }
 
+Box& Objecte::getCapsaObjecte()
+{
+    Box &capsaObj = *(new Box(Point(0,0,0),Point(0,0,0)));
+    return capsaObj;
+}

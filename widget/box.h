@@ -30,6 +30,7 @@ class Box
   Point minb, maxb;	// extrems mínim i màxim de la capsa
 
   void Render();
+
 };
 
 
