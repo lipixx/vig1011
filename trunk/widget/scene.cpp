@@ -47,7 +47,7 @@ void Scene::Render()
       lobjectes[i].Render(lmodels);
 }
 
-void Scene::calculaEsfera(Point &centreEscena, float &radi)
+void Scene::calculaEsfera(Point &centreEscena, double &radi)
 {
     int numObjs = lobjectes.size();
     Box capsaEscena = *(new Box(Point(0,0,0),Point(0,0,0)));
@@ -63,7 +63,8 @@ void Scene::calculaEsfera(Point &centreEscena, float &radi)
     //Volem sumar dos Point i fer la meitat
     centreEscena =  (capsaEscena.maxb + capsaEscena.minb)/2.0;
 
-    //Volem la longitut entre dos punts, Point.cpp ens ofereix length().
+    //Volem la longitut entre dos punts, Point.cpp ens ofereix length()
+    //que executa la fórmula de càlcul del mòdul d'un vector
     radi = (capsaEscena.maxb - capsaEscena.minb).length() /2.0;
 }
 

@@ -25,7 +25,7 @@ class Scene
   void AddModel(Model &);
   void AddObjecte(Objecte &);
 
-  void calculaEsfera(Point &centreEscena, float &radi);
+  void calculaEsfera(Point &centreEscena, double &radi);
 
 };
 

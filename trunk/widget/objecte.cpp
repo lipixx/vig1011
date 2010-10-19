@@ -36,6 +36,9 @@ void Objecte::Render(std::vector<Model> &lmodels)
   glScalef(sx/(sx*scale),1,sz/(sz*scale));
   glTranslatef(-(caixa.maxb.x+caixa.minb.x)/2,-caixa.minb.y,-(caixa.maxb.z+caixa.minb.z)/2);
 
+  //DEBUG
+  //caixa.Render();
+
   m.Render();
   glPopMatrix();
 }
@@ -129,6 +132,5 @@ Box& Objecte::getCapsaObjecte(Model &model)
     glPopMatrix();
 
     //4.Retornem la capsa
-
     return capsaObj;
 }
