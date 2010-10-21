@@ -3,19 +3,39 @@
 
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
-{}
+{
+    filferros = false;
+}
+
+void GLWidget::resetCamera()
+{
+    setDefaultCamera();
+    updateGL();
+}
+
+void GLWidget::setFilferros(bool toggle)
+{
+    if (toggle)
+    {
+    if (filferros)
+        filferros = false;
+    else
+        filferros = true;
+}
+    cout << "togle:" << toggle << endl;
+    cout << "fil:" << filferros << endl;
+}
 
 void GLWidget::setDefaultCamera()
 {
     scene.calculaEsfera(VRP,radi);
     dist = 2*radi;
-    zFar = 3*radi;
-    zNear = radi;
+    zFar = radi;
+    zNear = 3*radi;
     angleX = 15;
     angleY = -30;
-    angleZ = 0;
-    fovy = (float) 2*atanf(radi/dist)*RAD2DEG;
-    aspect = (float) width()/height();
+    fovy = (float) 2 * atanf(radi/dist) * RAD2DEG;
+    dynamic_fovy = fovy;
 }
 
 void GLWidget::initializeGL()
@@ -31,8 +51,10 @@ void GLWidget::resizeGL (int width, int height)
   glViewport (0, 0, width, height);
   aspect = (float) width/height;
 
-  //if (aspect < 1) //Si w < h
-  //fovy=atan(tan(fovy*DEG2RAD/2)/aspect)*RAD2DEG*2;
+  if (aspect < 1)
+      dynamic_fovy=atan(tan(fovy*DEG2RAD/2)/aspect)*RAD2DEG*2;
+
+  updateGL();
 }
 
 void GLWidget::paintGL( void )
@@ -40,16 +62,19 @@ void GLWidget::paintGL( void )
   // Esborrem els buffers
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluPerspective(fovy,aspect,zNear,zFar);
-
  glMatrixMode(GL_MODELVIEW);
  glLoadIdentity();
  glTranslatef(0,0,-dist);
  glRotatef(angleX,1,0,0);
  glRotatef(angleY,0,1,0);
  glTranslatef(-VRP.x,-VRP.y,-VRP.z);
+
+ glMatrixMode(GL_PROJECTION);
+ glLoadIdentity();
+ if (aspect < 1)
+     gluPerspective(dynamic_fovy,aspect,zNear,zFar);
+   else
+     gluPerspective(fovy,aspect,zNear,zFar);
 
  // dibuixar eixos aplicacio
   glDisable(GL_LIGHTING);
@@ -78,7 +103,7 @@ void GLWidget::mousePressEvent( QMouseEvent *e)
   }
   else if (e->button()&Qt::LeftButton &&  e->modifiers() &Qt::ControlModifier)
   {
-      DoingInteractive = PAN;
+    DoingInteractive = PAN;
   }
 }
 
@@ -110,7 +135,8 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
   if (DoingInteractive == ROTATE)
   {
     // Fem la rotacio
-
+      angleX= angleX + (e->y()-yClick)/2.0;
+      angleY= angleY + (e->x()-xClick)/2.0;
   }
   else if (DoingInteractive == ZOOM)
   {
@@ -124,6 +150,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
   }
   xClick = e->x();
   yClick = e->y();
+  updateGL();
 
 }
 

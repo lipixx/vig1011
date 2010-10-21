@@ -28,7 +28,9 @@ protected:
     virtual void mouseMoveEvent (QMouseEvent *e);
     virtual void keyPressEvent (QKeyEvent *event);
 
-    double dist, zNear, zFar, radi, angleX, angleY, angleZ, fovy, aspect;
+    double dist, zNear, zFar, radi, angleX, angleY, aspect;
+    GLfloat fovy, dynamic_fovy;
+
 
     Point VRP;
     Scene scene;
@@ -40,9 +42,12 @@ protected:
 
 private:
      void setDefaultCamera();
+     bool filferros;
 
  public slots:
      void LoadObject ();
+     void resetCamera();
+     void setFilferros(bool);
 };
 
 #endif
