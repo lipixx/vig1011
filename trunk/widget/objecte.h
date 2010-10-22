@@ -29,6 +29,7 @@ class Objecte
   Point getPosition();
   float getScale();
   float getOrientation();
+  void setPosition(Point p);
 
   Box& getCapsaObjecte(Model &model);
 };

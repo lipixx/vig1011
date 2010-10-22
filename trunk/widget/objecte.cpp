@@ -27,7 +27,7 @@ void Objecte::Render(std::vector<Model> &lmodels, GLenum mode)
   glTranslatef(-(caixa.maxb.x+caixa.minb.x)/2,-caixa.minb.y,-(caixa.maxb.z+caixa.minb.z)/2);
 
   //DEBUG
-  caixa.Render();
+  //caixa.Render();
 
   m.Render(mode);
   glPopMatrix();
@@ -46,6 +46,13 @@ int Objecte::getModelId()
 Point Objecte::getPosition()
 {
    return pos;
+}
+
+void Objecte::setPosition(Point p)
+{
+    pos.x = p.x;
+    pos.y = p.y;
+    pos.z = p.z;
 }
 
 float Objecte::getScale()

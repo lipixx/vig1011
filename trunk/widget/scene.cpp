@@ -93,12 +93,13 @@ void Scene::carregaModel(const char* filename)
         if (lmodels[i].getName() == filename)
             trobat = true;
     }
+
     if (!trobat)
     {
         this->AddModel(m);
         i = numModels;
     }
-
+    else i--;
     //Calculem l'escalat. El costat més llarg de la base ha de ser 1.0
     Box caixa = m.boundingBox();
     float sx = caixa.maxb.x-caixa.minb.x;
@@ -110,5 +111,29 @@ void Scene::carregaModel(const char* filename)
     //3.Amb l'identificador lmodel[i] corresponent, crear un objecte (centre000,escalat,orient0º)
     Objecte obj(filename,i,Point(0,0,0),scale,0);
     this->AddObjecte(obj);
+    idPosicionantObjecte = lobjectes.size()-1;
 }
 
+void Scene::mouDarrerObjecte(int sentit)
+{
+  Point p(0,0,0);
+  switch (sentit)
+    {
+    case XNEG:
+      p.x = -0.2;
+      break;
+    case XPOS:
+      p.x = 0.2;
+      break;
+    case ZNEG:
+      p.z = -0.2;
+      break;
+    case ZPOS:
+      p.z = 0.2;
+      break;
+    default:
+      break;
+    }
+   Point actual = lobjectes[idPosicionantObjecte].getPosition();
+   lobjectes[idPosicionantObjecte].setPosition(actual+p);
+}
