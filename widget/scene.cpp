@@ -107,7 +107,6 @@ void Scene::carregaModel(const char* filename)
     if (sx > sz) scale = 1.0/sx;
     else scale = 1.0/sz;
 
-    cout << scale << endl;
     //3.Amb l'identificador lmodel[i] corresponent, crear un objecte (centre000,escalat,orient0º)
     Objecte obj(filename,i,Point(0,0,0),scale,0);
     this->AddObjecte(obj);

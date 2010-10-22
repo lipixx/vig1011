@@ -19,24 +19,15 @@ void Objecte::Render(std::vector<Model> &lmodels, GLenum mode)
 
  //(nom, model, pos,scale,orientation)
   Box caixa = m.boundingBox();
-
-  float sx = caixa.maxb.x-caixa.minb.x;
-  float sz = caixa.maxb.z-caixa.minb.z;
-
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
-
   glTranslatef(pos.x,pos.y,pos.z);
   glRotatef(orientation,0,1,0);
-  /*Definim la mida de l'obecte. El càlcul es fa amb el factor que té l'objecte
-   que s'ha obtingut de l'XML, respecte la mida actual de la caixa contenidora
-   de l'objecte. Recordem que la mida no té unitats, per això ho hem d'escalar
-   respecte alguna cosa.*/
-  glScalef(sx/(sx*scale),1,sz/(sz*scale));
+  glScalef(scale,scale,scale);
   glTranslatef(-(caixa.maxb.x+caixa.minb.x)/2,-caixa.minb.y,-(caixa.maxb.z+caixa.minb.z)/2);
 
   //DEBUG
-  //caixa.Render();
+  caixa.Render();
 
   m.Render(mode);
   glPopMatrix();

@@ -28,12 +28,12 @@ void GLWidget::unsetFilferros()
 void GLWidget::setDefaultCamera()
 {
     scene.calculaEsfera(VRP,radi);
-    dist = 5*radi;
-    zFar = 2*radi;
-    zNear = 7*radi;
+    dist = 2*radi;
+    zFar = 3*radi;
+    zNear = 1*radi;
     angleX = 15;
     angleY = -30;
-    fovy = (float) 2 * atanf(radi/dist) * RAD2DEG;
+    fovy = (float) 2.2 * atanf(radi/dist) * RAD2DEG;
     dynamic_fovy = fovy;
 }
 
@@ -61,19 +61,19 @@ void GLWidget::paintGL( void )
   // Esborrem els buffers
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
- glMatrixMode(GL_MODELVIEW);
- glLoadIdentity();
- glTranslatef(0,0,-dist);
- glRotatef(angleX,1,0,0);
- glRotatef(angleY,0,1,0);
- glTranslatef(-VRP.x,-VRP.y,-VRP.z);
-
  glMatrixMode(GL_PROJECTION);
  glLoadIdentity();
  if (aspect < 1)
      gluPerspective(dynamic_fovy,aspect,zNear,zFar);
    else
      gluPerspective(fovy,aspect,zNear,zFar);
+
+ glMatrixMode(GL_MODELVIEW);
+ glLoadIdentity();
+ glTranslatef(0,0,-dist);
+ glRotatef(angleX,1,0,0);
+ glRotatef(angleY,0,1,0);
+ glTranslatef(-VRP.x,-VRP.y,-VRP.z);
 
  // dibuixar eixos aplicacio
   glDisable(GL_LIGHTING);
@@ -161,6 +161,7 @@ void GLWidget::LoadObject()
     // Aquí cal fer el codi per a carregar el model escollit
     const char *mod = (model.toStdString()).c_str();
     scene.carregaModel(mod);
+    setDefaultCamera();
     updateGL();
   }
 }
