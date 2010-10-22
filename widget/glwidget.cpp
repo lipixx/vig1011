@@ -5,6 +5,7 @@ GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
     filferros = GL_POLYGON;
+    posicionantObjecte = false;
 }
 
 void GLWidget::resetCamera()
@@ -91,6 +92,9 @@ void GLWidget::mousePressEvent( QMouseEvent *e)
   xClick = e->x();
   yClick = e->y();
 
+  if (e->button()&Qt::RightButton && posicionantObjecte)
+    posicionantObjecte = false;
+
   if (e->button()&Qt::LeftButton &&
       ! (e->modifiers()&(Qt::ShiftModifier|Qt::AltModifier|Qt::ControlModifier)))
   {
@@ -109,17 +113,52 @@ void GLWidget::mousePressEvent( QMouseEvent *e)
 void GLWidget::keyPressEvent(QKeyEvent *e)
 {
   switch (e->key())
-  {
+    {
     case Qt::Key_F:
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        updateGL();
-        break;
+      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+      updateGL();
+      break;
     case Qt::Key_S:
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        updateGL();
-        break;
+      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+      updateGL();
+      break;   
     default: e->ignore();
-  }
+    }
+  
+  if (posicionantObjecte)
+    {
+      int value = -1;
+      
+      if (e->modifiers()&Qt::ShiftModifier)
+	{
+	  switch (e->key())
+	    {
+	    case Qt::Key_X:
+	      value = XPOS;
+	      break;
+	    case Qt::Key_Z:
+	      value = ZPOS;
+	      break;	      
+	    default:
+	      break;
+	    }
+	}
+	  else
+	    {
+	      switch (e->key())
+		{		  
+		case Qt::Key_X:
+		  value = XNEG;
+		  break;
+		case Qt::Key_Z:
+		  value = ZNEG;
+		  break;
+		default: break;
+		}
+	    }
+      scene.mouDarrerObjecte(value);
+      updateGL();
+    }
 }
 
 void GLWidget::mouseReleaseEvent( QMouseEvent *)
@@ -162,6 +201,7 @@ void GLWidget::LoadObject()
     const char *mod = (model.toStdString()).c_str();
     scene.carregaModel(mod);
     setDefaultCamera();
+    posicionantObjecte = true;
     updateGL();
   }
 }

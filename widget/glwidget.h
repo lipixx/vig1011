@@ -44,6 +44,7 @@ protected:
 private:
      void setDefaultCamera();
      GLenum filferros;
+     bool posicionantObjecte;
 
  public slots:
      void LoadObject ();

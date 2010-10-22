@@ -5,6 +5,11 @@
 #include <QtOpenGL/qgl.h>
 #include <box.h>
 
+#define XPOS 0
+#define XNEG 1
+#define ZPOS 2
+#define ZNEG 3
+
 class Scene
 {
  private:
@@ -13,8 +18,9 @@ class Scene
   // i un altre amb instàncies seves (instàncies o referències a objectes).
   std::vector<Model> lmodels;
   std::vector<Objecte> lobjectes;
+  int  idPosicionantObjecte;
 
- public:
+public:
   static MaterialLib matlib;	  // col·lecció de materials
 
   Scene();
@@ -26,7 +32,7 @@ class Scene
   void AddObjecte(Objecte &);
   void carregaModel(const char* filename);
   void calculaEsfera(Point &centreEscena, double &radi);
-
+  void mouDarrerObjecte(int);
 };
 
 #endif
