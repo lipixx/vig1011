@@ -4,7 +4,7 @@
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent)
 {
-    filferros = false;
+    filferros = GL_POLYGON;
 }
 
 void GLWidget::resetCamera()
@@ -13,25 +13,24 @@ void GLWidget::resetCamera()
     updateGL();
 }
 
-void GLWidget::setFilferros(bool toggle)
+void GLWidget::setFilferros()
 {
-    if (toggle)
-    {
-    if (filferros)
-        filferros = false;
-    else
-        filferros = true;
+  filferros = GL_LINE_LOOP;
+  updateGL();
 }
-    cout << "togle:" << toggle << endl;
-    cout << "fil:" << filferros << endl;
+
+void GLWidget::unsetFilferros()
+{
+  filferros = GL_POLYGON;
+  updateGL();
 }
 
 void GLWidget::setDefaultCamera()
 {
     scene.calculaEsfera(VRP,radi);
-    dist = 2*radi;
-    zFar = radi;
-    zNear = 3*radi;
+    dist = 5*radi;
+    zFar = 2*radi;
+    zNear = 7*radi;
     angleX = 15;
     angleY = -30;
     fovy = (float) 2 * atanf(radi/dist) * RAD2DEG;
@@ -49,7 +48,7 @@ void GLWidget::initializeGL()
 void GLWidget::resizeGL (int width, int height)
 {
   glViewport (0, 0, width, height);
-  aspect = (float) width/height;
+  aspect = (float) width/ (float) height;
 
   if (aspect < 1)
       dynamic_fovy=atan(tan(fovy*DEG2RAD/2)/aspect)*RAD2DEG*2;
@@ -84,7 +83,7 @@ void GLWidget::paintGL( void )
   glColor3f(0,0,1); glVertex3f(0,0,0); glVertex3f(0,0,20); // Z
   glEnd();
 
-  scene.Render();
+  scene.Render(filferros);
 }
 
 void GLWidget::mousePressEvent( QMouseEvent *e)

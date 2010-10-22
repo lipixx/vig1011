@@ -7,6 +7,7 @@
 #include "box.h"
 #include "face.h"
 #include "material_lib.h"
+#include <QtOpenGL/qgl.h>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ class Model
   // retorna la capsa del model (previament s'ha d'haver calculat)
   Box boundingBox() const;
 
-  void Render();
+  void Render(GLenum mode);
 
  private:
   void make_face ( char **words, int nwords, int material );

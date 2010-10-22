@@ -38,13 +38,13 @@ void Scene::construirBase ()
   AddObjecte(oref);
 }
 
-void Scene::Render()
+void Scene::Render(GLenum mode)
 {
   int numObjs = lobjectes.size();
 
   // Cal pintar tots els objectes de l'escena que es troben al vector
   for (int i=0;i<numObjs;i++)
-      lobjectes[i].Render(lmodels);
+      lobjectes[i].Render(lmodels,mode);
 }
 
 void Scene::calculaEsfera(Point &centreEscena, double &radi)
@@ -61,11 +61,11 @@ void Scene::calculaEsfera(Point &centreEscena, double &radi)
     }
 
     //Volem sumar dos Point i fer la meitat
-    centreEscena =  (capsaEscena.maxb + capsaEscena.minb)/2.0;
+    centreEscena =  (capsaEscena.maxb + capsaEscena.minb)/2;
 
     //Volem la longitut entre dos punts, Point.cpp ens ofereix length()
     //que executa la fórmula de càlcul del mòdul d'un vector
-    radi = (capsaEscena.maxb - capsaEscena.minb).length() /2.0;
+    radi = (capsaEscena.maxb - capsaEscena.minb).length() /2.f;
 }
 
 void Scene::AddModel(Model &o)
