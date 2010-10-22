@@ -67,14 +67,12 @@ Box& Objecte::getCapsaObjecte(Model &model)
     //per transformar la bounding del model. La setejem igual que al Render()
     //i hem de tenir en compte el glLoadIdentity ja que sino ens calcula
     //la caixa amb la matriu GL_MODELVIEW actual i que està "bruta".
-    float sx = caixaModel.maxb.x-caixaModel.minb.x;
-    float sz = caixaModel.maxb.z-caixaModel.minb.z;
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(pos.x,pos.y,pos.z);
     glRotatef(orientation,0,1,0);
-    glScalef(sx/(sx*scale),1,sz/(sz*scale));
+    glScalef(scale,scale,scale);
     glTranslatef(-(caixaModel.maxb.x+caixaModel.minb.x)/2,-caixaModel.minb.y,-(caixaModel.maxb.z+caixaModel.minb.z)/2);
 
     //3.Haurem de transformar cada punt de la bounding box, per això
