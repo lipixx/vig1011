@@ -77,3 +77,39 @@ void Scene::AddObjecte(Objecte &oref)
 {
   lobjectes.push_back(oref);
 }
+
+void Scene::carregaModel(const char* filename)
+{
+    //1.Agafar el nom del model
+    //2.Si NO existeix dins lmodel, crear-lo i inserir-lo
+    Model m(filename);
+    m.readObj(filename,Scene::matlib);
+
+    int numModels = lmodels.size();
+    bool trobat = false;
+    int i = 0;
+    for (;i<numModels;i++)
+    {
+        if (lmodels[i].getName() == filename)
+            trobat = true;
+    }
+    if (!trobat)
+    {
+        this->AddModel(m);
+        i = numModels;
+    }
+
+    //Calculem l'escalat. El costat més llarg de la base ha de ser 1.0
+    Box caixa = m.boundingBox();
+    float sx = caixa.maxb.x-caixa.minb.x;
+    float sz = caixa.maxb.z-caixa.minb.z;
+    float scale;
+    if (sx > sz) scale = 1.0/sx;
+    else scale = 1.0/sz;
+
+    cout << scale << endl;
+    //3.Amb l'identificador lmodel[i] corresponent, crear un objecte (centre000,escalat,orient0º)
+    Objecte obj(filename,i,Point(0,0,0),scale,0);
+    this->AddObjecte(obj);
+}
+

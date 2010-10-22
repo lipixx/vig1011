@@ -60,6 +60,12 @@ void Model::computeNormals()
   }
 }
 
+std::string Model::getName()
+{
+    return name;
+}
+
+
 /*
 Lectura d'un fitxer OBJ
 
