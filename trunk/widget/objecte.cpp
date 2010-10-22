@@ -10,7 +10,7 @@ Objecte::Objecte(std::string n, int mod, Point p, float scl, float ori):
 Objecte::~Objecte(void)
 {}
 
-void Objecte::Render(std::vector<Model> &lmodels)
+void Objecte::Render(std::vector<Model> &lmodels, GLenum mode)
 {
   //L'objecte té les dades de "modificació" que aplicarem
   //al model del seu objecte: scale, position, orientation
@@ -21,7 +21,6 @@ void Objecte::Render(std::vector<Model> &lmodels)
   Box caixa = m.boundingBox();
 
   float sx = caixa.maxb.x-caixa.minb.x;
-  float sy = caixa.maxb.y-caixa.minb.y;
   float sz = caixa.maxb.z-caixa.minb.z;
 
   glMatrixMode(GL_MODELVIEW);
@@ -39,7 +38,7 @@ void Objecte::Render(std::vector<Model> &lmodels)
   //DEBUG
   //caixa.Render();
 
-  m.Render();
+  m.Render(mode);
   glPopMatrix();
 }
 
@@ -75,11 +74,13 @@ Box& Objecte::getCapsaObjecte(Model &model)
 
     //2.Preparem la matriu (posició, scale i orientation)
     //per transformar la bounding del model. La setejem igual que al Render()
+    //i hem de tenir en compte el glLoadIdentity ja que sino ens calcula
+    //la caixa amb la matriu GL_MODELVIEW actual i que està "bruta".
     float sx = caixaModel.maxb.x-caixaModel.minb.x;
-    float sy = caixaModel.maxb.y-caixaModel.minb.y;
     float sz = caixaModel.maxb.z-caixaModel.minb.z;
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
+    glLoadIdentity();
     glTranslatef(pos.x,pos.y,pos.z);
     glRotatef(orientation,0,1,0);
     glScalef(sx/(sx*scale),1,sz/(sz*scale));

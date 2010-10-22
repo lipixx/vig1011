@@ -2,7 +2,6 @@
 #include <cmath>
 #include <string>
 #include <iostream>
-#include <QtOpenGL/qgl.h>
 #include "scene.h"
 
 using namespace std;
@@ -26,13 +25,12 @@ void Model::updateBoundingBox()
   }
 }
 
-void Model::Render()
+void Model::Render(GLenum mode)
 {
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares
   for(unsigned int cara = 0; cara < faces.size(); cara++) {
 
-    glBegin (GL_POLYGON);
-
+    glBegin (mode);
     Color color = Scene().matlib.material(faces[cara].material).kd;
     glColor3f(color.r,color.g,color.b);
 

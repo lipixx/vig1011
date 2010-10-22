@@ -2,6 +2,7 @@
 #define _OBJECTE_H_
 #include <vector>
 #include <stdio.h>
+#include <QtOpenGL/qgl.h>
 #include "point.h"
 #include "model.h"
 #include "box.h"
@@ -22,7 +23,7 @@ class Objecte
   Objecte(std::string nom, int idmod, Point p, float scl, float ori);
   ~Objecte(void);
 
-  void Render(std::vector<Model> &);
+  void Render(std::vector<Model> &,GLenum mode);
   std::string getNom();
   int getModelId();
   Point getPosition();

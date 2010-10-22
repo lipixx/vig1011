@@ -21,7 +21,7 @@ class Scene
 
   void Init();
   void construirBase();
-  void Render();
+  void Render(GLenum mode);
   void AddModel(Model &);
   void AddObjecte(Objecte &);
 

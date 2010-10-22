@@ -5,11 +5,12 @@
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QFileDialog>
+#include <QtOpenGL/qgl.h>
 #include "point.h"
 #include "scene.h"
-#define PI 3.141592654
+#define PI 3.1415926535898
 #define RAD2DEG 180/PI
-#define DEG2RAD PI*180
+#define DEG2RAD PI/180
 
 class GLWidget : public QGLWidget
 {
@@ -42,12 +43,13 @@ protected:
 
 private:
      void setDefaultCamera();
-     bool filferros;
+     GLenum filferros;
 
  public slots:
      void LoadObject ();
      void resetCamera();
-     void setFilferros(bool);
+     void setFilferros();
+     void unsetFilferros();
 };
 
 #endif
