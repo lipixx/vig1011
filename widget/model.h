@@ -27,6 +27,7 @@ class Model
   Box boundingBox() const;
 
   void Render(GLenum mode);
+  std::string getName();
 
  private:
   void make_face ( char **words, int nwords, int material );

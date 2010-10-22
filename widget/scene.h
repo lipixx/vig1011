@@ -24,7 +24,7 @@ class Scene
   void Render(GLenum mode);
   void AddModel(Model &);
   void AddObjecte(Objecte &);
-
+  void carregaModel(const char* filename);
   void calculaEsfera(Point &centreEscena, double &radi);
 
 };
