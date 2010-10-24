@@ -115,11 +115,11 @@ void GLWidget::keyPressEvent(QKeyEvent *e)
   switch (e->key())
     {
     case Qt::Key_F:
-      glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+      filferros = GL_LINE_LOOP;
       updateGL();
       break;
     case Qt::Key_S:
-      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+      filferros = GL_POLYGON;
       updateGL();
       break;   
     default: e->ignore();
