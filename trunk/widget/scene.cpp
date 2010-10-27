@@ -88,7 +88,7 @@ void Scene::carregaModel(const char* filename)
     int numModels = lmodels.size();
     bool trobat = false;
     int i = 0;
-    for (;i<numModels;i++)
+    for (;i<numModels&&!trobat;i++)
     {
         if (lmodels[i].getName() == filename)
             trobat = true;
