@@ -6,6 +6,7 @@ GLWidget::GLWidget(QWidget *parent) :
 {
     filferros = GL_POLYGON;
     posicionantObjecte = false;
+    cameraOrtho = false;
 }
 
 void GLWidget::resetCamera()
@@ -18,6 +19,17 @@ void GLWidget::setFilferros()
 {
   filferros = GL_LINE_LOOP;
   updateGL();
+}
+
+void GLWidget::setCameraOrtho()
+{
+    if (cameraOrtho)
+    {
+        cameraOrtho = false;
+        glViewport (0, 0, (float)width(), (float)height());
+    }
+    else cameraOrtho = true;
+    updateGL();
 }
 
 void GLWidget::unsetFilferros()
@@ -57,34 +69,64 @@ void GLWidget::resizeGL (int width, int height)
   updateGL();
 }
 
+void GLWidget::setModelView(int casView)
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glTranslatef(0,0,-dist);
+
+    if (casView == CAM_PERSPECTIVE)
+    {
+        glRotatef(angleX,1,0,0);
+        glRotatef(angleY,0,1,0);
+    }
+    if (casView == CAM_ORTHO_LEFT)
+        glRotatef(90,1,0,0);
+
+    if (casView == CAM_ORTHO_RIGHT)
+        //Do Nothing - For future implementations
+
+   glTranslatef(-VRP.x,-VRP.y,-VRP.z);
+
+   // dibuixar eixos aplicacio
+   glDisable(GL_LIGHTING);
+   glBegin(GL_LINES);
+   glColor3f(1,0,0); glVertex3f(0,0,0); glVertex3f(20,0,0); // X
+   glColor3f(0,1,0); glVertex3f(0,0,0); glVertex3f(0,20,0); // Y
+   glColor3f(0,0,1); glVertex3f(0,0,0); glVertex3f(0,0,20); // Z
+   glEnd();
+}
+
 void GLWidget::paintGL( void )
 {
   // Esborrem els buffers
-  glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+ glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
  glMatrixMode(GL_PROJECTION);
  glLoadIdentity();
- if (aspect < 1)
-     gluPerspective(dynamic_fovy,aspect,zNear,zFar);
-   else
-     gluPerspective(fovy,aspect,zNear,zFar);
 
- glMatrixMode(GL_MODELVIEW);
- glLoadIdentity();
- glTranslatef(0,0,-dist);
- glRotatef(angleX,1,0,0);
- glRotatef(angleY,0,1,0);
- glTranslatef(-VRP.x,-VRP.y,-VRP.z);
+ if (!cameraOrtho)
+ {
+    if (aspect < 1)
+        gluPerspective(dynamic_fovy,aspect,zNear,zFar);
+      else
+        gluPerspective(fovy,aspect,zNear,zFar);
 
- // dibuixar eixos aplicacio
-  glDisable(GL_LIGHTING);
-  glBegin(GL_LINES);
-  glColor3f(1,0,0); glVertex3f(0,0,0); glVertex3f(20,0,0); // X
-  glColor3f(0,1,0); glVertex3f(0,0,0); glVertex3f(0,20,0); // Y
-  glColor3f(0,0,1); glVertex3f(0,0,0); glVertex3f(0,0,20); // Z
-  glEnd();
-
-  scene.Render(filferros);
+     setModelView(CAM_PERSPECTIVE);
+     scene.Render(filferros);
+  }
+ else
+ {
+     glOrtho(-10,10,-10,10,zNear,zFar);
+     //Part esquerra
+     glViewport (0, 0, (float) width()/2, (float) height());
+     setModelView(CAM_ORTHO_LEFT);
+     scene.Render(filferros);
+     //Part dreta
+     glViewport ((float) width()/2, 0, (float) width()/2,(float) height());
+     setModelView(CAM_ORTHO_RIGHT);
+     scene.Render(filferros);
+ }
 }
 
 void GLWidget::mousePressEvent( QMouseEvent *e)

@@ -11,7 +11,9 @@
 #define PI 3.1415926535898
 #define RAD2DEG 180/PI
 #define DEG2RAD PI/180
-
+#define CAM_PERSPECTIVE 0
+#define CAM_ORTHO_LEFT 1
+#define CAM_ORTHO_RIGHT 2
 class GLWidget : public QGLWidget
 {
     Q_OBJECT
@@ -44,12 +46,14 @@ protected:
 private:
      void setDefaultCamera();
      GLenum filferros;
-     bool posicionantObjecte;
+     bool posicionantObjecte, cameraOrtho;
+     void setModelView(int);
 
  public slots:
      void LoadObject ();
      void resetCamera();
      void setFilferros();
+     void setCameraOrtho();
      void unsetFilferros();
 };
 

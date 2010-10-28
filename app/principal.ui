@@ -120,6 +120,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QCheckBox" name="planElevChBox">
+       <property name="text">
+        <string>Plan-Elev</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -169,8 +176,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>534</x>
-     <y>408</y>
+     <x>509</x>
+     <y>409</y>
     </hint>
     <hint type="destinationlabel">
      <x>545</x>
@@ -185,8 +192,8 @@
    <slot>LoadObject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>535</x>
-     <y>35</y>
+     <x>509</x>
+     <y>33</y>
     </hint>
     <hint type="destinationlabel">
      <x>372</x>
@@ -201,8 +208,8 @@
    <slot>resetCamera()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>441</x>
-     <y>136</y>
+     <x>509</x>
+     <y>129</y>
     </hint>
     <hint type="destinationlabel">
      <x>379</x>
@@ -233,12 +240,28 @@
    <slot>setFilferros()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>421</x>
-     <y>97</y>
+     <x>509</x>
+     <y>99</y>
     </hint>
     <hint type="destinationlabel">
      <x>373</x>
      <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>planElevChBox</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>setCameraOrtho()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>450</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>146</y>
     </hint>
    </hints>
   </connection>
