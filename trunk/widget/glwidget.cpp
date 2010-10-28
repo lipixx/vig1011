@@ -117,13 +117,13 @@ void GLWidget::paintGL( void )
   }
  else
  {
-     glOrtho(-10,10,-10,10,zNear,zFar);
+     glOrtho(-radi,radi,-radi,radi,zNear,zFar);
      //Part esquerra
-     glViewport (0, 0, (float) width()/2, (float) height());
+     glViewport (0, (float)height()/4, (float) width()/2, (float) height()/2);
      setModelView(CAM_ORTHO_LEFT);
      scene.Render(filferros);
      //Part dreta
-     glViewport ((float) width()/2, 0, (float) width()/2,(float) height());
+     glViewport ((float) width()/2, (float)height()/4, (float) width()/2,(float) height()/2);
      setModelView(CAM_ORTHO_RIGHT);
      scene.Render(filferros);
  }
@@ -221,11 +221,24 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
   else if (DoingInteractive == ZOOM)
   {
     // Fem el zoom
+      if(dynamic_fovy+(e->y()-yClick)/2 >0
+               && dynamic_fovy+(e->y()-yClick)/2< 180)
+              {
+                dynamic_fovy = dynamic_fovy+(e->y()-yClick)/2;
+                fovy=dynamic_fovy;
+              }
+
 
   }
   else if (DoingInteractive==PAN)
   {
     // Fem el pan
+      cout << "imhre" << endl;
+      float m[4][4];
+       glGetFloatv(GL_MODELVIEW_MATRIX,&m[0][0]);
+       Point x_obs = Point(m[0][0],m[1][0],m[2][0]) * (xClick - e->x());
+       Point y_obs = Point(m[0][1],m[1][1],m[2][1]) * (e->y() - yClick);
+       VRP += (x_obs + y_obs) * 0.05; //Multipliquem per obtenir suavitat
 
   }
   xClick = e->x();
@@ -247,3 +260,32 @@ void GLWidget::LoadObject()
     updateGL();
   }
 }
+
+void GLWidget::wheelEvent(QWheelEvent *e)
+{
+
+  //Descomentar si volem que s'hagi de pitjar shift per fer zoom
+  //amb la roda.
+  //  if (e->modifiers()&Qt::ShiftModifier)
+    {
+      //apropa_allunya és un enter + si hem d'apropar, i - si hem
+      //d'allunyar
+      int apropa_allunya = -1*e->delta()/15/8;
+
+      //Factor de zoom de 3.2
+      float factor_zoom = apropa_allunya*3.2;
+
+        if(dynamic_fovy+factor_zoom>0 && dynamic_fovy+factor_zoom<180)
+        {
+          dynamic_fovy = dynamic_fovy+factor_zoom;
+          fovy=dynamic_fovy;
+        }
+    }
+
+  e->accept();
+
+  xClick = e->x();
+  yClick = e->y();
+  updateGL();
+}
+

@@ -30,6 +30,7 @@ protected:
     virtual void mouseReleaseEvent (QMouseEvent *e);
     virtual void mouseMoveEvent (QMouseEvent *e);
     virtual void keyPressEvent (QKeyEvent *event);
+    virtual void wheelEvent(QWheelEvent *e);
 
     double dist, zNear, zFar, radi, angleX, angleY, aspect;
     GLfloat fovy, dynamic_fovy;
