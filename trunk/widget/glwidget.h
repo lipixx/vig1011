@@ -35,6 +35,7 @@ protected:
     double dist, zNear, zFar, radi, angleX, angleY, aspect;
     GLfloat fovy, dynamic_fovy;
 
+    float lastW,lastH;
 
     Point VRP;
     Scene scene;
