@@ -117,13 +117,16 @@ void GLWidget::paintGL( void )
   }
  else
  {
-     glOrtho(-radi,radi,-radi,radi,zNear,zFar);
+     float h = (float) height()/2;
+     float w = (float) width()/2;
+
+     glOrtho(-radi,radi,-radi/aspect,radi/aspect,zNear,zFar);
      //Part esquerra
-     glViewport (0, (float)height()/4, (float) width()/2, (float) height()/2);
+     glViewport (0, h/2, w, h);
      setModelView(CAM_ORTHO_LEFT);
      scene.Render(filferros);
      //Part dreta
-     glViewport ((float) width()/2, (float)height()/4, (float) width()/2,(float) height()/2);
+     glViewport (w,h/2,w,h);
      setModelView(CAM_ORTHO_RIGHT);
      scene.Render(filferros);
  }
