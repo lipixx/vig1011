@@ -84,9 +84,11 @@ void GLWidget::setModelView(int casView)
         glRotatef(90,1,0,0);
 
     if (casView == CAM_ORTHO_RIGHT)
+    {
         //Do Nothing - For future implementations
+    }
 
-   glTranslatef(-VRP.x,-VRP.y,-VRP.z);
+     glTranslatef(-VRP.x,-VRP.y,-VRP.z);
 
    // dibuixar eixos aplicacio
    glDisable(GL_LIGHTING);
@@ -236,14 +238,13 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
   else if (DoingInteractive==PAN)
   {
     // Fem el pan
-      cout << "imhre" << endl;
       float m[4][4];
-       glGetFloatv(GL_MODELVIEW_MATRIX,&m[0][0]);
-       Point x_obs = Point(m[0][0],m[1][0],m[2][0]) * (xClick - e->x());
-       Point y_obs = Point(m[0][1],m[1][1],m[2][1]) * (e->y() - yClick);
-       VRP += (x_obs + y_obs) * 0.05; //Multipliquem per obtenir suavitat
-
+      glGetFloatv(GL_MODELVIEW_MATRIX,&m[0][0]);
+      Point x_obs = Point(m[0][0],m[1][0],m[2][0]) * (xClick - e->x());
+      Point y_obs = Point(m[0][1],m[1][1],m[2][1]) * (e->y() - yClick);
+      VRP += (x_obs + y_obs) * 0.05; //Multipliquem per obtenir suavitat
   }
+
   xClick = e->x();
   yClick = e->y();
   updateGL();
