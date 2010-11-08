@@ -142,13 +142,14 @@ void GLWidget::mousePressEvent(QMouseEvent *e)
   yClick = e->y();
 
   if (e->button()&Qt::RightButton && posicionantObjecte)
-    posicionantObjecte = false;
+      if (scene.validarPosicio())
+        posicionantObjecte = false;
 
   if (e->button()&Qt::LeftButton && !(e->modifiers()&(Qt::ShiftModifier|Qt::AltModifier|Qt::ControlModifier)))
   {
     DoingInteractive = ROTATE;
   }
-  else if (e->button()&Qt::LeftButton &&  e->modifiers() & Qt::ShiftModifier && e->modifiers()& Qt::AltModifier)
+  else if (posicionantObjecte && e->button()&Qt::LeftButton &&  e->modifiers() & Qt::ShiftModifier && e->modifiers()& Qt::AltModifier)
   {
     DoingInteractive = MOV;
   }
@@ -168,18 +169,21 @@ void GLWidget::keyPressEvent(QKeyEvent *e)
     {
     case Qt::Key_F:
       filferros = GL_LINE_LOOP;
-      updateGL();
       break;
     case Qt::Key_S:
       filferros = GL_POLYGON;
-      updateGL();
       break;   
+    case Qt::Key_Escape:
+      scene.mouDarrerObjecte(POS_INICIAL);
+      scene.validarPosicio();
+      posicionantObjecte = false;
+      break;
     default: e->ignore();
     }
   
   if (posicionantObjecte)
     {
-      int value = -1;     
+      int value = -1;
       if (e->modifiers()&Qt::ShiftModifier)
 	{
 	  switch (e->key())
@@ -207,9 +211,9 @@ void GLWidget::keyPressEvent(QKeyEvent *e)
 		default: break;
 		}
 	    }
-      scene.mouDarrerObjecte(value);
-      updateGL();
+      scene.mouDarrerObjecte(value); 
     }
+  updateGL();
 }
 
 void GLWidget::mouseReleaseEvent( QMouseEvent *)

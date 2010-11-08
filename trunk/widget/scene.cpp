@@ -68,6 +68,13 @@ void Scene::calculaEsfera(Point &centreEscena, double &radi)
     radi = (capsaEscena.maxb - capsaEscena.minb).length() /2.f;
 }
 
+void Scene::calculaEsferaObjecte(Point &centreObjecte, double &radi,int idObj)
+{
+    Box capsaObjecte = lobjectes[idObj].getCapsaObjecte(lmodels[lobjectes[idObj].getModelId()]);
+    centreObjecte = (capsaObjecte.maxb + capsaObjecte.minb)/2;
+    radi = (capsaObjecte.maxb - capsaObjecte.minb).length() /2.f;
+}
+
 void Scene::AddModel(Model &o)
 {
   lmodels.push_back(o);
@@ -93,7 +100,6 @@ void Scene::carregaModel(const char* filename)
         if (lmodels[i].getName() == filename)
             trobat = true;
     }
-
     if (!trobat)
     {
         this->AddModel(m);
@@ -131,11 +137,16 @@ void Scene::mouDarrerObjecte(int sentit)
     case ZPOS:
       p.z = 0.2;
       break;
+    case POS_INICIAL:
+      lobjectes[idPosicionantObjecte].setLastPosicioValida();
+      break;
     default:
       break;
-    }
+    }  
+  if (sentit != POS_INICIAL){
    Point actual = lobjectes[idPosicionantObjecte].getPosition();
    lobjectes[idPosicionantObjecte].setPosition(actual+p);
+    }
 }
 
 void Scene::mouDarrerObjecte(Point u, Point v)
@@ -145,3 +156,44 @@ void Scene::mouDarrerObjecte(Point u, Point v)
     Point actual = lobjectes[idPosicionantObjecte].getPosition();
     lobjectes[idPosicionantObjecte].setPosition(actual+u+v);
 }
+
+bool Scene::validarPosicio()
+{
+   bool colisio = false;
+   double radi = 0, radiObjProper = 0, dist = 0;
+   Point centreObjecte;
+   Point centreObjecteProper;
+
+   calculaEsferaObjecte(centreObjecte,radi,idPosicionantObjecte);
+
+   for (unsigned int i=1; i<lobjectes.size(); i++)
+    {
+     if ((int)i != idPosicionantObjecte)
+        {
+          calculaEsferaObjecte(centreObjecteProper,radiObjProper,i);
+          dist = pow(centreObjecte.x - centreObjecteProper.x,2)
+           +pow(centreObjecte.y - centreObjecteProper.y,2)
+           +pow(centreObjecte.z - centreObjecteProper.z,2);
+           dist = sqrt(dist);
+
+      cout << radi << endl;
+      if (dist < radi+radiObjProper)
+       colisio = true;
+       break;
+        }
+    }
+
+
+    if (colisio)//Si les caixes intercepten, no validar!
+    {
+        cout << "Pos. NO-VALIDADA, SEGUEIX POSICIONANT" << endl;
+        return false;
+    }
+    else
+    {
+      lobjectes[idPosicionantObjecte].validarPosicio();
+      cout << "Pos. VALIDADA" << endl;
+      return true;
+    }
+}
+
