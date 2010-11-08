@@ -36,7 +36,7 @@ protected:
     Point VRP;
     Scene scene;
 
-    typedef  enum {NONE, ROTATE, ZOOM, PAN} InteractiveAction;
+    typedef  enum {NONE, ROTATE, ZOOM, PAN, MOV} InteractiveAction;
     typedef  enum {CAM_PERSPECTIVE,CAM_ORTHO_LEFT,CAM_ORTHO_RIGHT} camSelection;
     InteractiveAction DoingInteractive;
 

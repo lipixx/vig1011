@@ -75,20 +75,23 @@ void GLWidget::setModelView(int casView)
     glLoadIdentity();
     glTranslatef(0,0,-dist);
 
-    if (casView == CAM_PERSPECTIVE)
+    switch (casView)
     {
+    case CAM_PERSPECTIVE:
         glRotatef(angleX,1,0,0);
         glRotatef(angleY,0,1,0);
-    }
-    if (casView == CAM_ORTHO_LEFT)
+        break;
+    case CAM_ORTHO_LEFT:
         glRotatef(90,1,0,0);
-
-    if (casView == CAM_ORTHO_RIGHT)
-    {
+        break;
+    case CAM_ORTHO_RIGHT:
         //Do Nothing - For future implementations
+        break;
+    default:
+        break;
     }
 
-     glTranslatef(-VRP.x,-VRP.y,-VRP.z);
+   glTranslatef(-VRP.x,-VRP.y,-VRP.z);
 
    // dibuixar eixos aplicacio
    glDisable(GL_LIGHTING);
@@ -121,7 +124,6 @@ void GLWidget::paintGL( void )
  {
      float h = (float) height()/2;
      float w = (float) width()/2;
-
      glOrtho(-radi,radi,-radi/aspect,radi/aspect,zNear,zFar);
      //Part esquerra
      glViewport (0, h/2, w, h);
@@ -134,7 +136,7 @@ void GLWidget::paintGL( void )
  }
 }
 
-void GLWidget::mousePressEvent( QMouseEvent *e)
+void GLWidget::mousePressEvent(QMouseEvent *e)
 {
   xClick = e->x();
   yClick = e->y();
@@ -142,10 +144,13 @@ void GLWidget::mousePressEvent( QMouseEvent *e)
   if (e->button()&Qt::RightButton && posicionantObjecte)
     posicionantObjecte = false;
 
-  if (e->button()&Qt::LeftButton &&
-      ! (e->modifiers()&(Qt::ShiftModifier|Qt::AltModifier|Qt::ControlModifier)))
+  if (e->button()&Qt::LeftButton && !(e->modifiers()&(Qt::ShiftModifier|Qt::AltModifier|Qt::ControlModifier)))
   {
     DoingInteractive = ROTATE;
+  }
+  else if (e->button()&Qt::LeftButton &&  e->modifiers() & Qt::ShiftModifier && e->modifiers()& Qt::AltModifier)
+  {
+    DoingInteractive = MOV;
   }
   else if (e->button()&Qt::LeftButton &&  e->modifiers() &Qt::ShiftModifier)
   {
@@ -174,8 +179,7 @@ void GLWidget::keyPressEvent(QKeyEvent *e)
   
   if (posicionantObjecte)
     {
-      int value = -1;
-      
+      int value = -1;     
       if (e->modifiers()&Qt::ShiftModifier)
 	{
 	  switch (e->key())
@@ -218,13 +222,13 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
   // Aqui cal que es calculi i s'apliqui la rotaci, el zoom o el pan
   // com s'escaigui...
   if (DoingInteractive == ROTATE)
-  {
+     {
     // Fem la rotacio
       angleX= angleX + (e->y()-yClick)/2.0;
       angleY= angleY + (e->x()-xClick)/2.0;
-  }
-  else if (DoingInteractive == ZOOM)
-  {
+     }
+  else if (DoingInteractive == ZOOM && !cameraOrtho)
+     {
     // Fem el zoom
       if(dynamic_fovy+(e->y()-yClick)/2 >0
                && dynamic_fovy+(e->y()-yClick)/2< 180)
@@ -232,26 +236,32 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
                 dynamic_fovy = dynamic_fovy+(e->y()-yClick)/2;
                 fovy=dynamic_fovy;
               }
-
-
-  }
-  else if (DoingInteractive==PAN)
-  {
+     }
+  else if (DoingInteractive==PAN && !cameraOrtho)
+     {
     // Fem el pan
       float m[4][4];
       glGetFloatv(GL_MODELVIEW_MATRIX,&m[0][0]);
       //Recordem que la primera fila de Modelview és la X d'observador en coord. d'app.(X0,X1,X2)
       //la segona fila és la Y d'observador (Y0,Y1,Y2)
       //la tercera fila és la z d'observador (Z0,Z1,Z2)
+      //I que és un accés per columnes, no per files.
       Point x_obs = Point(m[0][0],m[1][0],m[2][0]) * (xClick - e->x());
       Point y_obs = Point(m[0][1],m[1][1],m[2][1]) * (e->y() - yClick);
       VRP += (x_obs + y_obs) * 0.05; //Multipliquem per obtenir suavitat
+     }
+  else if (DoingInteractive==MOV)
+  {
+      float m[4][4];
+      glGetFloatv(GL_MODELVIEW_MATRIX,&m[0][0]);
+      //Veure DOC per explicació
+      Point u = Point(m[0][0],m[1][0],m[2][0])*(e->x()-xClick);
+      Point v = Point(m[2][0],m[1][0],-m[0][0])*(yClick-e->y());
+      scene.mouDarrerObjecte(u,v);
   }
-
   xClick = e->x();
   yClick = e->y();
   updateGL();
-
 }
 
 void GLWidget::LoadObject()
@@ -270,10 +280,11 @@ void GLWidget::LoadObject()
 
 void GLWidget::wheelEvent(QWheelEvent *e)
 {
-
   //Descomentar si volem que s'hagi de pitjar shift per fer zoom
   //amb la roda.
   //  if (e->modifiers()&Qt::ShiftModifier)
+if (!cameraOrtho)
+ {
     {
       //apropa_allunya és un enter + si hem d'apropar, i - si hem
       //d'allunyar
@@ -294,5 +305,6 @@ void GLWidget::wheelEvent(QWheelEvent *e)
   xClick = e->x();
   yClick = e->y();
   updateGL();
+ }
 }
 
