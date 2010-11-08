@@ -30,6 +30,7 @@ class Objecte
   Point getPosition();
   float getScale();
   float getOrientation();
+  void setOrientation(float);
   void setPosition(Point p);
   void validarPosicio();
   void getPosicioValida();

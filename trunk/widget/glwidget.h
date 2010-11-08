@@ -8,6 +8,7 @@
 #include <QtOpenGL/qgl.h>
 #include "point.h"
 #include "scene.h"
+#include "constants.h"
 #define PI 3.1415926535898
 #define RAD2DEG 180/PI
 #define DEG2RAD PI/180
@@ -32,19 +33,14 @@ protected:
 
     double dist, zNear, zFar, radi, angleX, angleY, aspect;
     GLfloat fovy, dynamic_fovy;
-
     Point VRP;
     Scene scene;
-
-    typedef  enum {NONE, ROTATE, ZOOM, PAN, MOV} InteractiveAction;
-    typedef  enum {CAM_PERSPECTIVE,CAM_ORTHO_LEFT,CAM_ORTHO_RIGHT} camSelection;
     InteractiveAction DoingInteractive;
-
-    int   xClick, yClick;
+    int xClick, yClick;
 
 private:
-     void setDefaultCamera();
      GLenum filferros;
+     void setDefaultCamera();
      bool posicionantObjecte, cameraOrtho;
      void setModelView(int);
 

@@ -8,7 +8,8 @@ HEADERS += glwidget.h \
     objecte.h \
     scene.h \
     material_lib.h \
-    point.h
+    point.h \
+    constants.h
 SOURCES += glwidget.cpp \
     box.cpp \
     color.cpp \
