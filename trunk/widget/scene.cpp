@@ -137,3 +137,11 @@ void Scene::mouDarrerObjecte(int sentit)
    Point actual = lobjectes[idPosicionantObjecte].getPosition();
    lobjectes[idPosicionantObjecte].setPosition(actual+p);
 }
+
+void Scene::mouDarrerObjecte(Point u, Point v)
+{
+    u /= 50;
+    v /= 50;
+    Point actual = lobjectes[idPosicionantObjecte].getPosition();
+    lobjectes[idPosicionantObjecte].setPosition(actual+u+v);
+}

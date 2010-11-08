@@ -33,6 +33,7 @@ public:
   void carregaModel(const char* filename);
   void calculaEsfera(Point &centreEscena, double &radi);
   void mouDarrerObjecte(int);
+  void mouDarrerObjecte(Point u, Point v);
 };
 
 #endif
