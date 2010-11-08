@@ -9,32 +9,31 @@
 
 class Scene
 {
- private:
-	
+private:
+
   // Tindrem un vector amb els models geomètrics dels objectes geomètrics
   // i un altre amb instàncies seves (instàncies o referències a objectes).
-  std::vector<Model> lmodels;
-  std::vector<Objecte> lobjectes;
-  int  idPosicionantObjecte;
-  void calculaEsferaObjecte(Point &centreObjecte, double &radi,int idObj);
+  std::vector < Model > lmodels;
+  std::vector < Objecte > lobjectes;
+  int idPosicionantObjecte;
+  void calculaEsferaObjecte (Point & centreObjecte, double &radi, int idObj);
 
 public:
-  static MaterialLib matlib;	  // col·lecció de materials
+  static MaterialLib matlib;	// col·lecció de materials
 
-  Scene();
+    Scene ();
 
-  void Init();
-  void construirBase();
-  void Render(GLenum mode);
-  void AddModel(Model &);
-  void AddObjecte(Objecte &);
-  void carregaModel(const char* filename);
-  void calculaEsfera(Point &centreEscena, double &radi);
-  void mouDarrerObjecte(int);
-  void mouDarrerObjecte(Point u, Point v);
-  void orientaDarrerObjecte(int);
-  bool validarPosicio();
+  void Init ();
+  void construirBase ();
+  void Render (GLenum mode);
+  void AddModel (Model &);
+  void AddObjecte (Objecte &);
+  void carregaModel (const char *filename);
+  void calculaEsfera (Point & centreEscena, double &radi);
+  void mouDarrerObjecte (int);
+  void mouDarrerObjecte (Point u, Point v);
+  void orientaDarrerObjecte (int);
+  bool validarPosicio ();
 };
 
 #endif
-
