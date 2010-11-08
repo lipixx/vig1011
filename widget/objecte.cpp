@@ -5,10 +5,26 @@
 
 Objecte::Objecte(std::string n, int mod, Point p, float scl, float ori):
   nom(n), model(mod), pos(p), scale(scl), orientation(ori)
-{}
+{
+    Point pos_valid = *(new Point(p.x,p.y,p.z));
+}
 
 Objecte::~Objecte(void)
 {}
+
+void Objecte::validarPosicio()
+{
+    pos_valid.x = pos.x;
+    pos_valid.y = pos.y;
+    pos_valid.z = pos.z;
+}
+
+void Objecte::setLastPosicioValida()
+{
+    pos.x = pos_valid.x;
+    pos.y = pos_valid.y;
+    pos.z = pos_valid.z;
+}
 
 void Objecte::Render(std::vector<Model> &lmodels, GLenum mode)
 {
@@ -27,7 +43,7 @@ void Objecte::Render(std::vector<Model> &lmodels, GLenum mode)
   glTranslatef(-(caixa.maxb.x+caixa.minb.x)/2,-caixa.minb.y,-(caixa.maxb.z+caixa.minb.z)/2);
 
   //DEBUG
-  //caixa.Render();
+  caixa.Render();
 
   m.Render(mode);
   glPopMatrix();
@@ -87,15 +103,12 @@ Box& Objecte::getCapsaObjecte(Model &model)
     //a mà:
     vector<Vertex> &verts = model.vertices;
 
-    //Inicialitzem amb la caps del polígon base
-    Box & capsaObj = *(new Box(Point(-5,0,-5),Point(5,0,5)));
+    Box & capsaObj = *(new Box (Point(0,0,0),Point(0,0,0)));
 
     //Creem la matriu amb el punt
     GLfloat p1[16];
 
-    //i = 1 perquè el del poligon 0 l'hem posat a mà, i sabem que sempre
-    //és el primer.
-    for (unsigned int i=1; i < verts.size(); ++i)
+    for (unsigned int i=0; i < verts.size(); ++i)
     {
       //Agafem el punt del vèrtex actual
       Point punt(verts[i].coord.x, verts[i].coord.y, verts[i].coord.z);

@@ -16,6 +16,7 @@ class Objecte
   std::string nom;
   int model;   // identificador del model
   Point pos;    // posicio sobre el terra
+  Point pos_valid; // posició validada o la última bona
   float scale;	   // mida en unitats
   float orientation;  //orientació respecte Y
 
@@ -30,7 +31,9 @@ class Objecte
   float getScale();
   float getOrientation();
   void setPosition(Point p);
-
+  void validarPosicio();
+  void getPosicioValida();
+  void setLastPosicioValida();
   Box& getCapsaObjecte(Model &model);
 };
 

@@ -9,7 +9,7 @@
 #define XNEG 1
 #define ZPOS 2
 #define ZNEG 3
-
+#define POS_INICIAL 4
 class Scene
 {
  private:
@@ -19,6 +19,7 @@ class Scene
   std::vector<Model> lmodels;
   std::vector<Objecte> lobjectes;
   int  idPosicionantObjecte;
+  void calculaEsferaObjecte(Point &centreObjecte, double &radi,int idObj);
 
 public:
   static MaterialLib matlib;	  // col·lecció de materials
@@ -34,6 +35,7 @@ public:
   void calculaEsfera(Point &centreEscena, double &radi);
   void mouDarrerObjecte(int);
   void mouDarrerObjecte(Point u, Point v);
+  bool validarPosicio();
 };
 
 #endif
