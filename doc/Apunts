@@ -1,0 +1,44 @@
+El vector del moviment que volem ha de ser
+el vector perpendicular al Y de l'observador
+i a l'Y de l'aplicació perquè l'objecte
+es mogui damunt la base.
+Vector movO = Yo ^ Ya
+
+A més, volem que a efectes del que veu l'observador
+l'objecte es mogui de dalt a baix en paral·lel
+a l'Y d'observador quan movem el ratoli amunt i avall, i això és el mateix que es mogui en
+perpendicular a X de l'observador.
+
+Vector mov1= Ya * Xo
+
+Només haurem d'agafar la pos que teniem i:
+
+Vx = num. pixels que el rató s'ha despl. en X
+Vy = num. pixels que el rató s'ha despl. en Y
+(podem dividir aquest Vx i Vy amb algo per suavitzar)
+
+posFinal = posActual + Vx * mov0 + Vy * mov1
+
+A més, la Ya, sempre és 0,1,0 en aquesta pràctica.
+Llavors la mov0 coincideix amb la Xobs.
+
+També, en aquesta pràctica,
+mov1 = (b,0,-a) essent b i a les Xobs=(a,0,b).
+
+
+Recordem que la Modelview és així:
+
+Xox Xoy Xoz 0
+Yox Yoy Yoz 0
+Zox Zoy Zoz 0
+0   0   0   1
+
+I per agafar els valors m[i]:
+0: Xox  4: Xoy 8: Xoz  12: 0
+1: Yox  5: Yoy 9: Yoz  13: 0
+2: Zox  6: Zoy 10:Zoz  14: 0
+3: 0    7: 0   11: 0   15: 0
+
+//Recordem que la primera fila de Modelview és la X d'observador en coord. d'app.(X0,X1,X2)
+//la segona fila és la Y d'observador (Y0,Y1,Y2)
+//la tercera fila és la z d'observador (Z0,Z1,Z2)

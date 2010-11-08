@@ -240,6 +240,9 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e)
     // Fem el pan
       float m[4][4];
       glGetFloatv(GL_MODELVIEW_MATRIX,&m[0][0]);
+      //Recordem que la primera fila de Modelview és la X d'observador en coord. d'app.(X0,X1,X2)
+      //la segona fila és la Y d'observador (Y0,Y1,Y2)
+      //la tercera fila és la z d'observador (Z0,Z1,Z2)
       Point x_obs = Point(m[0][0],m[1][0],m[2][0]) * (xClick - e->x());
       Point y_obs = Point(m[0][1],m[1][1],m[2][1]) * (e->y() - yClick);
       VRP += (x_obs + y_obs) * 0.05; //Multipliquem per obtenir suavitat

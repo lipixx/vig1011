@@ -11,9 +11,7 @@
 #define PI 3.1415926535898
 #define RAD2DEG 180/PI
 #define DEG2RAD PI/180
-#define CAM_PERSPECTIVE 0
-#define CAM_ORTHO_LEFT 1
-#define CAM_ORTHO_RIGHT 2
+
 class GLWidget : public QGLWidget
 {
     Q_OBJECT
@@ -35,12 +33,11 @@ protected:
     double dist, zNear, zFar, radi, angleX, angleY, aspect;
     GLfloat fovy, dynamic_fovy;
 
-    float lastW,lastH;
-
     Point VRP;
     Scene scene;
 
     typedef  enum {NONE, ROTATE, ZOOM, PAN} InteractiveAction;
+    typedef  enum {CAM_PERSPECTIVE,CAM_ORTHO_LEFT,CAM_ORTHO_RIGHT} camSelection;
     InteractiveAction DoingInteractive;
 
     int   xClick, yClick;
