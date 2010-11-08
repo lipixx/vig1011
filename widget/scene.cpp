@@ -157,6 +157,16 @@ void Scene::mouDarrerObjecte(Point u, Point v)
     lobjectes[idPosicionantObjecte].setPosition(actual+u+v);
 }
 
+void Scene::orientaDarrerObjecte(int sentit)
+{
+    float gir;
+    if (sentit == YPOS)
+        gir = -10;
+    else
+        gir = 10;
+    lobjectes[idPosicionantObjecte].setOrientation(lobjectes[idPosicionantObjecte].getOrientation()+gir);
+}
+
 bool Scene::validarPosicio()
 {
    bool colisio = false;

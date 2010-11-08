@@ -81,6 +81,11 @@ float Objecte::getOrientation()
    return orientation;
 }
 
+void Objecte::setOrientation(float ori)
+{
+   orientation = ori;
+}
+
 Box& Objecte::getCapsaObjecte(Model &model)
 {
     //1.Agafem la bounding box del model

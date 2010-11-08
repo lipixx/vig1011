@@ -4,12 +4,9 @@
 #include "model.h"
 #include <QtOpenGL/qgl.h>
 #include <box.h>
+#include "constants.h"
 
-#define XPOS 0
-#define XNEG 1
-#define ZPOS 2
-#define ZNEG 3
-#define POS_INICIAL 4
+
 class Scene
 {
  private:
@@ -35,6 +32,7 @@ public:
   void calculaEsfera(Point &centreEscena, double &radi);
   void mouDarrerObjecte(int);
   void mouDarrerObjecte(Point u, Point v);
+  void orientaDarrerObjecte(int);
   bool validarPosicio();
 };
 

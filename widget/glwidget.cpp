@@ -173,11 +173,6 @@ void GLWidget::keyPressEvent(QKeyEvent *e)
     case Qt::Key_S:
       filferros = GL_POLYGON;
       break;   
-    case Qt::Key_Escape:
-      scene.mouDarrerObjecte(POS_INICIAL);
-      scene.validarPosicio();
-      posicionantObjecte = false;
-      break;
     default: e->ignore();
     }
   
@@ -208,6 +203,18 @@ void GLWidget::keyPressEvent(QKeyEvent *e)
 		case Qt::Key_Z:
 		  value = ZNEG;
 		  break;
+                case Qt::Key_Escape:
+                  scene.mouDarrerObjecte(POS_INICIAL);
+                  scene.validarPosicio();
+                  posicionantObjecte = false;
+                  break;
+                case Qt::Key_D:
+                  scene.orientaDarrerObjecte(YPOS);
+
+                  break;
+                case Qt::Key_E:
+                  scene.orientaDarrerObjecte(YNEG);
+                  break;
 		default: break;
 		}
 	    }
