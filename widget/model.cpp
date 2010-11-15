@@ -29,7 +29,7 @@ Model::updateBoundingBox ()
 }
 
 void
-Model::Render (GLenum mode)
+Model::Render (GLenum mode, bool seleccionant, int idObj)
 {
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares
   for (unsigned int cara = 0; cara < faces.size (); cara++)
@@ -37,7 +37,11 @@ Model::Render (GLenum mode)
 
       glBegin (mode);
       Color color = Scene ().matlib.material (faces[cara].material).kd;
-      glColor3f (color.r, color.g, color.b);
+
+      if (seleccionant)
+          glColor3f((idObj*0.01),0,0);
+      else
+          glColor3f (color.r, color.g, color.b);
 
       for (unsigned int vertex = 0; vertex < faces[cara].vertices.size ();
 	   vertex++)
