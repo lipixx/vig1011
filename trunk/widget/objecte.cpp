@@ -12,7 +12,7 @@ orientation (ori)
 {
   
 Point pos_valid = *(new Point (p.x, p.y, p.z));
-
+seleccionat = false;
 } 
 
 Objecte::~Objecte (void) 
@@ -20,17 +20,20 @@ Objecte::~Objecte (void)
 } 
 
 void
-
 Objecte::validarPosicio () 
 {
-  
 pos_valid.x = pos.x;
-  
 pos_valid.y = pos.y;
-  
 pos_valid.z = pos.z;
+seleccionat = false;
 
-} 
+}
+
+void
+Objecte::setSeleccionat(bool s)
+{
+    seleccionat = s;
+}
 
 void
 
@@ -47,7 +50,7 @@ pos.z = pos_valid.z;
 
 void
 
-Objecte::Render (std::vector < Model > &lmodels, GLenum mode) 
+Objecte::Render (std::vector < Model > &lmodels, GLenum mode, bool seleccionant, int idobj)
 {
   
     //L'objecte té les dades de "modificació" que aplicarem
@@ -76,8 +79,10 @@ glTranslatef (-(caixa.maxb.x + caixa.minb.x) / 2, -caixa.minb.y,
     //DEBUG
     caixa.Render ();
   
-
-m.Render (mode);
+if (seleccionat)
+    m.Render(mode,true,100.0);
+else
+    m.Render (mode, seleccionant, idobj);
   
 glPopMatrix ();
 
@@ -85,7 +90,7 @@ glPopMatrix ();
 
 std::string Objecte::getNom () 
 {
-  
+
 return nom;
 
 }
@@ -187,8 +192,8 @@ Box & Objecte::getCapsaObjecte (Model & model)
     Point punt (verts[i].coord.x, verts[i].coord.y, verts[i].coord.z);
 
     //Inicialització
-    for (int i = 4; i < 16; ++i)
-        p1[i] = 0.0f;
+    for (int j = 4; j < 16; ++j)
+        p1[j] = 0.0f;
 
     p1[0] = punt.x;
     p1[1] = punt.y;
@@ -207,7 +212,7 @@ Box & Objecte::getCapsaObjecte (Model & model)
     glPopMatrix ();
     if (i == 0) capsaObj.init(punt);
     else capsaObj.update (punt);
-    }
+  }
 glPopMatrix ();
    //4.Retornem la capsa
    return capsaObj;

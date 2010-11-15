@@ -7,6 +7,7 @@ QGLWidget (parent)
   filferros = GL_POLYGON;
   posicionantObjecte = false;
   cameraOrtho = false;
+  seleccionant = false;
 }
 
 void
@@ -126,6 +127,11 @@ GLWidget::paintGL (void)
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity ();
 
+  if (seleccionant)
+  {
+     glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
+  }
+
   if (!cameraOrtho)
     {
       if (aspect < 1)
@@ -134,7 +140,7 @@ GLWidget::paintGL (void)
 	gluPerspective (fovy, aspect, zNear, zFar);
 
       setModelView (CAM_PERSPECTIVE);
-      scene.Render (filferros);
+      scene.Render (filferros,seleccionant);
     }
   else
     {
@@ -144,11 +150,11 @@ GLWidget::paintGL (void)
       //Part esquerra
       glViewport (0, h / 2, w, h);
       setModelView (CAM_ORTHO_LEFT);
-      scene.Render (filferros);
+      scene.Render (filferros,seleccionant);
       //Part dreta
       glViewport (w, h / 2, w, h);
       setModelView (CAM_ORTHO_RIGHT);
-      scene.Render (filferros);
+      scene.Render (filferros,seleccionant);
     }
 }
 
@@ -160,7 +166,10 @@ GLWidget::mousePressEvent (QMouseEvent * e)
 
   if (e->button () & Qt::RightButton && posicionantObjecte)
     if (scene.validarPosicio ())
-      posicionantObjecte = false;
+      {
+        posicionantObjecte = false;
+        updateGL();
+      }
 
   if (e->button () & Qt::LeftButton
       && !(e->
@@ -185,6 +194,19 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     {
       DoingInteractive = PAN;
     }
+  else if (e->button() & Qt::MidButton)
+  {
+      //double * pixel;
+      seleccionant = true;
+      paintGL();
+      glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
+      //glReadPixels(xClick,yClick,width(),height(),GL_RED,GL_UNSIGNED_BYTE,pixel);
+      //scene.nouSeleccionat(id);
+      scene.nouSeleccionat(1);
+      seleccionant = false;
+      updateGL();
+     // seleccionant = false;
+  }
 }
 
 void
@@ -230,9 +252,12 @@ GLWidget::keyPressEvent (QKeyEvent * e)
 	      value = ZNEG;
 	      break;
 	    case Qt::Key_Escape:
-	      scene.mouDarrerObjecte (POS_INICIAL);
-	      scene.validarPosicio ();
-	      posicionantObjecte = false;
+	      scene.mouDarrerObjecte (POS_INICIAL);	      
+              if (scene.validarPosicio ())
+              {
+                  posicionantObjecte = false;
+                  updateGL();
+              }
 	      break;
 	    case Qt::Key_D:
 	      scene.orientaDarrerObjecte (YPOS);

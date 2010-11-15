@@ -43,13 +43,13 @@ Scene::construirBase ()
 }
 
 void
-Scene::Render (GLenum mode)
+Scene::Render (GLenum mode,bool seleccionant)
 {
   int numObjs = lobjectes.size ();
 
   // Cal pintar tots els objectes de l'escena que es troben al vector
   for (int i = 0; i < numObjs; i++)
-    lobjectes[i].Render (lmodels, mode);
+    lobjectes[i].Render (lmodels, mode, seleccionant, i);
 }
 
 void
@@ -268,8 +268,15 @@ Scene::validarPosicio ()
     }
   else
     {
-      lobjectes[idPosicionantObjecte].validarPosicio ();
+      lobjectes[idPosicionantObjecte].validarPosicio ();      
       cout << "Pos. VALIDADA" << endl;
       return true;
     }
+}
+
+void
+Scene::nouSeleccionat(int id)
+{
+    lobjectes[id].setSeleccionat(true);
+    idPosicionantObjecte = id;
 }
