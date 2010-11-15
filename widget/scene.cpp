@@ -75,16 +75,6 @@ Scene::calculaEsfera (Point & centreEscena, double &radi)
 }
 
 void
-Scene::calculaEsferaObjecte (Point & centreObjecte, double &radi, int idObj)
-{
-  Box capsaObjecte =
-    lobjectes[idObj].
-    getCapsaObjecte (lmodels[lobjectes[idObj].getModelId ()]);
-  centreObjecte = (capsaObjecte.maxb + capsaObjecte.minb) / 2;
-  radi = (capsaObjecte.maxb - capsaObjecte.minb).length () / 2.f;
-}
-
-void
 Scene::AddModel (Model & o)
 {
   lmodels.push_back (o);
@@ -187,30 +177,67 @@ Scene::orientaDarrerObjecte (int sentit)
     setOrientation (lobjectes[idPosicionantObjecte].getOrientation () + gir);
 }
 
+bool Scene::detectaColisio(Box &obj1, Box &obj2)
+{
+    bool resultat = false;
+
+    cout << "Obj1 min: " << obj1.minb << " Obj1 max: " << obj1.maxb << endl;
+    cout << "Obj2 min: " << obj2.minb << " Obj2 max: " << obj2.maxb << endl;
+    //Pla X
+    if (obj1.maxb.x > obj2.maxb.x)
+    {
+       if (obj1.minb.x < obj2.maxb.x) resultat = true;
+       if (obj1.minb.x == obj2.maxb.x) resultat = false;
+       if (obj1.minb.x > obj2.maxb.x) resultat = false;
+    }
+   if (obj1.maxb.x == obj2.maxb.x)
+    {
+        resultat = true;
+    }
+
+    if (obj1.maxb.x < obj2.maxb.x)
+    {
+        if (obj2.minb.x < obj1.maxb.x) resultat = true;
+        if (obj2.minb.x > obj1.maxb.x) resultat = false;
+        if (obj2.minb.x == obj1.maxb.x) resultat = false;
+    }
+
+    //Pla Z
+    if (resultat) //Si colisiona en X
+    {
+        if (obj1.maxb.z > obj2.maxb.z)
+           {
+              if (obj1.minb.z < obj2.maxb.z) resultat = true;
+              if (obj1.minb.z == obj2.maxb.z) resultat = false;
+              if (obj1.minb.z > obj2.maxb.z) resultat = false;
+           }
+          if (obj1.maxb.z == obj2.maxb.z)
+           {
+               resultat = true;
+           }
+
+           if (obj1.maxb.z < obj2.maxb.z)
+           {
+               if (obj2.minb.z < obj1.maxb.z) resultat = true;
+               if (obj2.minb.z > obj1.maxb.z) resultat = false;
+               if (obj2.minb.z == obj1.maxb.z) resultat = false;
+           }
+    }
+    return resultat;
+}
+
 bool
 Scene::validarPosicio ()
 {
   bool colisio = false;
-  double radi = 0, radiObjProper = 0, dist = 0;
-  Point centreObjecte;
-  Point centreObjecteProper;
+  Box capsaUltimObjectePosicionat = lobjectes[idPosicionantObjecte].getCapsaObjecte (lmodels[lobjectes[idPosicionantObjecte].getModelId ()]);
 
-  calculaEsferaObjecte (centreObjecte, radi, idPosicionantObjecte);
-
-  for (unsigned int i = 1; i < lobjectes.size (); i++)
+  for (unsigned int i = 1; i < lobjectes.size () && !colisio; i++)
     {
       if ((int) i != idPosicionantObjecte)
 	{
-	  calculaEsferaObjecte (centreObjecteProper, radiObjProper, i);
-	  dist = pow (centreObjecte.x - centreObjecteProper.x, 2)
-	    + pow (centreObjecte.y - centreObjecteProper.y, 2)
-	    + pow (centreObjecte.z - centreObjecteProper.z, 2);
-	  dist = sqrt (dist);
-
-	  cout << radi << endl;
-	  if (dist < radi + radiObjProper)
-	    colisio = true;
-	  break;
+          Box capsaObjecte = lobjectes[i].getCapsaObjecte (lmodels[lobjectes[i].getModelId ()]);
+          colisio = detectaColisio(capsaUltimObjectePosicionat,capsaObjecte);
 	}
     }
 

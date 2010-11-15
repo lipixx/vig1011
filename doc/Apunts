@@ -42,3 +42,32 @@ I per agafar els valors m[i]:
 //Recordem que la primera fila de Modelview és la X d'observador en coord. d'app.(X0,X1,X2)
 //la segona fila és la Y d'observador (Y0,Y1,Y2)
 //la tercera fila és la z d'observador (Z0,Z1,Z2)
+
+#####################
+
+Selecció per color fals:
+
+1. Pintar tot el background negre
+2. Pintar cada objecte amb el seu "id"
+3. glReadPixels(X,Y,1,1,GL_RED,GL_UNSIGNED_BYTE,&pixel) (Y~= altura de la vista - pospixel) 
+
+Si pixel = 0 hem pitjat a negre, al background.
+Sino pixel val l'ID de l'objecte
+
+(hem de tenir activat el zbuffer.. per defecte hi està)
+
+4. Pintar en color la caixa de l'objecte seleccionat
+
+--
+RenderSelec-
+	-> Back Buffer
+	-> desactivar swap buffers
+
+PaintG
+	-> Swap buffers
+	-> borrar backgr.
+	-> scene.render
+Pasar al render de l'objecte (i del model)  un booleà que digui si fem render de selecció
+o no, allà pintarem la component g i b a 0, i la R = id de l'objecte.
+
+
