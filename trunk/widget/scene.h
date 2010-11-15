@@ -16,7 +16,7 @@ private:
   std::vector < Model > lmodels;
   std::vector < Objecte > lobjectes;
   int idPosicionantObjecte;
-  void calculaEsferaObjecte (Point & centreObjecte, double &radi, int idObj);
+  bool detectaColisio(Box &obj1, Box &obj2);
 
 public:
   static MaterialLib matlib;	// col·lecció de materials
