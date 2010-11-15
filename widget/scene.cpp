@@ -151,18 +151,38 @@ Scene::mouDarrerObjecte (int sentit)
     }
   if (sentit != POS_INICIAL)
     {
-      Point actual = lobjectes[idPosicionantObjecte].getPosition ();
-      lobjectes[idPosicionantObjecte].setPosition (actual + p);
+      //No pot sortir del terra
+      Point actual = lobjectes[idPosicionantObjecte].getPosition () + p;
+      Box capsaObjecte = lobjectes[idPosicionantObjecte].getCapsaObjecte (lmodels[lobjectes[idPosicionantObjecte].getModelId ()]);
+      Box capsaTerra = lobjectes[0].getCapsaObjecte (lmodels[lobjectes[0].getModelId ()]);
+      if (capsaObjecte.maxb.x + p.x > capsaTerra.maxb.x) actual.x = actual.x - (capsaObjecte.maxb.x - capsaTerra.maxb.x) - p.x;
+      if (capsaObjecte.maxb.z + p.z > capsaTerra.maxb.z) actual.z = actual.z - (capsaObjecte.maxb.z - capsaTerra.maxb.z) - p.z;
+      if (capsaObjecte.minb.x + p.x < capsaTerra.minb.x) actual.x = actual.x + (capsaTerra.minb.x - capsaObjecte.minb.x) - p.x;
+      if (capsaObjecte.minb.z + p.z < capsaTerra.minb.z) actual.z = actual.z + (capsaTerra.minb.z - capsaObjecte.minb.z) - p.z;
+      lobjectes[idPosicionantObjecte].setPosition (actual);
     }
 }
 
 void
 Scene::mouDarrerObjecte (Point u, Point v)
 {
-  u /= 50;
-  v /= 50;
+  u /= 40;
+  v /= 40;
   Point actual = lobjectes[idPosicionantObjecte].getPosition ();
-  lobjectes[idPosicionantObjecte].setPosition (actual + u + v);
+  Point inc = Point();
+  inc = u+v;
+  actual += inc;
+
+  //5 és la mida de la base escalada al seu valor (1.0)
+  Box capsaObjecte = lobjectes[idPosicionantObjecte].getCapsaObjecte (lmodels[lobjectes[idPosicionantObjecte].getModelId ()]);
+  Box capsaTerra = lobjectes[0].getCapsaObjecte (lmodels[lobjectes[0].getModelId ()]);
+
+  if (capsaObjecte.maxb.x + inc.x > capsaTerra.maxb.x) actual.x = actual.x - (capsaObjecte.maxb.x - capsaTerra.maxb.x) - inc.x;
+  if (capsaObjecte.maxb.z + inc.z > capsaTerra.maxb.z) actual.z = actual.z - (capsaObjecte.maxb.z - capsaTerra.maxb.z) - inc.z;
+  if (capsaObjecte.minb.x + inc.x < capsaTerra.minb.x) actual.x = actual.x + (capsaTerra.minb.x - capsaObjecte.minb.x) - inc.x;
+  if (capsaObjecte.minb.z + inc.z < capsaTerra.minb.z )actual.z = actual.z +(capsaTerra.minb.z - capsaObjecte.minb.z)  - inc.z;
+
+  lobjectes[idPosicionantObjecte].setPosition (actual);
 }
 
 void
@@ -240,7 +260,6 @@ Scene::validarPosicio ()
           colisio = detectaColisio(capsaUltimObjectePosicionat,capsaObjecte);
 	}
     }
-
 
   if (colisio)			//Si les caixes intercepten, no validar!
     {
