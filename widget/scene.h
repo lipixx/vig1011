@@ -22,10 +22,11 @@ public:
   static MaterialLib matlib;	// col·lecció de materials
 
     Scene ();
-  void nouSeleccionat(int id);
+  bool nouSeleccionat(int id);
   void Init ();
   void construirBase ();
-  void Render (GLenum mode,bool seleccionant);
+  void Render (GLenum mode,bool seleccionant); 
+  void Render (GLenum mode);
   void AddModel (Model &);
   void AddObjecte (Objecte &);
   void carregaModel (const char *filename);

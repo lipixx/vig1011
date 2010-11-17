@@ -53,6 +53,16 @@ Scene::Render (GLenum mode,bool seleccionant)
 }
 
 void
+Scene::Render (GLenum mode)
+{
+  int numObjs = lobjectes.size ();
+
+  // Cal pintar tots els objectes de l'escena que es troben al vector
+  for (int i = 0; i < numObjs; i++)
+    lobjectes[i].Render (lmodels, mode, false, i);
+}
+
+void
 Scene::calculaEsfera (Point & centreEscena, double &radi)
 {
   int numObjs = lobjectes.size ();
@@ -122,7 +132,9 @@ Scene::carregaModel (const char *filename)
   //3.Amb l'identificador lmodel[i] corresponent, crear un objecte (centre000,escalat,orient0º)
   Objecte obj (filename, i, Point (0, 0, 0), scale, 0);
   this->AddObjecte (obj);
+  if (lobjectes.size() > 1) lobjectes[idPosicionantObjecte].setSeleccionat(false);
   idPosicionantObjecte = lobjectes.size () - 1;
+  lobjectes[idPosicionantObjecte].setSeleccionat(true);
 }
 
 void
@@ -201,8 +213,6 @@ bool Scene::detectaColisio(Box &obj1, Box &obj2)
 {
     bool resultat = false;
 
-    cout << "Obj1 min: " << obj1.minb << " Obj1 max: " << obj1.maxb << endl;
-    cout << "Obj2 min: " << obj2.minb << " Obj2 max: " << obj2.maxb << endl;
     //Pla X
     if (obj1.maxb.x > obj2.maxb.x)
     {
@@ -274,9 +284,14 @@ Scene::validarPosicio ()
     }
 }
 
-void
+bool
 Scene::nouSeleccionat(int id)
 {
+    //Hem de convertir id a l'ID demanat --TODO
+    if ((unsigned int) id > lobjectes.size() || id < 1) return false;
+
     lobjectes[id].setSeleccionat(true);
     idPosicionantObjecte = id;
+
+    return true;
 }

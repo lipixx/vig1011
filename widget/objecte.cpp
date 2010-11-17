@@ -80,7 +80,7 @@ glTranslatef (-(caixa.maxb.x + caixa.minb.x) / 2, -caixa.minb.y,
     caixa.Render ();
   
 if (seleccionat)
-    m.Render(mode,true,100.0);
+    m.Render(mode,true,150.0);
 else
     m.Render (mode, seleccionant, idobj);
   
