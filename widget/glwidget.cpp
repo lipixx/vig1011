@@ -196,7 +196,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
       //Fem el render de l'escena falsament al back buffer
       scene.Render (filferros,true);
       //Llegim del backbuffer les coordenades
-      glReadPixels(xClick,yClick,1,1,GL_RED,GL_UNSIGNED_BYTE,&pixel);
+      glReadPixels(xClick,height()-yClick,1,1,GL_RED,GL_UNSIGNED_BYTE,&pixel);
       //Restaurem el color de fons
       glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
 
