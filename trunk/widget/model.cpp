@@ -39,7 +39,9 @@ Model::Render (GLenum mode, bool seleccionant, int idObj)
       Color color = Scene ().matlib.material (faces[cara].material).kd;
 
       if (seleccionant)
-          glColor3f((idObj*0.01),0,0);
+      {
+          glColor3ub(idObj,0,0);
+      }
       else
           glColor3f (color.r, color.g, color.b);
 

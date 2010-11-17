@@ -7,7 +7,6 @@ QGLWidget (parent)
   filferros = GL_POLYGON;
   posicionantObjecte = false;
   cameraOrtho = false;
-  seleccionant = false;
 }
 
 void
@@ -127,20 +126,14 @@ GLWidget::paintGL (void)
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity ();
 
-  if (seleccionant)
-  {
-     glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
-  }
-
   if (!cameraOrtho)
     {
       if (aspect < 1)
 	gluPerspective (dynamic_fovy, aspect, zNear, zFar);
       else
 	gluPerspective (fovy, aspect, zNear, zFar);
-
-      setModelView (CAM_PERSPECTIVE);
-      scene.Render (filferros,seleccionant);
+        setModelView (CAM_PERSPECTIVE);
+        scene.Render (filferros);
     }
   else
     {
@@ -150,11 +143,11 @@ GLWidget::paintGL (void)
       //Part esquerra
       glViewport (0, h / 2, w, h);
       setModelView (CAM_ORTHO_LEFT);
-      scene.Render (filferros,seleccionant);
+      scene.Render (filferros);
       //Part dreta
       glViewport (w, h / 2, w, h);
       setModelView (CAM_ORTHO_RIGHT);
-      scene.Render (filferros,seleccionant);
+      scene.Render (filferros);
     }
 }
 
@@ -194,19 +187,28 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     {
       DoingInteractive = PAN;
     }
-  else if (e->button() & Qt::MidButton)
+  else if (e->button() & Qt::MidButton && !posicionantObjecte)
   {
-      //double * pixel;
-      seleccionant = true;
-      paintGL();
+      GLuint pixel;
+      glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
+      glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+      //Fem el render de l'escena falsament al back buffer
+      scene.Render (filferros,true);
+      //Llegim del backbuffer les coordenades
+      glReadPixels(xClick,yClick,1,1,GL_RED,GL_UNSIGNED_BYTE,&pixel);
+      //Restaurem el color de fons
       glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
-      //glReadPixels(xClick,yClick,width(),height(),GL_RED,GL_UNSIGNED_BYTE,pixel);
-      //scene.nouSeleccionat(id);
-      scene.nouSeleccionat(1);
-      seleccionant = false;
-      updateGL();
-     // seleccionant = false;
-  }
+
+      cout << "ID_Seleccionat: "<< pixel << endl;
+
+      scene.nouSeleccionat(pixel);
+       if (scene.nouSeleccionat(pixel))
+       {
+           posicionantObjecte = true;
+           updateGL();
+       }
+    }
 }
 
 void

@@ -39,7 +39,7 @@ protected:
 private:
     GLenum filferros;
   void setDefaultCamera ();
-  bool posicionantObjecte, cameraOrtho, seleccionant;
+  bool posicionantObjecte, cameraOrtho;
   void setModelView (int);
 
   public slots:void LoadObject ();
