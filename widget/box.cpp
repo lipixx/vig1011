@@ -23,10 +23,13 @@ void Box::init(const Point& p)
 }
 
 // per a poder fer comprovacions si es vol
-void Box::Render()
+void Box::Render(bool seleccionat)
 {
   glLineWidth(1.0);
-  Render(1.0, 1.0, 1.0);
+  if (seleccionat)
+      Render(1.0,0,0);
+  else
+      Render(1.0, 1.0, 1.0);
 }
 
 void Box::Render(double r, double g, double b)

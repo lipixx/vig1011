@@ -336,8 +336,14 @@ GLWidget::LoadObject ()
 {
   QString model =
     QFileDialog::getOpenFileName (this, tr ("Open File"), "../data",
-				  tr ("Objectes (*.obj)"));
-  if (model != "")
+                                  tr ("Objectes (*.obj)"));
+ bool podemCarregar = true;
+
+  if (posicionantObjecte)
+  {
+     podemCarregar = scene.validarPosicio();
+  }
+  if (model != "" && podemCarregar)
     {
       // Aquí cal fer el codi per a carregar el model escollit
       const char *mod = (model.toStdString ()).c_str ();
