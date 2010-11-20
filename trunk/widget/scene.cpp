@@ -205,8 +205,9 @@ Scene::orientaDarrerObjecte (int sentit)
     gir = -10;
   else
     gir = 10;
+
   lobjectes[idPosicionantObjecte].
-    setOrientation (lobjectes[idPosicionantObjecte].getOrientation () + gir);
+    setOrientation (lobjectes[idPosicionantObjecte].getOrientation () + gir); 
 }
 
 bool Scene::detectaColisio(Box &obj1, Box &obj2)

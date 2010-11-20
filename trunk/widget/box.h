@@ -29,7 +29,7 @@ class Box
   // atributs
   Point minb, maxb;	// extrems mínim i màxim de la capsa
 
-  void Render();
+  void Render(bool seleccionat);
 
 };
 

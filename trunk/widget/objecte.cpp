@@ -39,13 +39,9 @@ void
 
 Objecte::setLastPosicioValida () 
 {
-  
 pos.x = pos_valid.x;
-  
 pos.y = pos_valid.y;
-  
 pos.z = pos_valid.z;
-
 } 
 
 void
@@ -57,42 +53,35 @@ Objecte::Render (std::vector < Model > &lmodels, GLenum mode, bool seleccionant,
     //al model del seu objecte: scale, position, orientation
     //per tant agafarem el model i farem la transformació
     Model m = lmodels[this->getModelId ()];
-  
 
-    //(nom, model, pos,scale,orientation)
+    glMatrixMode (GL_MODELVIEW);
     Box caixa = m.boundingBox ();
-  
-glMatrixMode (GL_MODELVIEW);
-  
-glPushMatrix ();
-  
-glTranslatef (pos.x, pos.y, pos.z);
-  
-glRotatef (orientation, 0, 1, 0);
-  
-glScalef (scale, scale, scale);
-  
-glTranslatef (-(caixa.maxb.x + caixa.minb.x) / 2, -caixa.minb.y,
-		 -(caixa.maxb.z + caixa.minb.z) / 2);
-  
 
-    //DEBUG
-    caixa.Render ();
-  
-if (seleccionat)
-    m.Render(mode,true,150.0);
-else
+    if (seleccionat)
+    {
+         Box capsaModel = this->getCapsaObjecte(m);
+         capsaModel.Render(true);
+    }
+    else
+    {
+    //Per debugar, descomentem aquestes 2 linies
+    //Box capsaModel = this->getCapsaObjecte(m);
+    //capsaModel.Render(false);
+    }
+
+    glPushMatrix ();
+    glTranslatef (pos.x, pos.y, pos.z);
+    glRotatef (orientation, 0, 1, 0);
+    glScalef (scale, scale, scale);
+    glTranslatef (-(caixa.maxb.x + caixa.minb.x) / 2, -caixa.minb.y,
+                     -(caixa.maxb.z + caixa.minb.z) / 2);
     m.Render (mode, seleccionant, idobj);
-  
-glPopMatrix ();
-
+    glPopMatrix ();
 } 
 
 std::string Objecte::getNom () 
 {
-
 return nom;
-
 }
 
 
@@ -100,18 +89,14 @@ return nom;
 int
 Objecte::getModelId () 
 {
-  
-return model;
-
+    return model;
 }
 
 
 
 Point Objecte::getPosition () 
-{
-  
+{ 
 return pos;
-
 }
 
 
@@ -119,22 +104,15 @@ return pos;
 void
 Objecte::setPosition (Point p) 
 {
-  
 pos.x = p.x;
-  
 pos.y = p.y;
-  
 pos.z = p.z;
-
 } 
 
 float
-
 Objecte::getScale () 
 {
-  
 return scale;
-
 }
 
 
@@ -142,9 +120,7 @@ return scale;
 float
 Objecte::getOrientation () 
 {
-  
 return orientation;
-
 }
 
 
@@ -152,14 +128,11 @@ return orientation;
 void
 Objecte::setOrientation (float ori) 
 {
-  
 orientation = ori;
-
 } 
 
 Box & Objecte::getCapsaObjecte (Model & model) 
 {
-  
   //1.Agafem la bounding box del model
   Box caixaModel = model.boundingBox ();
   
