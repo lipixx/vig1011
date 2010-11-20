@@ -27,7 +27,7 @@ void Box::Render(bool seleccionat)
 {
   glLineWidth(1.0);
   if (seleccionat)
-      Render(1.0,0,0);
+      Render(1.0,0,1.0);
   else
       Render(1.0, 1.0, 1.0);
 }
