@@ -70,4 +70,19 @@ PaintG
 Pasar al render de l'objecte (i del model)  un booleà que digui si fem render de selecció
 o no, allà pintarem la component g i b a 0, i la R = id de l'objecte.
 
+#################### P3
+
+1. Canviar tots els glColor per glMaterial.
+
+glMaterialf(GL_FRONT_AND_BACK,{GL_AMBIENT,GL_DIFFUSE,GL_SPECULAR,GL_SHINENESS},
+
+aqui també es pot passar amb un vector els valors, material.h té la gestió de materials
+però hem de recordar que haurem de convertir el material que és una classe amb 3 colors,
+a vector de 3 camps.
+
+2. 
+glEnable(GLLIGHTING)
+glEnable(GL_LIGHT0)
+
+openGL ignora després tot el que sigui glColor, i per tant només te en compte glMaterialfs.
 

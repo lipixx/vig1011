@@ -33,8 +33,7 @@ Model::Render (GLenum mode, bool seleccionant, int idObj)
 {
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares
   for (unsigned int cara = 0; cara < faces.size (); cara++)
-    {
-
+    {     
       glBegin (mode);
       Color color = Scene ().matlib.material (faces[cara].material).kd;
 
