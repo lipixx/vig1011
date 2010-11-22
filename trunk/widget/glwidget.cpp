@@ -187,27 +187,28 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     {
       DoingInteractive = PAN;
     }
-  else if (e->button() & Qt::MidButton && !posicionantObjecte)
+  else if (e->button() & Qt::MidButton)
   {
+      if (posicionantObjecte) posicionantObjecte = !scene.validarPosicio();
+      if (!posicionantObjecte)
+      {
       char pixel;
       glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
       glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
       //Fem el render de l'escena falsament al back buffer
       scene.Render (filferros,true);
       //Llegim del backbuffer les coordenades
       glReadPixels(xClick,height()-yClick,1,1,GL_RED,GL_UNSIGNED_BYTE,&pixel);
       //Restaurem el color de fons
       glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
-
       cout << "ID_Seleccionat: "<< (int)pixel << endl;
-
        if (scene.nouSeleccionat(pixel))
        {
            posicionantObjecte = true;
            updateGL();
        }
-    }
+   }
+  }
 }
 
 void
