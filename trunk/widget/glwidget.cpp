@@ -202,7 +202,6 @@ GLWidget::mousePressEvent (QMouseEvent * e)
 
       cout << "ID_Seleccionat: "<< (int)pixel << endl;
 
-      scene.nouSeleccionat(pixel);
        if (scene.nouSeleccionat(pixel))
        {
            posicionantObjecte = true;
