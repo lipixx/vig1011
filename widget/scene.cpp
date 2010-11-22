@@ -7,6 +7,7 @@ MaterialLib
 
 Scene::Scene ()
 {
+    idPosicionantObjecte = -1;
 }
 
 void
@@ -132,6 +133,7 @@ Scene::carregaModel (const char *filename)
   //3.Amb l'identificador lmodel[i] corresponent, crear un objecte (centre000,escalat,orient0º)
   Objecte obj (filename, i, Point (0, 0, 0), scale, 0);
   this->AddObjecte (obj);
+  if (idPosicionantObjecte == -1) idPosicionantObjecte = 1;
   if (lobjectes.size() > 1) lobjectes[idPosicionantObjecte].setSeleccionat(false);
   idPosicionantObjecte = lobjectes.size () - 1;
   lobjectes[idPosicionantObjecte].setSeleccionat(true);
