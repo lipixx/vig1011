@@ -189,7 +189,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     }
   else if (e->button() & Qt::MidButton && !posicionantObjecte)
   {
-      GLuint pixel;
+      char pixel;
       glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
       glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
@@ -200,7 +200,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
       //Restaurem el color de fons
       glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
 
-      cout << "ID_Seleccionat: "<< pixel << endl;
+      cout << "ID_Seleccionat: "<< (int)pixel << endl;
 
       scene.nouSeleccionat(pixel);
        if (scene.nouSeleccionat(pixel))
