@@ -60,7 +60,9 @@ Objecte::Render (std::vector < Model > &lmodels, GLenum mode, bool seleccionant,
     if (seleccionat)
     {
          Box capsaModel = this->getCapsaObjecte(m);
+         glDisable(GL_LIGHTING);
          capsaModel.Render(true);
+         glEnable(GL_LIGHTING);
     }
     else
     {

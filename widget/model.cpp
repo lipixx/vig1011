@@ -35,7 +35,7 @@ Model::Render (GLenum mode, bool seleccionant, int idObj)
   for (unsigned int cara = 0; cara < faces.size (); cara++)
     {     
       glBegin (mode);
-      Color color = Scene ().matlib.material (faces[cara].material).kd;
+      Color color = Scene().matlib.material(faces[cara].material).kd;
 
       if (seleccionant)
       {
@@ -43,9 +43,10 @@ Model::Render (GLenum mode, bool seleccionant, int idObj)
       }
       else
       {
-         glColor3f (color.r, color.g, color.b);
-       //  GLfloat mat[] = { 0.3f, 1.0f, 0.4f, 0.8f };
-       //  glMaterialfv(GL_FRONT,GL_AMBIENT,mat);
+         GLfloat mat[] = { color.r, color.g, color.b, color.a };
+         glNormal3f(faces[cara].normal.x,faces[cara].normal.y,faces[cara].normal.z);
+         glMaterialfv(GL_FRONT,GL_DIFFUSE,mat);
+
       }
       for (unsigned int vertex = 0; vertex < faces[cara].vertices.size ();
            vertex++)
