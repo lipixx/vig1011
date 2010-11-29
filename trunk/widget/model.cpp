@@ -42,10 +42,13 @@ Model::Render (GLenum mode, bool seleccionant, int idObj)
           glColor3ub(idObj,0,0);
       }
       else
-          glColor3f (color.r, color.g, color.b);
-
+      {
+         glColor3f (color.r, color.g, color.b);
+       //  GLfloat mat[] = { 0.3f, 1.0f, 0.4f, 0.8f };
+       //  glMaterialfv(GL_FRONT,GL_AMBIENT,mat);
+      }
       for (unsigned int vertex = 0; vertex < faces[cara].vertices.size ();
-	   vertex++)
+           vertex++)
 	{
 	  Point p = vertices[faces[cara].vertices[vertex]].coord;
 	  glVertex3f (p.x, p.y, p.z);

@@ -61,6 +61,8 @@ GLWidget::initializeGL ()
 {
   glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
   glEnable (GL_DEPTH_TEST);
+  glEnable (GL_LIGHTING);
+  glEnable (GL_LIGHT0);
   scene.Init ();
   setDefaultCamera ();
 }
@@ -115,6 +117,7 @@ GLWidget::setModelView (int casView)
   glVertex3f (0, 0, 0);
   glVertex3f (0, 0, 20);	// Z
   glEnd ();
+  glEnable(GL_LIGHTING);
 }
 
 void
@@ -122,7 +125,6 @@ GLWidget::paintGL (void)
 {
   // Esborrem els buffers
   glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
   glMatrixMode (GL_PROJECTION);
   glLoadIdentity ();
 
@@ -194,6 +196,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
       {
       char pixel;
       glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
+      glDisable(GL_LIGHTING);
       glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
       //Fem el render de l'escena falsament al back buffer
       scene.Render (filferros,true);
@@ -201,6 +204,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
       glReadPixels(xClick,height()-yClick,1,1,GL_RED,GL_UNSIGNED_BYTE,&pixel);
       //Restaurem el color de fons
       glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
+      glEnable(GL_LIGHTING);
       cout << "ID_Seleccionat: "<< (int)pixel << endl;
        if (scene.nouSeleccionat(pixel))
        {
