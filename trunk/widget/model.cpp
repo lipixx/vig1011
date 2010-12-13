@@ -59,6 +59,8 @@ Model::Render (GLenum mode, bool seleccionant, int idObj, Material m)
 	  Point p = vertices[faces[cara].vertices[vertex]].coord;
 	  glVertex3f (p.x, p.y, p.z);
 	}
+      glEnd();
+      glBegin(mode);
     }
   glEnd();
 }
