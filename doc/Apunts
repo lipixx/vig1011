@@ -86,3 +86,22 @@ glEnable(GL_LIGHT0)
 
 openGL ignora després tot el que sigui glColor, i per tant només te en compte glMaterialfs.
 
+3. La llum de l'escena és GL_LIGHT0 i la de camera és GL_LIGHT1.
+
+El light0 està a l'eix de les Y, i només pot pujar i baixar per aquest eix.
+
+-Per comprovar si la llum d'escena va bé, movem l'escena i no ha de canviar la il·luminació.
+-Per comprovar si GL_LIGHT1 (de càmera) va bé, hem de rotar l'escena i comprovar que s'il·lumina
+el que tenim al davant.
+- (1,0,0,0) = llum direccional, (1,0,0,1) = llum posicional. (glLight() Parameter)
+
+INFO
+########
+Backface culling is when OpenGL determines which faces are facing away from the viewer and are therefore unseen. Think of a cube. No matter how your rotate the cube, 3 faces will always be invisible. Figure out which faces these are, remove them from the list of polygons to be drawn and you just halved your drawing list.
+
+Depth buffering is fairly simple. For every pixel of every polygon drawn, compare it's z value to the z buffer. if it's less than the value in the z buffer set the z buffer value as the new z buffer value. If not, discard the pixel. Depth buffering gives very good results but can be fairly slow as each and every pixel requires a value lookup.
+
+In reality there is nothing similar between these two methods and they are often both used. Given a cube you can first cut out half the polygons using culling then draw them using z buffering.
+
+Culling can cut down on the polygons rendered, but it's not a sorting algorithm. That's what Z buffering is.
+
