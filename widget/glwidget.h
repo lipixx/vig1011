@@ -47,6 +47,9 @@ private:
   void setFilferros (bool);
   void setCameraOrtho ();
   void setPartsAmagades(bool);
+
+public:
+  int getIdPosicionantObjecte();
 };
 
 #endif

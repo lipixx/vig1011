@@ -2,6 +2,7 @@
 #define PRINCIPAL_H
 
 #include <QWidget>
+#include <dialegmaterials.h>
 
 namespace Ui {
     class Principal;
@@ -18,6 +19,10 @@ protected:
 
 private:
     Ui::Principal *ui;
+    DialegMaterials *dm;
+
+public slots:
+    void showMatDialog();    
 };
 
 #endif // PRINCIPAL_H

@@ -13,8 +13,11 @@ INCLUDEPATH += ../widget
 LIBS += ../widget/libglwidgetplugin.so
 
 SOURCES += main.cpp\
-        principal.cpp
+        principal.cpp \
+    dialegmaterials.cpp
 
-HEADERS  += principal.h
+HEADERS  += principal.h \
+    dialegmaterials.h
 
-FORMS    += principal.ui
+FORMS    += principal.ui \
+    dialegmaterials.ui
