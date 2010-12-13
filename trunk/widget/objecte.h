@@ -6,7 +6,7 @@
 #include "point.h"
 #include "model.h"
 #include "box.h"
-
+#include "material_lib.h"
  
 using namespace std;
 
@@ -18,11 +18,12 @@ protected:
 std::string nom;
   
 int model;			// identificador del model
-  Point pos;			// posicio sobre el terra
-  Point pos_valid;		// posició validada o la última bona
-  float scale;			// mida en unitats
-  float orientation;		//orientació respecte Y
-  bool seleccionat;
+Point pos;			// posicio sobre el terra
+Point pos_valid;		// posició validada o la última bona
+float scale;			// mida en unitats
+float orientation;		//orientació respecte Y
+bool seleccionat;
+Material material;
 
 public:
 Objecte (std::string nom, int idmod, Point p, float scl,

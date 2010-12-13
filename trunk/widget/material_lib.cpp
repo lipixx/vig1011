@@ -10,8 +10,7 @@ MaterialLib::MaterialLib()
 	materials.push_back(Material("material per defecte"));
 	// afegeix un segon material (vermell) a la posicio 1 
 	dict["material vermell"]=1;
-	materials.push_back(Material("material vermell", Color(.4,0,0),Color(.8,0,0))); 
-
+        materials.push_back(Material("material vermell", Color(.4,0,0),Color(.8,0,0)));
 }
 
 void MaterialLib::readMtl(const char* filename)

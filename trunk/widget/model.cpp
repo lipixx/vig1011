@@ -29,34 +29,38 @@ Model::updateBoundingBox ()
 }
 
 void
-Model::Render (GLenum mode, bool seleccionant, int idObj)
+Model::Render (GLenum mode, bool seleccionant, int idObj, Material m)
 {
+  Color color;
+
+  if (idObj == 0)
+      color = Scene().matlib.material(faces[0].material).kd;
+  else
+      color = m.kd;
+
+  glBegin (mode);
+  if (seleccionant)
+  {
+      glColor3ub(idObj,0,0);
+  }
+  else
+  {
+     GLfloat mat[] = { color.r, color.g, color.b, color.a };
+     glMaterialfv(GL_FRONT,GL_DIFFUSE,mat);
+  }
+
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares
   for (unsigned int cara = 0; cara < faces.size (); cara++)
-    {     
-      glBegin (mode);
-      Color color = Scene().matlib.material(faces[cara].material).kd;
-
-      if (seleccionant)
-      {
-          glColor3ub(idObj,0,0);
-      }
-      else
-      {
-         GLfloat mat[] = { color.r, color.g, color.b, color.a };
-         glNormal3f(faces[cara].normal.x,faces[cara].normal.y,faces[cara].normal.z);
-         glMaterialfv(GL_FRONT,GL_DIFFUSE,mat);
-
-      }
+    {
+      glNormal3f(faces[cara].normal.x,faces[cara].normal.y,faces[cara].normal.z);
       for (unsigned int vertex = 0; vertex < faces[cara].vertices.size ();
            vertex++)
 	{
 	  Point p = vertices[faces[cara].vertices[vertex]].coord;
 	  glVertex3f (p.x, p.y, p.z);
 	}
-
-      glEnd ();
     }
+  glEnd();
 }
 
 // Netela les dades de l'objecte per a poder carregar un nou model
