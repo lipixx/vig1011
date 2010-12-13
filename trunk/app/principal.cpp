@@ -1,11 +1,14 @@
 #include "principal.h"
 #include "ui_principal.h"
+#include "dialegmaterials.h"
 
 Principal::Principal(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Principal)
 {
     ui->setupUi(this);
+    dm = new DialegMaterials();
+    dm->initialize(ui->gLWidget);
 }
 
 Principal::~Principal()
@@ -24,3 +27,13 @@ void Principal::changeEvent(QEvent *e)
         break;
     }
 }
+
+void Principal::showMatDialog()
+{
+    if (ui->gLWidget->getIdPosicionantObjecte() != -1)
+    {
+        dm->updateData();
+        dm->show();
+    }
+}
+

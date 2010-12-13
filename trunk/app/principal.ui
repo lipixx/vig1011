@@ -112,6 +112,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="modMaterial">
+       <property name="text">
+        <string>Modificar material</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -250,5 +257,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>modMaterial</sender>
+   <signal>clicked()</signal>
+   <receiver>Principal</receiver>
+   <slot>showMatDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>447</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>536</x>
+     <y>268</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>showMatDialog()</slot>
+ </slots>
 </ui>

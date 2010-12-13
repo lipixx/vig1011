@@ -401,3 +401,11 @@ GLWidget::wheelEvent (QWheelEvent * e)
       updateGL ();
     }
 }
+
+int GLWidget::getIdPosicionantObjecte()
+{
+    if (posicionantObjecte)
+        return scene.getSeleccionat();
+    else
+        return -1;
+}

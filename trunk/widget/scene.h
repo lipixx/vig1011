@@ -35,6 +35,7 @@ public:
   void mouDarrerObjecte (Point u, Point v);
   void orientaDarrerObjecte (int);
   bool validarPosicio ();
+  int getSeleccionat();
 };
 
 #endif

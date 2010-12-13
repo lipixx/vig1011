@@ -298,3 +298,8 @@ Scene::nouSeleccionat(int id)
 
     return true;
 }
+
+int Scene::getSeleccionat()
+{
+    return idPosicionantObjecte;
+}
