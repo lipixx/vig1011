@@ -17,10 +17,25 @@ GLWidget::resetCamera ()
 }
 
 void
-GLWidget::setFilferros ()
+GLWidget::setFilferros (bool activar)
 {
-  filferros = GL_LINE_LOOP;
+  if (activar) filferros = GL_LINE_LOOP;
+  else filferros = GL_POLYGON;
   updateGL ();
+}
+
+void
+GLWidget::setPartsAmagades (bool activar)
+{
+    if (activar){
+    glEnable (GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    }
+    else {
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+    }
+    updateGL();
 }
 
 void
@@ -33,13 +48,6 @@ GLWidget::setCameraOrtho ()
     }
   else
     cameraOrtho = true;
-  updateGL ();
-}
-
-void
-GLWidget::unsetFilferros ()
-{
-  filferros = GL_POLYGON;
   updateGL ();
 }
 
@@ -60,7 +68,10 @@ void
 GLWidget::initializeGL ()
 {
   glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
+
   glEnable (GL_DEPTH_TEST);
+  glEnable(GL_CULL_FACE);
+
   glEnable (GL_LIGHTING);
   glEnable (GL_LIGHT0);
   glEnable(GL_NORMALIZE);

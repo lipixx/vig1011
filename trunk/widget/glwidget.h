@@ -44,9 +44,9 @@ private:
 
   public slots:void LoadObject ();
   void resetCamera ();
-  void setFilferros ();
+  void setFilferros (bool);
   void setCameraOrtho ();
-  void unsetFilferros ();
+  void setPartsAmagades(bool);
 };
 
 #endif
