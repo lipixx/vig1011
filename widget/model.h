@@ -24,7 +24,7 @@ void updateBoundingBox ();
 // retorna la capsa del model (previament s'ha d'haver calculat)
 Box boundingBox ()const;
 
-void Render (GLenum mode, bool seleccionant, int idObj);  
+void Render (GLenum mode, bool seleccionant, int idObj, Material m);
 std::string getName ();
 
 private:

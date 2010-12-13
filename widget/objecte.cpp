@@ -10,9 +10,9 @@ pos (p),
 scale (scl),
 orientation (ori) 
 {
-  
 Point pos_valid = *(new Point (p.x, p.y, p.z));
 seleccionat = false;
+material = Material("material bmari", Color(0,0.04,0.63),Color(0,0.08,1.0));
 } 
 
 Objecte::~Objecte (void) 
@@ -36,7 +36,6 @@ Objecte::setSeleccionat(bool s)
 }
 
 void
-
 Objecte::setLastPosicioValida () 
 {
 pos.x = pos_valid.x;
@@ -77,7 +76,7 @@ Objecte::Render (std::vector < Model > &lmodels, GLenum mode, bool seleccionant,
     glScalef (scale, scale, scale);
     glTranslatef (-(caixa.maxb.x + caixa.minb.x) / 2, -caixa.minb.y,
                      -(caixa.maxb.z + caixa.minb.z) / 2);
-    m.Render (mode, seleccionant, idobj);
+    m.Render (mode, seleccionant, idobj, material);
     glPopMatrix ();
 } 
 
