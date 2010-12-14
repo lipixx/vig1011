@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>542</width>
+    <width>552</width>
     <height>420</height>
    </rect>
   </property>
@@ -132,7 +132,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="exitButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -162,7 +162,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>exitButton</sender>
    <signal>clicked()</signal>
    <receiver>Principal</receiver>
    <slot>close()</slot>

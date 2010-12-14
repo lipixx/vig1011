@@ -16,13 +16,14 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
+    void closeEvent(QCloseEvent *e);
 
 private:
     Ui::Principal *ui;
-    DialegMaterials *dm;
+    DialegMaterials dm;
 
-public slots:
-    void showMatDialog();    
+private slots:
+    void showMatDialog();
 };
 
 #endif // PRINCIPAL_H
