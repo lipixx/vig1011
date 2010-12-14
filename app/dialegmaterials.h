@@ -15,6 +15,7 @@ class DialegMaterials : public QWidget
 public:
     explicit DialegMaterials(QWidget *parent = 0);
     ~DialegMaterials();
+
     void updateData();
     void initialize(GLWidget *glw);
 

@@ -7,8 +7,7 @@ Principal::Principal(QWidget *parent) :
     ui(new Ui::Principal)
 {
     ui->setupUi(this);
-    dm = new DialegMaterials();
-    dm->initialize(ui->gLWidget);
+    dm.initialize(ui->gLWidget);
 }
 
 Principal::~Principal()
@@ -32,8 +31,15 @@ void Principal::showMatDialog()
 {
     if (ui->gLWidget->getIdPosicionantObjecte() != -1)
     {
-        dm->updateData();
-        dm->show();
+        dm.updateData();
+        dm.show();
     }
 }
+
+void Principal::closeEvent( QCloseEvent *e )
+{
+       dm.close();
+       e->accept();
+}
+
 
