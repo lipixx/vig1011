@@ -303,3 +303,20 @@ int Scene::getSeleccionat()
 {
     return idPosicionantObjecte;
 }
+
+void Scene::getColorObj(int idObjecte, Color * c)
+{
+    Material * mat = lobjectes[idObjecte].getMaterial();
+    c->r = mat->kd.r;
+    c->g = mat->kd.g;
+    c->b = mat->kd.b;
+    c->a = mat->kd.a;
+}
+void Scene::setColorObj(int idObjecte,Color * c)
+{
+    Material * mat = lobjectes[idObjecte].getMaterial();
+    mat->kd.r = c->r;
+    mat->kd.g = c->g;
+    mat->kd.b = c->b;
+    mat->kd.a = c->a;
+}

@@ -22,9 +22,18 @@ public:
 private:
     Ui::DialegMaterials *ui;
     GLWidget *glwidget;
+    Color nouColor, backupColor;
+    int idActual;
 
-public slots:
+protected:
+    void closeEvent(QCloseEvent *e);
+
+private slots:
     void accepta();
+    void updateR(int);
+    void updateG(int);
+    void updateB(int);
+    void updateA(int);
 };
 
 #endif // DIALEGMATERIALS_H

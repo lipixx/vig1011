@@ -7,6 +7,7 @@ QGLWidget (parent)
   filferros = GL_POLYGON;
   posicionantObjecte = false;
   cameraOrtho = false;
+  modificant_colors = false;
 }
 
 void
@@ -171,7 +172,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
   xClick = e->x ();
   yClick = e->y ();
 
-  if (e->button () & Qt::RightButton && posicionantObjecte)
+  if (e->button () & Qt::RightButton && posicionantObjecte && !modificant_colors)
     if (scene.validarPosicio ())
       {
         posicionantObjecte = false;
@@ -201,9 +202,10 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     {
       DoingInteractive = PAN;
     }
-  else if (e->button() & Qt::MidButton)
+  else if (e->button() & Qt::MidButton && !modificant_colors)
   {
-      if (posicionantObjecte) posicionantObjecte = !scene.validarPosicio();
+      if (posicionantObjecte)
+          posicionantObjecte = !scene.validarPosicio();
       if (!posicionantObjecte)
       {
       char pixel;
@@ -217,7 +219,6 @@ GLWidget::mousePressEvent (QMouseEvent * e)
       //Restaurem el color de fons
       glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
       glEnable(GL_LIGHTING);
-      cout << "ID_Seleccionat: "<< (int)pixel << endl;
        if (scene.nouSeleccionat(pixel))
        {
            posicionantObjecte = true;
@@ -408,4 +409,20 @@ int GLWidget::getIdPosicionantObjecte()
         return scene.getSeleccionat();
     else
         return -1;
+}
+
+void GLWidget::getColorObj(int idObjecte, Color * c)
+{
+    scene.getColorObj(idObjecte,c);
+}
+
+void GLWidget::setColorObj(int idObjecte,Color * c)
+{
+    scene.setColorObj(idObjecte,c);
+    updateGL();
+}
+
+void GLWidget::modificantColors(bool b)
+{
+    modificant_colors = b;
 }
