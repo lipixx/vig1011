@@ -18,6 +18,10 @@ material = Material("material bmari", Color(0,0.04,0.63),Color(0,0.08,1.0));
 Objecte::~Objecte (void) 
 {
 } 
+Material * Objecte::getMaterial()
+{
+    return &material;
+}
 
 void
 Objecte::validarPosicio () 

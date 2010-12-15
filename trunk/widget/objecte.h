@@ -45,7 +45,8 @@ void setPosition (Point p);
 void validarPosicio ();
 void getPosicioValida ();
 void setLastPosicioValida ();
-  
+Material * getMaterial();
+
 Box & getCapsaObjecte (Model & model);
 
 };

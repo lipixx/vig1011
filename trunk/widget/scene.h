@@ -35,7 +35,10 @@ public:
   void mouDarrerObjecte (Point u, Point v);
   void orientaDarrerObjecte (int);
   bool validarPosicio ();
-  int getSeleccionat();
+  int getSeleccionat();  
+  //Dialeg materials i colors
+  void getColorObj(int idObjecte, Color * c);
+  void setColorObj(int idObjecte,Color * c);
 };
 
 #endif
