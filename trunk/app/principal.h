@@ -22,6 +22,9 @@ private:
     Ui::Principal *ui;
     DialegMaterials dm;
 
+public slots:
+    void setFilferrosCheckBox(bool);
+
 private slots:
     void showMatDialog();
 };

@@ -42,4 +42,7 @@ void Principal::closeEvent( QCloseEvent *e )
        e->accept();
 }
 
-
+void Principal::setFilferrosCheckBox(bool act)
+{
+    ui->filferrosCheckBox->setChecked(act);
+}
