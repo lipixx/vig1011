@@ -1,6 +1,5 @@
 #include "dialegmaterials.h"
 #include "ui_dialegmaterials.h"
-#include "color.h"
 
 DialegMaterials::DialegMaterials(QWidget *parent) :
     QWidget(parent),
@@ -26,31 +25,66 @@ void DialegMaterials::updateData()
 
    if (idActual != -1)
     {
-       glwidget->getColorObj(idActual,&backupColor);
-       glwidget->modificantColors(true);
-       nouColor = backupColor;
+       glwidget->getMaterialObj(idActual,&backupMaterial);
+       glwidget->modificantMaterials(true);
+       nouMaterial = backupMaterial;
+
+       //Set ui
        ui->label_idobj->setText(QString::number(idActual));
-       ui->rlabel->setText(QString::number((float)backupColor.r*255));
-       ui->glabel->setText(QString::number((float)backupColor.g*255));
-       ui->blabel->setText(QString::number((float)backupColor.b*255));
-       ui->alabel->setText(QString::number((float)backupColor.a));
-       ui->rSlider->setValue((float)backupColor.r*255);
-       ui->gSlider->setValue((float)backupColor.g*255);
-       ui->bSlider->setValue((float)backupColor.b*255);
-       ui->aSlider->setValue((float)backupColor.a*100);
+       ui->nlabel->setText(QString::number(backupMaterial.shininess));
+       ui->nSlider->setValue((float)backupMaterial.shininess*100);
+
+       ui->rlabel_kd->setText(QString::number((float)backupMaterial.kd.r*255));
+       ui->rlabel_ks->setText(QString::number((float)backupMaterial.ks.r*255));
+       ui->rlabel_ka->setText(QString::number((float)backupMaterial.ka.r*255));
+
+       ui->glabel_kd>setText(QString::number((float)backupMaterial.kd.g*255));
+       ui->glabel_ks->setText(QString::number((float)backupMaterial.ks.g*255));
+       ui->glabel_ka->setText(QString::number((float)backupMaterial.ka.g*255));
+
+       ui->blabel_kd->setText(QString::number((float)backupMaterial.kd.b*255));
+       ui->blabel_ks->setText(QString::number((float)backupMaterial.ks.b*255));
+       ui->blabel_ka->setText(QString::number((float)backupMaterial.ka.b*255));
+
+       ui->alabel_kd->setText(QString::number((float)backupMaterial.kd.a));
+       ui->alabel_ks->setText(QString::number((float)backupMaterial.ks.a));
+       ui->alabel_ka->setText(QString::number((float)backupMaterial.ka.a));
+
+       ui->rSlider_kd->setValue((float)backupMaterial.kd.r*255);
+       ui->rSlider_ks->setValue((float)backupMaterial.ks.r*255);
+       ui->rSlider_ka->setValue((float)backupMaterial.ka.r*255);
+
+       ui->gSlider_kd->setValue((float)backupMaterial.kd.g*255);
+       ui->gSlider_ks->setValue((float)backupMaterial.ks.g*255);
+       ui->gSlider_ka->setValue((float)backupMaterial.ka.g*255);
+
+       ui->bSlider_kd->setValue((float)backupMaterial.kd.b*255);
+       ui->bSlider_ks->setValue((float)backupMaterial.ks.b*255);
+       ui->bSlider_ka->setValue((float)backupMaterial.ka.b*255);
+
+       ui->aSlider_kd->setValue((float)backupMaterial.kd.a*100);
+       ui->aSlider_ks->setValue((float)backupMaterial.ks.a*100);
+       ui->aSlider_ka->setValue((float)backupMaterial.ka.a*100);
     }
 }
 
+/*
+ S'ha d'acabar el següent:
+glwidget->getMaterialObj(idActual,&backupMaterial);
+glwidget->modificantMaterials(true);
+
+i per cada slider, fer els corresponents slots i signals!.
+ */
 void DialegMaterials::accepta()
 {
     //Actualitzar material de l'objecte
-    backupColor = nouColor;
+    backupMaterial = nouMaterial;
     this->close();
 }
 
 void DialegMaterials::closeEvent(QCloseEvent *e)
 {
-    glwidget->setColorObj(idActual,&backupColor);
+    glwidget->setColorObj(idActual,&backupMaterial);
     glwidget->modificantColors(false);
     e->accept();
 }
@@ -58,25 +92,25 @@ void DialegMaterials::closeEvent(QCloseEvent *e)
 void DialegMaterials::updateR(int r)
 {
     ui->rlabel->setText(QString::number((float)r));
-    nouColor.r = (float) r/255;
-    glwidget->setColorObj(idActual,&nouColor);
+    nouMaterial.r = (float) r/255;
+    glwidget->setColorObj(idActual,&nouMaterial);
 }
 void DialegMaterials::updateG(int g)
 {
     ui->glabel->setText(QString::number((float)g));
-    nouColor.g = (float) g/255;
-    glwidget->setColorObj(idActual,&nouColor);
+    nouMaterial.g = (float) g/255;
+    glwidget->setColorObj(idActual,&nouMaterial);
 }
 void DialegMaterials::updateB(int b)
 {
     ui->blabel->setText(QString::number((float)b));
-    nouColor.b = (float) b/255;
-    glwidget->setColorObj(idActual,&nouColor);
+    nouMaterial.b = (float) b/255;
+    glwidget->setColorObj(idActual,&nouMaterial);
 }
 void DialegMaterials::updateA(int a)
 {
     ui->alabel->setText(QString::number((float)a));
-    nouColor.a = (float) a/100;
-    glwidget->setColorObj(idActual,&nouColor);
+    nouMaterial.a = (float) a/100;
+    glwidget->setColorObj(idActual,&nouMaterial);
 }
 
