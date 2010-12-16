@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <glwidget.h>
+#include <material.h>
 
 namespace Ui {
     class DialegMaterials;
@@ -22,7 +23,7 @@ public:
 private:
     Ui::DialegMaterials *ui;
     GLWidget *glwidget;
-    Color nouColor, backupColor;
+    Material nouMaterial, backupMaterial;
     int idActual;
 
 protected:
