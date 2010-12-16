@@ -75,7 +75,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="filferrosCheckBox">
        <property name="text">
         <string>Filferros</string>
        </property>
@@ -184,8 +184,8 @@
    <slot>LoadObject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>509</x>
-     <y>33</y>
+     <x>541</x>
+     <y>32</y>
     </hint>
     <hint type="destinationlabel">
      <x>372</x>
@@ -200,8 +200,8 @@
    <slot>resetCamera()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>531</x>
-     <y>128</y>
+     <x>541</x>
+     <y>123</y>
     </hint>
     <hint type="destinationlabel">
      <x>379</x>
@@ -216,8 +216,8 @@
    <slot>setCameraOrtho()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>531</x>
-     <y>153</y>
+     <x>541</x>
+     <y>147</y>
     </hint>
     <hint type="destinationlabel">
      <x>329</x>
@@ -232,8 +232,8 @@
    <slot>setPartsAmagades(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>531</x>
-     <y>98</y>
+     <x>541</x>
+     <y>94</y>
     </hint>
     <hint type="destinationlabel">
      <x>285</x>
@@ -242,7 +242,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox_2</sender>
+   <sender>filferrosCheckBox</sender>
    <signal>toggled(bool)</signal>
    <receiver>gLWidget</receiver>
    <slot>setFilferros(bool)</slot>
@@ -264,8 +264,8 @@
    <slot>showMatDialog()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>447</x>
-     <y>186</y>
+     <x>541</x>
+     <y>179</y>
     </hint>
     <hint type="destinationlabel">
      <x>536</x>
@@ -273,8 +273,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>gLWidget</sender>
+   <signal>filferrosChanged(bool)</signal>
+   <receiver>Principal</receiver>
+   <slot>setFilferrosCheckBox(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>554</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showMatDialog()</slot>
+  <slot>setFilferrosCheckBox(bool)</slot>
  </slots>
 </ui>

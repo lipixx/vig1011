@@ -42,6 +42,9 @@ private:
   bool posicionantObjecte, cameraOrtho, modificant_colors;
   void setModelView (int);
 
+signals:
+    void filferrosChanged(bool);
+
   public slots:
     void LoadObject ();
      void resetCamera ();

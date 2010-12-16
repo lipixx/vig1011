@@ -235,9 +235,11 @@ GLWidget::keyPressEvent (QKeyEvent * e)
     {
     case Qt::Key_F:
       filferros = GL_LINE_LOOP;
+      emit filferrosChanged(true);
       break;
     case Qt::Key_S:
       filferros = GL_POLYGON;
+      emit filferrosChanged(false);
       break;
     default:
       e->ignore ();
