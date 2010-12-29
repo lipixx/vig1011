@@ -39,7 +39,7 @@ protected:
 private:
     GLenum filferros;
   void setDefaultCamera ();
-  bool posicionantObjecte, cameraOrtho, modificant_colors;
+  bool posicionantObjecte, cameraOrtho, modificant_materials;
   void setModelView (int);
 
 signals:
@@ -47,16 +47,16 @@ signals:
 
   public slots:
     void LoadObject ();
-     void resetCamera ();
-     void setFilferros (bool);
-     void setCameraOrtho ();
-     void setPartsAmagades(bool);
+    void resetCamera ();
+    void setFilferros (bool);
+    void setCameraOrtho ();
+    void setPartsAmagades(bool);
 
 public:
   int getIdPosicionantObjecte();
-  void getColorObj(int idObjecte, Color * c);
-  void setColorObj(int idObjecte,Color * c);
-  void modificantColors(bool);
+  void getMaterialObj(int idObjecte, Material * c);
+  void setMaterialObj(int idObjecte, Material * c);
+  void modificantMaterials(bool);
 };
 
 #endif

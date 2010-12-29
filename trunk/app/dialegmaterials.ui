@@ -101,13 +101,13 @@
       <x>0</x>
       <y>0</y>
       <width>341</width>
-      <height>240</height>
+      <height>228</height>
      </rect>
     </property>
     <attribute name="label">
      <string>KD - Component Difús</string>
     </attribute>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -216,13 +216,13 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_2">
+   <widget class="QWidget" name="kspage">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
       <width>341</width>
-      <height>240</height>
+      <height>228</height>
      </rect>
     </property>
     <attribute name="label">
@@ -337,7 +337,15 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_3">
+   <widget class="QWidget" name="kapage">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>341</width>
+      <height>228</height>
+     </rect>
+    </property>
     <attribute name="label">
      <string>KA - Component Ambient</string>
     </attribute>
@@ -431,7 +439,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QSlider" name="aSlide_ka">
+       <widget class="QSlider" name="aSlider_ka">
         <property name="maximum">
          <number>100</number>
         </property>
@@ -454,7 +462,7 @@
   <widget class="QSlider" name="nSlider">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>120</x>
      <y>60</y>
      <width>243</width>
      <height>15</height>
@@ -472,7 +480,7 @@
     <rect>
      <x>30</x>
      <y>60</y>
-     <width>61</width>
+     <width>81</width>
      <height>16</height>
     </rect>
    </property>
@@ -483,7 +491,7 @@
   <widget class="QLabel" name="nlabel">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>390</x>
      <y>60</y>
      <width>46</width>
      <height>13</height>
@@ -535,8 +543,8 @@
    <slot>updateR(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
-     <y>93</y>
+     <x>238</x>
+     <y>159</y>
     </hint>
     <hint type="destinationlabel">
      <x>294</x>
@@ -551,8 +559,8 @@
    <slot>updateG(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>222</x>
-     <y>125</y>
+     <x>239</x>
+     <y>215</y>
     </hint>
     <hint type="destinationlabel">
      <x>295</x>
@@ -567,8 +575,8 @@
    <slot>updateB(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>226</x>
-     <y>169</y>
+     <x>243</x>
+     <y>261</y>
     </hint>
     <hint type="destinationlabel">
      <x>295</x>
@@ -583,12 +591,156 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>221</x>
-     <y>204</y>
+     <x>238</x>
+     <y>303</y>
     </hint>
     <hint type="destinationlabel">
      <x>295</x>
      <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rSlider_ks</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateR(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>198</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>41</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gSlider_ks</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateG(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>237</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>400</x>
+     <y>179</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bSlider_ks</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateB(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>296</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>394</x>
+     <y>307</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>aSlider_ks</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateA(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>403</x>
+     <y>364</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>rSlider_ka</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateR(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>124</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>30</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gSlider_ka</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateG(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>115</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>26</x>
+     <y>288</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bSlider_ka</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateB(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>144</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>41</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>aSlider_ka</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateA(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>296</x>
+     <y>359</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>164</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>nSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateN(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>144</x>
+     <y>69</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>29</x>
+     <y>87</y>
     </hint>
    </hints>
   </connection>
@@ -600,5 +752,6 @@
   <slot>updateG(int)</slot>
   <slot>updateB(int)</slot>
   <slot>updateA(int)</slot>
+  <slot>updateN(int)</slot>
  </slots>
 </ui>

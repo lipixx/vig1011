@@ -38,7 +38,7 @@ void DialegMaterials::updateData()
        ui->rlabel_ks->setText(QString::number((float)backupMaterial.ks.r*255));
        ui->rlabel_ka->setText(QString::number((float)backupMaterial.ka.r*255));
 
-       ui->glabel_kd>setText(QString::number((float)backupMaterial.kd.g*255));
+       ui->glabel_kd->setText(QString::number((float)backupMaterial.kd.g*255));
        ui->glabel_ks->setText(QString::number((float)backupMaterial.ks.g*255));
        ui->glabel_ka->setText(QString::number((float)backupMaterial.ka.g*255));
 
@@ -84,33 +84,94 @@ void DialegMaterials::accepta()
 
 void DialegMaterials::closeEvent(QCloseEvent *e)
 {
-    glwidget->setColorObj(idActual,&backupMaterial);
-    glwidget->modificantColors(false);
+    glwidget->setMaterialObj(idActual,&backupMaterial);
+    glwidget->modificantMaterials(false);
     e->accept();
+}
+
+void DialegMaterials::updateN(int n)
+{
+    ui->nlabel->setText(QString::number((float)n));
+    nouMaterial.shininess = (float) n;
 }
 
 void DialegMaterials::updateR(int r)
 {
-    ui->rlabel->setText(QString::number((float)r));
-    nouMaterial.r = (float) r/255;
-    glwidget->setColorObj(idActual,&nouMaterial);
+    //kd 0 , ks 1, ka 2
+    switch (ui->toolBox->currentIndex())
+    {
+    case 0:
+        ui->rlabel_kd->setText(QString::number((float)r));
+        nouMaterial.kd.r = (float) r/255;
+        break;
+    case 1:
+        ui->rlabel_ks->setText(QString::number((float)r));
+        nouMaterial.ks.r = (float) r/255;
+        break;
+    case 2:
+        ui->rlabel_ka->setText(QString::number((float)r));
+        nouMaterial.ka.r = (float) r/255;
+        break;
+    }
+    glwidget->setMaterialObj(idActual,&nouMaterial);
 }
 void DialegMaterials::updateG(int g)
 {
-    ui->glabel->setText(QString::number((float)g));
-    nouMaterial.g = (float) g/255;
-    glwidget->setColorObj(idActual,&nouMaterial);
+    //kd 0 , ks 1, ka 2
+    switch (ui->toolBox->currentIndex())
+    {
+    case 0:
+        ui->glabel_kd->setText(QString::number((float)g));
+        nouMaterial.kd.g = (float) g/255;
+        break;
+    case 1:
+        ui->glabel_ks->setText(QString::number((float)g));
+        nouMaterial.ks.g = (float) g/255;
+        break;
+    case 2:
+        ui->glabel_ka->setText(QString::number((float)g));
+        nouMaterial.ka.g = (float) g/255;
+        break;
+    }
+    glwidget->setMaterialObj(idActual,&nouMaterial);
 }
 void DialegMaterials::updateB(int b)
 {
-    ui->blabel->setText(QString::number((float)b));
-    nouMaterial.b = (float) b/255;
-    glwidget->setColorObj(idActual,&nouMaterial);
+    //kd 0 , ks 1, ka 2
+    switch (ui->toolBox->currentIndex())
+    {
+    case 0:
+        ui->blabel_kd->setText(QString::number((float)b));
+        nouMaterial.kd.b = (float) b/255;
+        break;
+    case 1:
+        ui->blabel_ks->setText(QString::number((float)b));
+        nouMaterial.ks.b = (float) b/255;
+        break;
+    case 2:
+        ui->blabel_ka->setText(QString::number((float)b));
+        nouMaterial.ka.b = (float) b/255;
+        break;
+    }
+    glwidget->setMaterialObj(idActual,&nouMaterial);
 }
 void DialegMaterials::updateA(int a)
 {
-    ui->alabel->setText(QString::number((float)a));
-    nouMaterial.a = (float) a/100;
-    glwidget->setColorObj(idActual,&nouMaterial);
+    //kd 0 , ks 1, ka 2
+    switch (ui->toolBox->currentIndex())
+    {
+    case 0:
+        ui->alabel_kd->setText(QString::number((float)a));
+        nouMaterial.kd.a = (float) a/255;
+        break;
+    case 1:
+        ui->alabel_ks->setText(QString::number((float)a));
+        nouMaterial.ks.a = (float) a/255;
+        break;
+    case 2:
+        ui->alabel_ka->setText(QString::number((float)a));
+        nouMaterial.ka.a = (float) a/255;
+        break;
+    }
+    glwidget->setMaterialObj(idActual,&nouMaterial);
 }
-

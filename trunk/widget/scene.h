@@ -37,8 +37,8 @@ public:
   bool validarPosicio ();
   int getSeleccionat();  
   //Dialeg materials i colors
-  void getColorObj(int idObjecte, Color * c);
-  void setColorObj(int idObjecte,Color * c);
+  void getMaterialObj(int idObjecte, Material * c);
+  void setMaterialObj(int idObjecte, Material * c);
 };
 
 #endif
