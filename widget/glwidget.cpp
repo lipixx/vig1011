@@ -7,7 +7,7 @@ QGLWidget (parent)
   filferros = GL_POLYGON;
   posicionantObjecte = false;
   cameraOrtho = false;
-  modificant_colors = false;
+  modificant_materials = false;
 }
 
 void
@@ -172,7 +172,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
   xClick = e->x ();
   yClick = e->y ();
 
-  if (e->button () & Qt::RightButton && posicionantObjecte && !modificant_colors)
+  if (e->button () & Qt::RightButton && posicionantObjecte && !modificant_materials)
     if (scene.validarPosicio ())
       {
         posicionantObjecte = false;
@@ -202,7 +202,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     {
       DoingInteractive = PAN;
     }
-  else if (e->button() & Qt::MidButton && !modificant_colors)
+  else if (e->button() & Qt::MidButton && !modificant_materials)
   {
       if (posicionantObjecte)
           posicionantObjecte = !scene.validarPosicio();
@@ -413,18 +413,18 @@ int GLWidget::getIdPosicionantObjecte()
         return -1;
 }
 
-void GLWidget::getColorObj(int idObjecte, Color * c)
+void GLWidget::getMaterialObj(int idObjecte, Material * c)
 {
-    scene.getColorObj(idObjecte,c);
+    scene.getMaterialObj(idObjecte,c);
 }
 
-void GLWidget::setColorObj(int idObjecte,Color * c)
+void GLWidget::setMaterialObj(int idObjecte, Material * c)
 {
-    scene.setColorObj(idObjecte,c);
+    scene.setMaterialObj(idObjecte,c);
     updateGL();
 }
 
-void GLWidget::modificantColors(bool b)
+void GLWidget::modificantMaterials(bool b)
 {
-    modificant_colors = b;
+    modificant_materials = b;
 }

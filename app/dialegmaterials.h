@@ -31,6 +31,7 @@ protected:
 
 private slots:
     void accepta();
+    void updateN(int);
     void updateR(int);
     void updateG(int);
     void updateB(int);

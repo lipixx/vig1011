@@ -304,19 +304,41 @@ int Scene::getSeleccionat()
     return idPosicionantObjecte;
 }
 
-void Scene::getColorObj(int idObjecte, Color * c)
+void Scene::getMaterialObj(int idObjecte, Material * m)
 {
+    //Vigilar amb les copies de info!!
     Material * mat = lobjectes[idObjecte].getMaterial();
-    c->r = mat->kd.r;
-    c->g = mat->kd.g;
-    c->b = mat->kd.b;
-    c->a = mat->kd.a;
+    m->ka.a=mat->ka.a;
+    m->ka.r=mat->ka.r;
+    m->ka.g=mat->ka.g;
+    m->ka.b=mat->ka.b;
+    m->kd.a=mat->kd.a;
+    m->kd.r=mat->kd.r;
+    m->kd.g=mat->kd.g;
+    m->kd.b=mat->kd.b;
+    m->ks.a=mat->ks.a;
+    m->ks.r=mat->ks.r;
+    m->ks.g=mat->ks.g;
+    m->ks.b=mat->ks.b;
+    m->shininess=mat->shininess;
+    m->name = mat->name;
 }
-void Scene::setColorObj(int idObjecte,Color * c)
+
+void Scene::setMaterialObj(int idObjecte,Material * mat)
 {
-    Material * mat = lobjectes[idObjecte].getMaterial();
-    mat->kd.r = c->r;
-    mat->kd.g = c->g;
-    mat->kd.b = c->b;
-    mat->kd.a = c->a;
+    //Vigilar amb les copies de info!!
+    Material * m = lobjectes[idObjecte].getMaterial();
+    m->ka.a=mat->ka.a;
+    m->ka.r=mat->ka.r;
+    m->ka.g=mat->ka.g;
+    m->ka.b=mat->ka.b;
+    m->kd.a=mat->kd.a;
+    m->kd.r=mat->kd.r;
+    m->kd.g=mat->kd.g;
+    m->kd.b=mat->kd.b;
+    m->ks.a=mat->ks.a;
+    m->ks.r=mat->ks.r;
+    m->ks.g=mat->ks.g;
+    m->ks.b=mat->ks.b;
+    m->shininess=mat->shininess;
 }
