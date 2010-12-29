@@ -92,8 +92,20 @@
      <height>321</height>
     </rect>
    </property>
+   <property name="minimumSize">
+    <size>
+     <width>341</width>
+     <height>321</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>341</width>
+     <height>321</height>
+    </size>
+   </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="kdpage">
     <property name="geometry">
