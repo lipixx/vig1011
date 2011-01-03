@@ -633,6 +633,86 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>carregaPyramid()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>58</x>
+     <y>653</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>79</x>
+     <y>454</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>carregaPrisma()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>155</x>
+     <y>665</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>514</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_4</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>carregaCub()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>650</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>257</x>
+     <y>468</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>carregaDoor()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>371</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>478</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_7</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>carregaWindow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>639</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>474</x>
+     <y>515</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showMatDialog()</slot>

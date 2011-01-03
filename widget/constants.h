@@ -1,5 +1,5 @@
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#ifndef _CONSTANTS_H_
+#define _CONSTANTS_H_
 
 #define PI 3.1415926535898
 #define RAD2DEG 180/PI

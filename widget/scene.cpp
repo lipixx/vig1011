@@ -1,7 +1,6 @@
 #include "scene.h"
 #include <math.h>
-
-
+#include "constants.h"
 MaterialLib
   Scene::matlib;
 
@@ -13,7 +12,15 @@ Scene::Scene ()
 void
 Scene::Init ()
 {
-  construirBase ();
+  construirBase();
+
+  static const char * filename[] = {"../models/cub.obj","../models/door.obj","../models/prisma.obj","../models/window.obj","../models/pyramid.obj"};
+  for (int i = 0; i<5; i++)
+  {
+  Model m (filename[i]);
+  m.readObj (filename[i], Scene::matlib);
+  this->AddModel (m);
+  }
 }
 
 void
