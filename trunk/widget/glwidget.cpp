@@ -73,8 +73,58 @@ GLWidget::initializeGL ()
   glEnable (GL_DEPTH_TEST);
   glEnable(GL_CULL_FACE);
 
+  //Iniciem LIGHT0
+  amb_light[0][0] = 0.3f;
+  amb_light[0][1] = 0.3f;
+  amb_light[0][2] = 0.3f;
+  amb_light[0][3] = 1.0f;
+  diff_light[0][0] = 0.5f;
+  diff_light[0][1] = 0.5f;
+  diff_light[0][2] = 0.5f;
+  diff_light[0][3] = 1.0f;
+  spec_light[0][0] = 0.0f;
+  spec_light[0][1] = 0.0f;
+  spec_light[0][2] = 0.0f;
+  spec_light[0][3] = 1.0f;
+  pos_light[0][0] = 0.0f;
+  pos_light[0][1] = 1.0f;
+  pos_light[0][2] = 0.0f;
+  pos_light[0][3] = 0.0f;
+
+  //Iniciem LIGHT1
+  amb_light[1][0] = 0.2f;
+  amb_light[1][1] = 0.2f;
+  amb_light[1][2] = 0.4f;
+  amb_light[1][3] = 1.0f;
+  diff_light[1][0] = 0.3f;
+  diff_light[1][1] = 0.4f;
+  diff_light[1][2] = 0.5f;
+  diff_light[1][3] = 1.0f;
+  spec_light[1][0] = 0.1f;
+  spec_light[1][1] = 0.2f;
+  spec_light[1][2] = 0.3f;
+  spec_light[1][3] = 1.0f;
+  pos_light[1][0] = 1.0f;
+  pos_light[1][1] = 1.0f;
+  pos_light[1][2] = 1.0f;
+  pos_light[1][3] = 0.0f;
+
+  glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
+  glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
+  glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
+  glLightfv(GL_LIGHT0,GL_POSITION,pos_light[0]);
+
+  glLightfv(GL_LIGHT1,GL_AMBIENT,amb_light[1]);
+  glLightfv(GL_LIGHT1,GL_DIFFUSE,diff_light[1]);
+  glLightfv(GL_LIGHT1,GL_SPECULAR,spec_light[1]);
+  glLightfv(GL_LIGHT1,GL_POSITION,pos_light[1]);
+
+  //Model de colorat, GL_FLAT: ilum. constant, GL_SMOOTH: ilum. Gouraud.
+  //glShadeModel(GL_FLAT);
+
   glEnable (GL_LIGHTING);
   glEnable (GL_LIGHT0);
+
   glEnable(GL_NORMALIZE);
   scene.Init ();
   setDefaultCamera ();
@@ -130,7 +180,7 @@ GLWidget::setModelView (int casView)
   glVertex3f (0, 0, 0);
   glVertex3f (0, 0, 20);	// Z
   glEnd ();
-  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHTING);  
 }
 
 void
