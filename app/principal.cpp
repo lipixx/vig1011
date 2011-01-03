@@ -38,7 +38,7 @@ void Principal::showMatDialog()
 
 void Principal::closeEvent( QCloseEvent *e )
 {
-       dm.close();
+    if (!dm.isHidden()) dm.close();
        e->accept();
 }
 
