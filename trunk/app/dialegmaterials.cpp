@@ -32,7 +32,7 @@ void DialegMaterials::updateData()
        //Set ui
        ui->label_idobj->setText(QString::number(idActual));
        ui->nlabel->setText(QString::number(backupMaterial.shininess));
-       ui->nSlider->setValue((float)backupMaterial.shininess*100);
+       ui->nSlider->setValue((float)backupMaterial.shininess);
 
        ui->rlabel_kd->setText(QString::number((float)backupMaterial.kd.r*255));
        ui->rlabel_ks->setText(QString::number((float)backupMaterial.ks.r*255));
@@ -93,6 +93,7 @@ void DialegMaterials::updateN(int n)
 {
     ui->nlabel->setText(QString::number((float)n));
     nouMaterial.shininess = (float) n;
+    glwidget->setMaterialObj(idActual,&nouMaterial);
 }
 
 void DialegMaterials::updateR(int r)

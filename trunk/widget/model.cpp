@@ -31,12 +31,8 @@ Model::updateBoundingBox ()
 void
 Model::Render (GLenum mode, bool seleccionant, int idObj, Material m)
 {
-  Color color;
-
-  if (idObj == 0)
-      color = Scene().matlib.material(faces[0].material).kd;
-  else
-      color = m.kd;
+    if (idObj == 0) { m = Scene().matlib.material(faces[0].material);}
+    GLfloat mat[3][4] = {{m.ka.r, m.ka.g, m.ka.b, m.ka.a},{m.ks.r, m.ks.g, m.kd.b, m.ks.a},{m.kd.r, m.kd.g, m.kd.b, m.kd.a}};
 
   glBegin (mode);
   if (seleccionant)
@@ -45,8 +41,10 @@ Model::Render (GLenum mode, bool seleccionant, int idObj, Material m)
   }
   else
   {
-     GLfloat mat[] = { color.r, color.g, color.b, color.a };
-     glMaterialfv(GL_FRONT,GL_DIFFUSE,mat);
+     glMaterialfv(GL_FRONT,GL_AMBIENT,mat[0]);
+     glMaterialfv(GL_FRONT,GL_SPECULAR,mat[1]);
+     glMaterialfv(GL_FRONT,GL_DIFFUSE,mat[2]);
+     glMaterialf(GL_FRONT,GL_SHININESS,m.shininess);
   }
 
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares

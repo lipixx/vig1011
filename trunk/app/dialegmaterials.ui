@@ -124,7 +124,7 @@
       <rect>
        <x>40</x>
        <y>10</y>
-       <width>289</width>
+       <width>294</width>
        <height>181</height>
       </rect>
      </property>
@@ -329,19 +329,19 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>341</width>
-      <height>234</height>
+      <width>96</width>
+      <height>26</height>
      </rect>
     </property>
     <attribute name="label">
      <string>KS - Component Especular</string>
     </attribute>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>10</y>
-       <width>289</width>
+       <width>294</width>
        <height>181</height>
       </rect>
      </property>
@@ -552,8 +552,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>341</width>
-      <height>234</height>
+      <width>96</width>
+      <height>26</height>
      </rect>
     </property>
     <attribute name="label">
@@ -564,7 +564,7 @@
       <rect>
        <x>40</x>
        <y>10</y>
-       <width>289</width>
+       <width>294</width>
        <height>181</height>
       </rect>
      </property>
@@ -787,7 +787,10 @@
     </size>
    </property>
    <property name="maximum">
-    <number>100</number>
+    <number>128</number>
+   </property>
+   <property name="singleStep">
+    <number>1</number>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -905,8 +908,8 @@
    <slot>updateB(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>243</x>
-     <y>261</y>
+     <x>257</x>
+     <y>256</y>
     </hint>
     <hint type="destinationlabel">
      <x>295</x>
@@ -921,8 +924,8 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>238</x>
-     <y>303</y>
+     <x>252</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel">
      <x>295</x>
@@ -937,8 +940,8 @@
    <slot>updateR(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>120</x>
-     <y>198</y>
+     <x>118</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>41</x>
@@ -953,8 +956,8 @@
    <slot>updateG(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>239</x>
-     <y>237</y>
+     <x>237</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>400</x>
@@ -969,8 +972,8 @@
    <slot>updateB(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>296</x>
-     <y>287</y>
+     <x>294</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>394</x>
@@ -985,8 +988,8 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>321</x>
-     <y>326</y>
+     <x>319</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>403</x>
@@ -1001,8 +1004,8 @@
    <slot>updateR(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>124</x>
-     <y>231</y>
+     <x>122</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>30</x>
@@ -1017,8 +1020,8 @@
    <slot>updateG(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>115</x>
-     <y>281</y>
+     <x>113</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>26</x>
@@ -1033,8 +1036,8 @@
    <slot>updateB(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>144</x>
-     <y>310</y>
+     <x>142</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>41</x>
@@ -1049,8 +1052,8 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>296</x>
-     <y>359</y>
+     <x>294</x>
+     <y>125</y>
     </hint>
     <hint type="destinationlabel">
      <x>164</x>
