@@ -58,7 +58,7 @@
    <item row="1" column="2" rowspan="2">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="colLlumsButton">
        <property name="text">
         <string>Color llums</string>
        </property>
@@ -496,8 +496,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>509</x>
-     <y>409</y>
+     <x>722</x>
+     <y>623</y>
     </hint>
     <hint type="destinationlabel">
      <x>541</x>
@@ -512,8 +512,8 @@
    <slot>LoadObject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>32</y>
+     <x>722</x>
+     <y>56</y>
     </hint>
     <hint type="destinationlabel">
      <x>372</x>
@@ -528,8 +528,8 @@
    <slot>resetCamera()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>123</y>
+     <x>722</x>
+     <y>163</y>
     </hint>
     <hint type="destinationlabel">
      <x>379</x>
@@ -544,8 +544,8 @@
    <slot>setCameraOrtho()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>169</y>
+     <x>722</x>
+     <y>190</y>
     </hint>
     <hint type="destinationlabel">
      <x>329</x>
@@ -560,8 +560,8 @@
    <slot>setPartsAmagades(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>94</y>
+     <x>722</x>
+     <y>131</y>
     </hint>
     <hint type="destinationlabel">
      <x>285</x>
@@ -576,12 +576,12 @@
    <slot>setFilferros(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>450</x>
-     <y>70</y>
+     <x>722</x>
+     <y>104</y>
     </hint>
     <hint type="destinationlabel">
-     <x>358</x>
-     <y>68</y>
+     <x>367</x>
+     <y>164</y>
     </hint>
    </hints>
   </connection>
@@ -592,8 +592,8 @@
    <slot>showMatDialog()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>541</x>
-     <y>179</y>
+     <x>722</x>
+     <y>222</y>
     </hint>
     <hint type="destinationlabel">
      <x>536</x>
@@ -617,9 +617,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>colLlumsButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Principal</receiver>
+   <slot>showLightDialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>547</x>
+     <y>40</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>585</x>
+     <y>12</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showMatDialog()</slot>
   <slot>setFilferrosCheckBox(bool)</slot>
+  <slot>showLightDialog()</slot>
  </slots>
 </ui>

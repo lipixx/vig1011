@@ -27,6 +27,7 @@ public slots:
 
 private slots:
     void showMatDialog();
+    void showLightDialog();
 };
 
 #endif // PRINCIPAL_H

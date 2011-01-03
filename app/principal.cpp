@@ -32,6 +32,17 @@ void Principal::showMatDialog()
     if (ui->gLWidget->getIdPosicionantObjecte() != -1)
     {
         dm.updateData();
+        dm.setLightTab(0);
+        dm.show();
+    }
+}
+
+void Principal::showLightDialog()
+{
+    if (ui->gLWidget->getIdPosicionantObjecte() != -1)
+    {
+        dm.updateData();
+        dm.setLightTab(1);
         dm.show();
     }
 }
