@@ -7,7 +7,7 @@ QGLWidget (parent)
   filferros = GL_POLYGON;
   posicionantObjecte = false;
   cameraOrtho = false;
-  modificant_materials = false;
+  modificant_materials = false;  
 }
 
 void
@@ -400,28 +400,36 @@ GLWidget::mouseMoveEvent (QMouseEvent * e)
   updateGL ();
 }
 
-void
-GLWidget::LoadObject ()
+void GLWidget::LoadObject ()
 {
-  QString model =
-    QFileDialog::getOpenFileName (this, tr ("Open File"), "../data",
-                                  tr ("Objectes (*.obj)"));
- bool podemCarregar = true;
-
-  if (posicionantObjecte)
-  {
-     podemCarregar = scene.validarPosicio();
-  }
-  if (model != "" && podemCarregar)
-    {
-      // Aquí cal fer el codi per a carregar el model escollit
-      const char *mod = (model.toStdString ()).c_str ();
-      scene.carregaModel (mod);
-      setDefaultCamera ();
-      posicionantObjecte = true;
-      updateGL ();
-    }
+ QString model = QFileDialog::getOpenFileName (this, tr ("Open File"), "../data",tr ("Objectes (*.obj)"));
+ LoadObject(model);
 }
+
+void GLWidget::LoadObject(QString model)
+{
+    bool podemCarregar = true;
+
+     if (posicionantObjecte)
+     {
+        podemCarregar = scene.validarPosicio();
+     }
+     if (model != "" && podemCarregar)
+       {
+         // Aquí cal fer el codi per a carregar el model escollit
+         const char *mod = (model.toStdString ()).c_str ();
+         scene.carregaModel (mod);
+         //setDefaultCamera ();
+         posicionantObjecte = true;
+         updateGL ();
+       }
+}
+void GLWidget::carregaCub(){ LoadObject(QString("../models/cub.obj"));}
+void GLWidget::carregaPrisma(){ LoadObject(QString("../models/prisma.obj"));}
+void GLWidget::carregaDoor(){ LoadObject(QString("../models/door.obj"));}
+void GLWidget::carregaWindow(){ LoadObject(QString("../models/window.obj"));}
+void GLWidget::carregaPyramid(){ LoadObject(QString("../models/pyramid.obj"));}
+
 
 void
 GLWidget::wheelEvent (QWheelEvent * e)

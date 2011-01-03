@@ -45,7 +45,7 @@ private:
   void setDefaultCamera ();
   bool posicionantObjecte, cameraOrtho, modificant_materials;
   void setModelView (int);
-
+  void LoadObject(QString model);
 signals:
     void filferrosChanged(bool);
 
@@ -55,6 +55,11 @@ signals:
     void setFilferros (bool);
     void setCameraOrtho ();
     void setPartsAmagades(bool);
+    void carregaCub();
+    void carregaPrisma();
+    void carregaDoor();
+    void carregaWindow();
+    void carregaPyramid();
 
 public:
   int getIdPosicionantObjecte();

@@ -77,30 +77,14 @@ i per cada slider, fer els corresponents slots i signals!.
  */
 void DialegMaterials::accepta()
 {
-    if (ui->tabWidget->currentIndex() == 0)
-    {
-    //Actualitzar material de l'objecte
     backupMaterial = nouMaterial;
-    }
-    else
-    {
-    //Acceptar canvis als llums
-    }
     this->close();
 }
 
 void DialegMaterials::closeEvent(QCloseEvent *e)
 {
-    if (ui->tabWidget->currentIndex() == 0)
-    {
-        //Restaurar material
-        glwidget->setMaterialObj(idActual,&backupMaterial);
-        glwidget->modificantMaterials(false);
-    }
-    else
-    {
-        //Restaurar llums
-    }
+    glwidget->setMaterialObj(idActual,&backupMaterial);
+    glwidget->modificantMaterials(false);
     e->accept();
 }
 
