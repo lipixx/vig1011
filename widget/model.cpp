@@ -41,10 +41,10 @@ Model::Render (GLenum mode, bool seleccionant, int idObj, Material m)
   }
   else
   {
-     glMaterialfv(GL_FRONT,GL_AMBIENT,mat[0]);
-     glMaterialfv(GL_FRONT,GL_SPECULAR,mat[1]);
-     glMaterialfv(GL_FRONT,GL_DIFFUSE,mat[2]);
-     glMaterialf(GL_FRONT,GL_SHININESS,m.shininess);
+     glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,mat[0]);
+     glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,mat[1]);
+     glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat[2]);
+     glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,m.shininess);
   }
 
   // Cal recorrer l'estructura de l'objecte per a pintar les seves cares

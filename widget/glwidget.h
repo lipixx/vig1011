@@ -38,6 +38,10 @@ protected:
 
 private:
     GLenum filferros;
+    GLfloat amb_light[NUM_LIGHTS][4];
+    GLfloat diff_light[NUM_LIGHTS][4];
+    GLfloat spec_light[NUM_LIGHTS][4];
+    GLfloat pos_light[NUM_LIGHTS][4];
   void setDefaultCamera ();
   bool posicionantObjecte, cameraOrtho, modificant_materials;
   void setModelView (int);
