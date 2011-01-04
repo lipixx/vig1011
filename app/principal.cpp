@@ -32,19 +32,20 @@ void Principal::showMatDialog()
     if (ui->gLWidget->getIdPosicionantObjecte() != -1)
     {
         dm.updateData();
-        dm.setLightTab(0);
+        dm.setLightTab(0,true);
         dm.show();
     }
 }
 
 void Principal::showLightDialog()
 {
-    if (ui->gLWidget->getIdPosicionantObjecte() != -1)
+    if (ui->gLWidget->getIdPosicionantObjecte() == -1) dm.setLightTab(1,false);
+    else
     {
+        dm.setLightTab(1,true);
         dm.updateData();
-        dm.setLightTab(1);
-        dm.show();
     }
+    dm.show();
 }
 
 void Principal::closeEvent( QCloseEvent *e )

@@ -46,9 +46,9 @@ void DialegMaterials::updateData()
        ui->blabel_ks->setText(QString::number((float)backupMaterial.ks.b*255));
        ui->blabel_ka->setText(QString::number((float)backupMaterial.ka.b*255));
 
-       ui->alabel_kd->setText(QString::number((float)backupMaterial.kd.a));
-       ui->alabel_ks->setText(QString::number((float)backupMaterial.ks.a));
-       ui->alabel_ka->setText(QString::number((float)backupMaterial.ka.a));
+       ui->alabel_kd->setText(QString::number((float)backupMaterial.kd.a*100));
+       ui->alabel_ks->setText(QString::number((float)backupMaterial.ks.a*100));
+       ui->alabel_ka->setText(QString::number((float)backupMaterial.ka.a*100));
 
        ui->rSlider_kd->setValue((float)backupMaterial.kd.r*255);
        ui->rSlider_ks->setValue((float)backupMaterial.ks.r*255);
@@ -68,23 +68,19 @@ void DialegMaterials::updateData()
     }
 }
 
-/*
- S'ha d'acabar el següent:
-glwidget->getMaterialObj(idActual,&backupMaterial);
-glwidget->modificantMaterials(true);
-
-i per cada slider, fer els corresponents slots i signals!.
- */
 void DialegMaterials::accepta()
 {
-    backupMaterial = nouMaterial;
+    if (ui->tabMaterials->isEnabled()) backupMaterial = nouMaterial;
     this->close();
 }
 
 void DialegMaterials::closeEvent(QCloseEvent *e)
 {
+    if (ui->tabMaterials->isEnabled())
+    {
     glwidget->setMaterialObj(idActual,&backupMaterial);
     glwidget->modificantMaterials(false);
+    }
     e->accept();
 }
 
@@ -162,21 +158,45 @@ void DialegMaterials::updateA(int a)
     {
     case 0:
         ui->alabel_kd->setText(QString::number((float)a));
-        nouMaterial.kd.a = (float) a/255;
+        nouMaterial.kd.a = (float) a/100;
         break;
     case 1:
         ui->alabel_ks->setText(QString::number((float)a));
-        nouMaterial.ks.a = (float) a/255;
+        nouMaterial.ks.a = (float) a/100;
         break;
     case 2:
         ui->alabel_ka->setText(QString::number((float)a));
-        nouMaterial.ka.a = (float) a/255;
+        nouMaterial.ka.a = (float) a/100;
         break;
     }
     glwidget->setMaterialObj(idActual,&nouMaterial);
 }
 
-void DialegMaterials::setLightTab(int index)
+void DialegMaterials::setLightTab(int index, bool activar_altre)
 {
     ui->tabWidget->setCurrentIndex(index);
+    if (!activar_altre)
+    {
+        switch (index)
+        {
+        case 0:
+             ui->tabLlums->setDisabled(true);
+            break;
+        case 1:
+             ui->tabMaterials->setDisabled(true);
+            break;
+        }
+    }
+    else
+    {
+        switch (index)
+        {
+        case 0:
+             ui->tabLlums->setEnabled(true);
+            break;
+        case 1:
+             ui->tabMaterials->setEnabled(true);
+            break;
+        }
+    }
 }

@@ -19,7 +19,7 @@ public:
 
     void updateData();
     void initialize(GLWidget *glw);
-    void setLightTab(int);
+    void setLightTab(int,bool);
 
 private:
     Ui::DialegMaterials *ui;

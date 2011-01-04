@@ -167,10 +167,12 @@ Scene::mouDarrerObjecte (int sentit)
     case POS_INICIAL:
       lobjectes[idPosicionantObjecte].setLastPosicioValida ();
       break;
+    case AL_INFINIT:
+      lobjectes.erase(lobjectes.begin() + idPosicionantObjecte);
     default:
       break;
     }
-  if (sentit != POS_INICIAL)
+  if (sentit != POS_INICIAL || sentit != AL_INFINIT)
     {
       //No pot sortir del terra
       Point actual = lobjectes[idPosicionantObjecte].getPosition () + p;
