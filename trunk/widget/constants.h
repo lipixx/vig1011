@@ -8,6 +8,6 @@
 
 typedef  enum {NONE, ROTATE, ZOOM, PAN, MOV} InteractiveAction;
 typedef  enum {CAM_PERSPECTIVE,CAM_ORTHO_LEFT,CAM_ORTHO_RIGHT} camSelection;
-typedef  enum {XPOS,XNEG,ZPOS,ZNEG,YPOS,YNEG,POS_INICIAL} universeStates;
+typedef  enum {XPOS,XNEG,ZPOS,ZNEG,YPOS,YNEG,POS_INICIAL,AL_INFINIT} universeStates;
 
 #endif // CONSTANTS_H

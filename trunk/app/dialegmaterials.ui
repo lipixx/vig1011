@@ -40,7 +40,7 @@
    <property name="currentIndex">
     <number>0</number>
    </property>
-   <widget class="QWidget" name="tab_3">
+   <widget class="QWidget" name="tabMaterials">
     <attribute name="title">
      <string>Materials</string>
     </attribute>
@@ -854,7 +854,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="tab_4">
+   <widget class="QWidget" name="tabLlums">
     <attribute name="title">
      <string>Llums</string>
     </attribute>
@@ -1056,8 +1056,8 @@
    <slot>updateR(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>348</x>
-     <y>271</y>
+     <x>342</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>499</x>
@@ -1073,7 +1073,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>328</x>
-     <y>305</y>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -1089,7 +1089,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>306</x>
-     <y>350</y>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -1104,8 +1104,8 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>350</x>
-     <y>385</y>
+     <x>342</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>

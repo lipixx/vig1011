@@ -114,6 +114,10 @@ GLWidget::initializeGL ()
   glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
   glLightfv(GL_LIGHT0,GL_POSITION,pos_light[0]);
 
+  //Transparències
+  glEnable (GL_BLEND);
+  glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
   glLightfv(GL_LIGHT1,GL_AMBIENT,amb_light[1]);
   glLightfv(GL_LIGHT1,GL_DIFFUSE,diff_light[1]);
   glLightfv(GL_LIGHT1,GL_SPECULAR,spec_light[1]);
@@ -322,8 +326,15 @@ GLWidget::keyPressEvent (QKeyEvent * e)
 	    case Qt::Key_Z:
 	      value = ZNEG;
 	      break;
+            case Qt::Key_Delete:
+              if (!modificant_materials)
+                {
+                 scene.mouDarrerObjecte(AL_INFINIT);
+                 posicionantObjecte = false;
+                }
+              break;
 	    case Qt::Key_Escape:
-	      scene.mouDarrerObjecte (POS_INICIAL);	      
+              scene.mouDarrerObjecte(POS_INICIAL);
               if (scene.validarPosicio ())
               {
                   posicionantObjecte = false;
@@ -332,7 +343,6 @@ GLWidget::keyPressEvent (QKeyEvent * e)
 	      break;
 	    case Qt::Key_D:
 	      scene.orientaDarrerObjecte (YPOS);
-
 	      break;
 	    case Qt::Key_E:
 	      scene.orientaDarrerObjecte (YNEG);
