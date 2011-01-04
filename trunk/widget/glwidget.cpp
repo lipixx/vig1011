@@ -74,61 +74,50 @@ GLWidget::initializeGL ()
   glEnable(GL_CULL_FACE);
 
   //Iniciem LIGHT0
-  amb_light[0][0] = 0.3f;
-  amb_light[0][1] = 0.3f;
-  amb_light[0][2] = 0.3f;
-  amb_light[0][3] = 1.0f;
+  amb_light[0][0] = 0.025f;
+  amb_light[0][1] = 0.025f;
+  amb_light[0][2] = 0.025f;
+  amb_light[0][3] = 0.025f;
   diff_light[0][0] = 0.5f;
   diff_light[0][1] = 0.5f;
   diff_light[0][2] = 0.5f;
-  diff_light[0][3] = 1.0f;
-  spec_light[0][0] = 0.0f;
-  spec_light[0][1] = 0.0f;
-  spec_light[0][2] = 0.0f;
-  spec_light[0][3] = 1.0f;
+  diff_light[0][3] = 0.5f;
+  spec_light[0][0] = 0.5f;
+  spec_light[0][1] = 0.5f;
+  spec_light[0][2] = 0.5f;
+  spec_light[0][3] = 0.5f;
   pos_light[0][0] = 0.0f;
-  pos_light[0][1] = 1.0f;
+  pos_light[0][1] = 5.0f;
   pos_light[0][2] = 0.0f;
   pos_light[0][3] = 0.0f;
 
   //Iniciem LIGHT1
-  amb_light[1][0] = 0.2f;
-  amb_light[1][1] = 0.2f;
-  amb_light[1][2] = 0.4f;
-  amb_light[1][3] = 1.0f;
+  amb_light[1][0] = 0.015f;
+  amb_light[1][1] = 0.015f;
+  amb_light[1][2] = 0.015f;
+  amb_light[1][3] = 0.015f;
   diff_light[1][0] = 0.3f;
-  diff_light[1][1] = 0.4f;
-  diff_light[1][2] = 0.5f;
-  diff_light[1][3] = 1.0f;
-  spec_light[1][0] = 0.1f;
-  spec_light[1][1] = 0.2f;
+  diff_light[1][1] = 0.3f;
+  diff_light[1][2] = 0.3f;
+  diff_light[1][3] = 0.3f;
+  spec_light[1][0] = 0.3f;
+  spec_light[1][1] = 0.3f;
   spec_light[1][2] = 0.3f;
-  spec_light[1][3] = 1.0f;
-  pos_light[1][0] = 1.0f;
-  pos_light[1][1] = 1.0f;
-  pos_light[1][2] = 1.0f;
+  spec_light[1][3] = 0.3f;
+  pos_light[1][0] = 0.0f;
+  pos_light[1][1] = 0.0f;
+  pos_light[1][2] = 0.0f;
   pos_light[1][3] = 0.0f;
-
-  glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
-  glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
-  glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
-  glLightfv(GL_LIGHT0,GL_POSITION,pos_light[0]);
 
   //Transparències
   glEnable (GL_BLEND);
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  glLightfv(GL_LIGHT1,GL_AMBIENT,amb_light[1]);
-  glLightfv(GL_LIGHT1,GL_DIFFUSE,diff_light[1]);
-  glLightfv(GL_LIGHT1,GL_SPECULAR,spec_light[1]);
-  glLightfv(GL_LIGHT1,GL_POSITION,pos_light[1]);
-
   //Model de colorat, GL_FLAT: ilum. constant, GL_SMOOTH: ilum. Gouraud.
-  //glShadeModel(GL_FLAT);
-
+  //glShadeModel(GL_SMOOTH);
   glEnable (GL_LIGHTING);
   glEnable (GL_LIGHT0);
-
+  glEnable (GL_LIGHT1);
   glEnable(GL_NORMALIZE);
   scene.Init ();
   setDefaultCamera ();
@@ -149,9 +138,17 @@ GLWidget::resizeGL (int width, int height)
 void
 GLWidget::setModelView (int casView)
 {
+
   glMatrixMode (GL_MODELVIEW);
   glLoadIdentity ();
   glTranslatef (0, 0, -dist);
+
+  //Si volem veure on està el llum 1
+  pintarCub(1);
+  glLightfv(GL_LIGHT1,GL_AMBIENT,amb_light[1]);
+  glLightfv(GL_LIGHT1,GL_DIFFUSE,diff_light[1]);
+  glLightfv(GL_LIGHT1,GL_SPECULAR,spec_light[1]);
+  glLightfv(GL_LIGHT1,GL_POSITION,pos_light[1]);
 
   switch (casView)
     {
@@ -170,6 +167,14 @@ GLWidget::setModelView (int casView)
     }
 
   glTranslatef (-VRP.x, -VRP.y, -VRP.z);
+
+  //Si volem veure on està el llum 0
+  pintarCub(0);
+
+  glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
+  glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
+  glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
+  glLightfv(GL_LIGHT0,GL_POSITION,pos_light[0]);
 
   // dibuixar eixos aplicacio
   glDisable (GL_LIGHTING);
@@ -495,4 +500,75 @@ void GLWidget::setMaterialObj(int idObjecte, Material * c)
 void GLWidget::modificantMaterials(bool b)
 {
     modificant_materials = b;
+}
+
+/***************DEBUG FUNCTIONS***************/
+void
+GLWidget::pintarCub(int element)
+{
+    float x,y,z;
+    //Pintar el llum 0
+    switch (element)
+    {
+       case 0:
+          x = pos_light[0][0];
+          y = pos_light[0][1];
+          z = pos_light[0][2];
+        break;
+        case 1:
+          x = pos_light[1][0];
+          y = pos_light[1][1];
+          z = pos_light[1][2];
+        break;
+        default:
+        break;
+    }
+
+
+    glDisable (GL_LIGHTING);
+     glBegin(GL_QUADS);	// Start Drawing The Cube
+     glColor3f(0.0f,1.0f,0.0f);	// Set The Color To Green
+
+     glVertex3f(x, y,z-1.0f);	// Top Right Of The Quad (Top)
+     glVertex3f(x-1.0f, y,z-1.0f);	// Top Left Of The Quad (Top)
+     glVertex3f(x-1.0f, y,z);	// Bottom Left Of The Quad (Top)
+     glVertex3f(x, y,z);	// Bottom Right Of The Quad (Top)
+
+     glColor3f(1.0f,0.5f,0.0f);	// Set The Color To Orange
+
+     glVertex3f(x,y-1.0f,z);	// Top Right Of The Quad (Bottom)
+     glVertex3f(x-1.0f,y-1.0f,z);	// Top Left Of The Quad (Bottom)
+     glVertex3f(x-1.0f,y-1.0f,z-1.0f);	// Bottom Left Of The Quad (Bottom)
+     glVertex3f(x,y-1.0f,z-1.0f);	// Bottom Right Of The Quad (Bottom)
+
+     glColor3f(1.0f,0.0f,0.0f);	// Set The Color To Red
+
+     glVertex3f(x, y,z);	// Top Right Of The Quad (Front)
+     glVertex3f(x-1.0f, y,z);	// Top Left Of The Quad (Front)
+     glVertex3f(x-1.0f,y-1.0f,z);	// Bottom Left Of The Quad (Front)
+     glVertex3f(x,y-1.0f,z);	// Bottom Right Of The Quad (Front)
+
+     glColor3f(1.0f,1.0f,0.0f);	// Set The Color To Yellow
+
+     glVertex3f(x,y-1.0f,z-1.0f);	// Bottom Left Of The Quad (Back)
+     glVertex3f(x-1.0f,y-1.0f,z-1.0f);	// Bottom Right Of The Quad (Back)
+     glVertex3f(x-1.0f,y,z-1.0f);	// Top Right Of The Quad (Back)
+     glVertex3f(x,y,z-1.0f);	// Top Left Of The Quad (Back)
+
+     glColor3f(0.0f,0.0f,1.0f);	// Set The Color To Blue
+
+     glVertex3f(x-1.0f,y,z);	// Top Right Of The Quad (Left)
+     glVertex3f(x-1.0f,y,z-1.0f);	// Top Left Of The Quad (Left)
+     glVertex3f(x-1.0f,y-1.0f,z-1.0f);	// Bottom Left Of The Quad (Left)
+     glVertex3f(x-1.0f,y-1.0f,z);	// Bottom Right Of The Quad (Left)
+
+     glColor3f(1.0f,0.0f,1.0f);	// Set The Color To Violet
+
+     glVertex3f(x,y,z-1.0f);	// Top Right Of The Quad (Right)
+     glVertex3f(x,y,z);	// Top Left Of The Quad (Right)
+     glVertex3f(x,y-1.0f,z);	// Bottom Left Of The Quad (Right)
+     glVertex3f(x,y-1.0f,z-1.0f);	// Bottom Right Of The Quad (Right)
+
+     glEnd();// Done Drawing The Quad
+     glEnable(GL_LIGHTING);
 }
