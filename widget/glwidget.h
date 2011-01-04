@@ -46,6 +46,7 @@ private:
   bool posicionantObjecte, cameraOrtho, modificant_materials;
   void setModelView (int);
   void LoadObject(QString model);
+  void pintarCub(int);
 signals:
     void filferrosChanged(bool);
 
