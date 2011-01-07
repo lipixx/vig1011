@@ -107,7 +107,7 @@ GLWidget::initializeGL ()
   pos_light[1][0] = 0.0f;
   pos_light[1][1] = 0.0f;
   pos_light[1][2] = 0.0f;
-  pos_light[1][3] = 0.0f;
+  pos_light[1][3] = 1.0f;
 
   //Transparències
   glEnable (GL_BLEND);
@@ -147,7 +147,6 @@ GLWidget::resizeGL (int width, int height)
 void
 GLWidget::setModelView (int casView)
 {
-
   glMatrixMode (GL_MODELVIEW);
   glLoadIdentity ();
 
@@ -155,8 +154,8 @@ GLWidget::setModelView (int casView)
   pintarCub(1);
   glLightfv(GL_LIGHT1,GL_POSITION,pos_light[1]);
 
-
   glTranslatef (0, 0, -dist);
+
 
   switch (casView)
     {
