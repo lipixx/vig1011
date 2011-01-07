@@ -37,6 +37,7 @@ private slots:
     void updateG(int);
     void updateB(int);
     void updateA(int);
+    void debug_llums(bool);
 };
 
 #endif // DIALEGMATERIALS_H

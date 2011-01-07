@@ -24,6 +24,7 @@ private:
 
 public slots:
     void setFilferrosCheckBox(bool);
+    void setStatusLlums();
 
 private slots:
     void showMatDialog();

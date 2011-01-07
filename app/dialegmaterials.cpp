@@ -19,6 +19,11 @@ void DialegMaterials::initialize(GLWidget *glw)
      glwidget = glw;
 }
 
+void DialegMaterials::debug_llums(bool b)
+{
+    glwidget->activarDebugLlums(b);
+}
+
 void DialegMaterials::updateData()
 {
    idActual = glwidget->getIdPosicionantObjecte();

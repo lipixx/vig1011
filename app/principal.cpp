@@ -37,6 +37,16 @@ void Principal::showMatDialog()
     }
 }
 
+void Principal::setStatusLlums()
+{
+  std::vector < bool > llums_status;
+
+ llums_status.push_back(ui->st_focus0->isChecked());
+ llums_status.push_back(ui->st_focus1->isChecked());
+
+  ui->gLWidget->setLights(llums_status);
+}
+
 void Principal::showLightDialog()
 {
     if (ui->gLWidget->getIdPosicionantObjecte() == -1) dm.setLightTab(1,false);

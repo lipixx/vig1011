@@ -42,11 +42,14 @@ private:
     GLfloat diff_light[NUM_LIGHTS][4];
     GLfloat spec_light[NUM_LIGHTS][4];
     GLfloat pos_light[NUM_LIGHTS][4];
+    GLenum light[NUM_LIGHTS];
+
   void setDefaultCamera ();
   bool posicionantObjecte, cameraOrtho, modificant_materials;
   void setModelView (int);
   void LoadObject(QString model);
   void pintarCub(int);
+  bool debug;
 signals:
     void filferrosChanged(bool);
 
@@ -61,12 +64,16 @@ signals:
     void carregaDoor();
     void carregaWindow();
     void carregaPyramid();
+    void setHeightFocus(int h);
+
 
 public:
   int getIdPosicionantObjecte();
   void getMaterialObj(int idObjecte, Material * c);
   void setMaterialObj(int idObjecte, Material * c);
   void modificantMaterials(bool);
+  void setLights(std::vector < bool > llums_status);
+   void activarDebugLlums(bool);
 };
 
 #endif
