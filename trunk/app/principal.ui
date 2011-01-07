@@ -40,16 +40,22 @@
    <item row="1" column="1" rowspan="2">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="st_focus0">
        <property name="text">
         <string>Focus 0 - Ambient</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_3">
+      <widget class="QCheckBox" name="st_focus1">
        <property name="text">
         <string>Focus 1 - Observador</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -214,6 +220,15 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QSlider" name="horizontalSlider">
+       <property name="maximum">
+        <number>300</number>
+       </property>
+       <property name="value">
+        <number>50</number>
+       </property>
+       <property name="sliderPosition">
+        <number>50</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -234,7 +249,7 @@
         </size>
        </property>
        <property name="text">
-        <string>0</string>
+        <string>50</string>
        </property>
       </widget>
      </item>
@@ -587,8 +602,8 @@
    <slot>LoadObject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>722</x>
-     <y>56</y>
+     <x>579</x>
+     <y>688</y>
     </hint>
     <hint type="destinationlabel">
      <x>372</x>
@@ -604,7 +619,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>722</x>
-     <y>163</y>
+     <y>152</y>
     </hint>
     <hint type="destinationlabel">
      <x>379</x>
@@ -620,7 +635,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>722</x>
-     <y>190</y>
+     <y>179</y>
     </hint>
     <hint type="destinationlabel">
      <x>329</x>
@@ -636,7 +651,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>722</x>
-     <y>131</y>
+     <y>99</y>
     </hint>
     <hint type="destinationlabel">
      <x>285</x>
@@ -652,7 +667,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>722</x>
-     <y>104</y>
+     <y>72</y>
     </hint>
     <hint type="destinationlabel">
      <x>367</x>
@@ -788,10 +803,75 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>gLWidget</receiver>
+   <slot>setHeightFocus(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>208</x>
+     <y>77</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>horizontalSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>label_3</receiver>
+   <slot>setNum(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>269</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>76</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>st_focus0</sender>
+   <signal>clicked()</signal>
+   <receiver>Principal</receiver>
+   <slot>setStatusLlums()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>344</x>
+     <y>44</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>25</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>st_focus1</sender>
+   <signal>clicked()</signal>
+   <receiver>Principal</receiver>
+   <slot>setStatusLlums()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>278</x>
+     <y>59</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showMatDialog()</slot>
   <slot>setFilferrosCheckBox(bool)</slot>
   <slot>showLightDialog()</slot>
+  <slot>setStatusLlums()</slot>
  </slots>
 </ui>
