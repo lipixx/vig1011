@@ -28,10 +28,16 @@ Model::updateBoundingBox ()
     }
 }
 
+Material
+Model::getModelMaterial()
+{
+    return Scene().matlib.material(faces[0].material);
+}
+
 void
 Model::Render (GLenum mode, bool seleccionant, int idObj, Material m)
 {
-    if (idObj == 0) { m = Scene().matlib.material(faces[0].material);}
+    if (idObj == 0){ m = Scene().matlib.material(faces[0].material);}
     GLfloat mat[3][4] = {{m.ka.r, m.ka.g, m.ka.b, m.ka.a},{m.ks.r, m.ks.g, m.kd.b, m.ks.a},{m.kd.r, m.kd.g, m.kd.b, m.kd.a}};
 
   glBegin (mode);

@@ -3,7 +3,7 @@
 #include <QtOpenGL/qgl.h>
 #include "scene.h"
 
- Objecte::Objecte (std::string n, int mod, Point p, float scl, float ori):
+ Objecte::Objecte (std::string n, int mod, Point p, float scl, float ori,Material m):
 nom (n),
 model (mod),
 pos (p),
@@ -12,7 +12,7 @@ orientation (ori)
 {
 Point pos_valid = *(new Point (p.x, p.y, p.z));
 seleccionat = false;
-material = Material("material bmari", Color(0,0.04,0.63),Color(0,0.08,1.0));
+material = m;
 } 
 
 Objecte::~Objecte (void) 

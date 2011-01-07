@@ -27,7 +27,7 @@ Material material;
 
 public:
 Objecte (std::string nom, int idmod, Point p, float scl,
-	    float ori);
+            float ori, Material m);
   
 ~Objecte (void);
   
