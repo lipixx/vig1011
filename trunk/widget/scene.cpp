@@ -46,7 +46,7 @@ Scene::construirBase ()
   b.updateBoundingBox ();
 
   AddModel (b);
-  Objecte oref ("Base", 0, Point (0, 0, 0), 1, 0);
+  Objecte oref ("Base", 0, Point (0, 0, 0), 1, 0, lmodels[0].getModelMaterial());
   AddObjecte (oref);
 }
 
@@ -138,12 +138,12 @@ Scene::carregaModel (const char *filename)
     scale = 1.0 / sz;
 
   //3.Amb l'identificador lmodel[i] corresponent, crear un objecte (centre000,escalat,orient0º)
-  Objecte obj (filename, i, Point (0, 0, 0), scale, 0);
+  Objecte obj (filename, i, Point (0, 0, 0), scale, 0, m.getModelMaterial());
   this->AddObjecte (obj);
   if (idPosicionantObjecte == -1) idPosicionantObjecte = 1;
   if (lobjectes.size() > 1) lobjectes[idPosicionantObjecte].setSeleccionat(false);
   idPosicionantObjecte = lobjectes.size () - 1;
-  lobjectes[idPosicionantObjecte].setSeleccionat(true);
+  lobjectes[idPosicionantObjecte].setSeleccionat(true);  
 }
 
 void
