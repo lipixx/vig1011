@@ -92,7 +92,7 @@ GLWidget::initializeGL ()
   pos_light[0][3] = 0.0f;
 
   //Iniciem LIGHT1
-  amb_light[1][0] = 0.015f;
+  amb_light[1][0] = 0.15f;
   amb_light[1][1] = 0.015f;
   amb_light[1][2] = 0.015f;
   amb_light[1][3] = 0.015f;
@@ -116,8 +116,17 @@ GLWidget::initializeGL ()
   //Model de colorat, GL_FLAT: ilum. constant, GL_SMOOTH: ilum. Gouraud.
   //glShadeModel(GL_SMOOTH);
   glEnable (GL_LIGHTING);
+
   glEnable (GL_LIGHT0);
+  glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
+  glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
+  glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
+
   glEnable (GL_LIGHT1);
+  glLightfv(GL_LIGHT1,GL_AMBIENT,amb_light[1]);
+  glLightfv(GL_LIGHT1,GL_DIFFUSE,diff_light[1]);
+  glLightfv(GL_LIGHT1,GL_SPECULAR,spec_light[1]);
+
   glEnable(GL_NORMALIZE);
   scene.Init ();
   setDefaultCamera ();
@@ -141,14 +150,13 @@ GLWidget::setModelView (int casView)
 
   glMatrixMode (GL_MODELVIEW);
   glLoadIdentity ();
-  glTranslatef (0, 0, -dist);
 
   //Si volem veure on està el llum 1
   pintarCub(1);
-  glLightfv(GL_LIGHT1,GL_AMBIENT,amb_light[1]);
-  glLightfv(GL_LIGHT1,GL_DIFFUSE,diff_light[1]);
-  glLightfv(GL_LIGHT1,GL_SPECULAR,spec_light[1]);
   glLightfv(GL_LIGHT1,GL_POSITION,pos_light[1]);
+
+
+  glTranslatef (0, 0, -dist);
 
   switch (casView)
     {
@@ -170,10 +178,6 @@ GLWidget::setModelView (int casView)
 
   //Si volem veure on està el llum 0
   pintarCub(0);
-
-  glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
-  glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
-  glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
   glLightfv(GL_LIGHT0,GL_POSITION,pos_light[0]);
 
   // dibuixar eixos aplicacio
@@ -511,14 +515,14 @@ GLWidget::pintarCub(int element)
     switch (element)
     {
        case 0:
-          x = pos_light[0][0];
-          y = pos_light[0][1];
-          z = pos_light[0][2];
+          x = pos_light[0][0]+0.5;
+          y = pos_light[0][1]+0.5;
+          z = pos_light[0][2]+0.5;
         break;
         case 1:
-          x = pos_light[1][0];
-          y = pos_light[1][1];
-          z = pos_light[1][2];
+          x = pos_light[1][0]+0.5;
+          y = pos_light[1][1]+0.5;
+          z = pos_light[1][2]+0.5;
         break;
         default:
         break;
