@@ -43,6 +43,15 @@ void Principal::setStatusLlums()
   ui->gLWidget->redefineixLlum(1,ui->st_focus1->isChecked());
 }
 
+void Principal::resetLights()
+{
+  ui->st_focus0->setChecked(true);
+  ui->st_focus1->setChecked(true);
+  ui->horizontalSlider->setValue(50);
+  ui->label_3->setText("50");
+  ui->gLWidget->initializeLights();
+}
+
 void Principal::showLightDialog()
 {
     if (ui->gLWidget->getIdPosicionantObjecte() == -1) dm.setLightTab(1,false);
