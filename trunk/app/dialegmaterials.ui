@@ -423,8 +423,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>341</width>
-        <height>234</height>
+        <width>96</width>
+        <height>26</height>
        </rect>
       </property>
       <attribute name="label">
@@ -646,8 +646,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>341</width>
-        <height>234</height>
+        <width>96</width>
+        <height>26</height>
        </rect>
       </property>
       <attribute name="label">
@@ -903,6 +903,236 @@
       <string>Veure posicions dels focus</string>
      </property>
     </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>90</y>
+       <width>391</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Color</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>151</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Ambient</string>
+      </property>
+      <widget class="QPushButton" name="boto_ambient">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>131</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>30</y>
+        <width>151</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Difós</string>
+      </property>
+      <widget class="QPushButton" name="boto_difos">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>131</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>140</y>
+        <width>151</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Especular</string>
+      </property>
+      <widget class="QPushButton" name="boto_specular">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>131</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QComboBox" name="lightSelectedBox">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>171</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Llum 0</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Llum 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Llum 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Llum 3</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Llum 4</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>350</y>
+       <width>391</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Posició</string>
+     </property>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>16</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>30</y>
+        <width>16</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>30</y>
+        <width>16</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Z</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="xPos">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>30</y>
+        <width>71</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="yPos">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>30</y>
+        <width>71</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="zPos">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>30</y>
+        <width>71</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QCheckBox" name="llum_activat">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>50</y>
+       <width>84</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Activat</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
@@ -995,8 +1225,8 @@
    <slot>updateR(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>349</x>
-     <y>239</y>
+     <x>344</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -1011,8 +1241,8 @@
    <slot>updateG(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>354</x>
-     <y>279</y>
+     <x>344</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -1027,8 +1257,8 @@
    <slot>updateB(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>338</x>
-     <y>322</y>
+     <x>344</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -1043,8 +1273,8 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>292</x>
-     <y>356</y>
+     <x>310</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>499</x>
@@ -1075,8 +1305,8 @@
    <slot>updateR(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>358</x>
-     <y>275</y>
+     <x>344</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>499</x>
@@ -1092,7 +1322,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>344</x>
-     <y>316</y>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -1107,8 +1337,8 @@
    <slot>updateB(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>322</x>
-     <y>357</y>
+     <x>340</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
@@ -1123,8 +1353,8 @@
    <slot>updateA(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>358</x>
-     <y>398</y>
+     <x>344</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
      <x>494</x>
@@ -1196,6 +1426,134 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>boto_ambient</sender>
+   <signal>clicked()</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>dialegColorA()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>180</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>270</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boto_specular</sender>
+   <signal>clicked()</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>dialegColorS()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>324</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>496</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lightSelectedBox</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>updateLlums()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>197</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>boto_difos</sender>
+   <signal>clicked()</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>dialegColorD()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>194</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>6</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>xPos</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>setPosition()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>153</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>480</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>yPos</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>setPosition()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>428</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>519</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>zPos</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>setPosition()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>553</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>llum_activat</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>DialegMaterials</receiver>
+   <slot>activaLlum(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>88</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>accepta()</slot>
@@ -1206,5 +1564,11 @@
   <slot>updateA(int)</slot>
   <slot>updateN(int)</slot>
   <slot>debug_llums(bool)</slot>
+  <slot>dialegColorA()</slot>
+  <slot>dialegColorS()</slot>
+  <slot>setPosition()</slot>
+  <slot>updateLlums()</slot>
+  <slot>dialegColorD()</slot>
+  <slot>activaLlum(bool)</slot>
  </slots>
 </ui>

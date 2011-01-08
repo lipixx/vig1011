@@ -1,5 +1,6 @@
 #include "dialegmaterials.h"
 #include "ui_dialegmaterials.h"
+#include <QColorDialog>
 
 DialegMaterials::DialegMaterials(QWidget *parent) :
     QWidget(parent),
@@ -7,6 +8,11 @@ DialegMaterials::DialegMaterials(QWidget *parent) :
 {
     ui->setupUi(this);
     idActual = -1;
+    QDoubleValidator *validator = new QDoubleValidator(-100, 100, 3, this);
+    validator->setNotation(QDoubleValidator::ScientificNotation);
+    ui->xPos->setValidator(validator);
+    ui->zPos->setValidator(validator);
+    ui->yPos->setValidator(validator);
 }
 
 DialegMaterials::~DialegMaterials()
@@ -17,11 +23,64 @@ DialegMaterials::~DialegMaterials()
 void DialegMaterials::initialize(GLWidget *glw)
 {
      glwidget = glw;
+     setejaBotons(0);
+     feature_en = true;
 }
 
 void DialegMaterials::debug_llums(bool b)
 {
     glwidget->activarDebugLlums(b);
+}
+
+void DialegMaterials::dialegColorA()
+{
+    QColor color = QColorDialog::getColor(QColor(glwidget->amb_light[ui->lightSelectedBox->currentIndex()][0]*255,glwidget->amb_light[ui->lightSelectedBox->currentIndex()][1]*255,glwidget->amb_light[ui->lightSelectedBox->currentIndex()][2]*255), this);
+    ui->boto_ambient->setPalette(color);
+    glwidget->amb_light[ui->lightSelectedBox->currentIndex()][0] = color.redF();
+    glwidget->amb_light[ui->lightSelectedBox->currentIndex()][1] = color.greenF();
+    glwidget->amb_light[ui->lightSelectedBox->currentIndex()][2] = color.blueF();
+    glwidget->redefineixLlum(ui->lightSelectedBox->currentIndex(),ui->llum_activat->checkState());
+}
+void DialegMaterials::dialegColorS()
+{
+    QColor color = QColorDialog::getColor(QColor(glwidget->diff_light[ui->lightSelectedBox->currentIndex()][0]*255,glwidget->diff_light[ui->lightSelectedBox->currentIndex()][1]*255,glwidget->diff_light[ui->lightSelectedBox->currentIndex()][2]*255), this);
+    ui->boto_specular->setPalette(color);
+    glwidget->diff_light[ui->lightSelectedBox->currentIndex()][0] = color.redF();
+    glwidget->diff_light[ui->lightSelectedBox->currentIndex()][1] = color.greenF();
+    glwidget->diff_light[ui->lightSelectedBox->currentIndex()][2] = color.blueF();
+    glwidget->redefineixLlum(ui->lightSelectedBox->currentIndex(),ui->llum_activat->checkState());
+}
+void DialegMaterials::dialegColorD()
+{
+    QColor color = QColorDialog::getColor(QColor(glwidget->spec_light[ui->lightSelectedBox->currentIndex()][0]*255,glwidget->spec_light[ui->lightSelectedBox->currentIndex()][1]*255,glwidget->spec_light[ui->lightSelectedBox->currentIndex()][2]*255), this);
+    ui->boto_difos->setPalette(color);
+    glwidget->spec_light[ui->lightSelectedBox->currentIndex()][0] = color.redF();
+    glwidget->spec_light[ui->lightSelectedBox->currentIndex()][1] = color.greenF();
+    glwidget->spec_light[ui->lightSelectedBox->currentIndex()][2] = color.blueF();
+    glwidget->redefineixLlum(ui->lightSelectedBox->currentIndex(),ui->llum_activat->checkState());
+}
+
+void DialegMaterials::setPosition()
+{
+    if (feature_en) {
+    int i = ui->lightSelectedBox->currentIndex();
+    glwidget->pos_light[i][0] = ui->xPos->text().toFloat();
+    glwidget->pos_light[i][1] = ui->yPos->text().toFloat();
+    glwidget->pos_light[i][2] = ui->zPos->text().toFloat();
+    glwidget->updateGL();
+    }
+}
+
+void DialegMaterials::activaLlum(bool activacio)
+{
+    glwidget->redefineixLlum(ui->lightSelectedBox->currentIndex(),activacio);
+}
+
+void DialegMaterials::updateLlums()
+{
+    feature_en = false;
+    setejaBotons(ui->lightSelectedBox->currentIndex());      
+    feature_en = true;
 }
 
 void DialegMaterials::updateData()
@@ -69,8 +128,25 @@ void DialegMaterials::updateData()
 
        ui->aSlider_kd->setValue((float)backupMaterial.kd.a*100);
        ui->aSlider_ks->setValue((float)backupMaterial.ks.a*100);
-       ui->aSlider_ka->setValue((float)backupMaterial.ka.a*100);
+       ui->aSlider_ka->setValue((float)backupMaterial.ka.a*100);             
     }
+}
+
+void DialegMaterials::setejaBotons(int i)
+{
+    ui->boto_ambient->setPalette(QColor (glwidget->amb_light[i][0]*255,glwidget->amb_light[i][1]*255,glwidget->amb_light[i][2]*255));
+    ui->boto_difos->setPalette(QColor (glwidget->diff_light[i][0]*255,glwidget->diff_light[i][1]*255,glwidget->diff_light[i][2]*255));
+    ui->boto_specular->setPalette(QColor (glwidget->spec_light[i][0]*255,glwidget->spec_light[i][1]*255,glwidget->spec_light[i][2]*255));
+
+    QString tmp;
+    tmp.setNum(glwidget->pos_light[i][0]);
+    ui->xPos->setText(tmp);
+    tmp.setNum(glwidget->pos_light[i][1]);
+    ui->yPos->setText(tmp);
+    tmp.setNum(glwidget->pos_light[i][2]);
+    ui->zPos->setText(tmp);
+
+    ui->llum_activat->setChecked(glwidget->light_state[i]);
 }
 
 void DialegMaterials::accepta()
@@ -179,7 +255,10 @@ void DialegMaterials::updateA(int a)
 
 void DialegMaterials::setLightTab(int index, bool activar_altre)
 {
-    ui->tabWidget->setCurrentIndex(index);
+    ui->lightSelectedBox->setCurrentIndex(0);
+    setejaBotons(0);
+
+    ui->tabWidget->setCurrentIndex(index);    
     if (!activar_altre)
     {
         switch (index)

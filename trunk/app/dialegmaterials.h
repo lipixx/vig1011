@@ -26,6 +26,8 @@ private:
     GLWidget *glwidget;
     Material nouMaterial, backupMaterial;
     int idActual;
+    void setejaBotons(int i);
+    bool feature_en;
 
 protected:
     void closeEvent(QCloseEvent *e);
@@ -38,6 +40,12 @@ private slots:
     void updateB(int);
     void updateA(int);
     void debug_llums(bool);
+    void dialegColorA();
+    void dialegColorS();
+    void dialegColorD();
+    void setPosition();
+    void updateLlums();
+    void activaLlum(bool);
 };
 
 #endif // DIALEGMATERIALS_H
