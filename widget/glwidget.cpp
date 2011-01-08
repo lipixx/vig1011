@@ -72,6 +72,66 @@ GLWidget::setDefaultCamera ()
 }
 
 void
+GLWidget::initializeLights()
+{
+    //Iniciem LIGHT0
+    amb_light[0][0] = 0.05f;
+    amb_light[0][1] = 0.05f;
+    amb_light[0][2] = 0.05f;
+    amb_light[0][3] = 1.0f;
+    diff_light[0][0] = 0.5f;
+    diff_light[0][1] = 0.5f;
+    diff_light[0][2] = 0.5f;
+    diff_light[0][3] = 1.0f;
+    spec_light[0][0] = 0.5f;
+    spec_light[0][1] = 0.5f;
+    spec_light[0][2] = 0.5f;
+    spec_light[0][3] = 1.0f;
+    pos_light[0][0] = 0.0f;
+    pos_light[0][1] = 5.0f;
+    pos_light[0][2] = 0.0f;
+    pos_light[0][3] = 1.0f;
+
+    //Iniciem LIGHT1 i la resta igual
+
+    for (int i=1; i<NUM_LIGHTS;i++)
+    {
+        light_state[i] = false;
+        amb_light[i][0] = 0.15f;
+        amb_light[i][1] = 0.015f;
+        amb_light[i][2] = 0.015f;
+        amb_light[i][3] = 1.0f;
+        diff_light[i][0] = 0.3f;
+        diff_light[i][1] = 0.3f;
+        diff_light[i][2] = 0.3f;
+        diff_light[i][3] = 1.0f;
+        spec_light[i][0] = 0.3f;
+        spec_light[i][1] = 0.3f;
+        spec_light[i][2] = 0.3f;
+        spec_light[i][3] = 1.0f;
+        pos_light[i][0] = 0.0f;
+        pos_light[i][1] = 0.0f;
+        pos_light[i][2] = 0.0f;
+        pos_light[i][3] = 1.0f;
+        glLightfv(light[i],GL_AMBIENT,amb_light[i]);
+        glLightfv(light[i],GL_DIFFUSE,diff_light[i]);
+        glLightfv(light[i],GL_SPECULAR,spec_light[i]);
+        glDisable(light[i]);
+    }
+    glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
+    glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
+    glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
+
+    //Model de colorat, GL_FLAT: ilum. constant, GL_SMOOTH: ilum. Gouraud.
+    //glShadeModel(GL_FLAT);
+    glEnable (GL_LIGHTING);
+    light_state[0] = true;
+    light_state[1] = true;
+    glEnable (GL_LIGHT0);
+    glEnable (GL_LIGHT1);
+}
+
+void
 GLWidget::initializeGL ()
 {
   glClearColor (0.4f, 0.4f, 0.8f, 1.0f);
@@ -79,61 +139,11 @@ GLWidget::initializeGL ()
   glEnable (GL_DEPTH_TEST);
   glEnable(GL_CULL_FACE);
 
-  //Iniciem LIGHT0
-  amb_light[0][0] = 0.05f;
-  amb_light[0][1] = 0.05f;
-  amb_light[0][2] = 0.05f;
-  amb_light[0][3] = 0.05f;
-  diff_light[0][0] = 0.5f;
-  diff_light[0][1] = 0.5f;
-  diff_light[0][2] = 0.5f;
-  diff_light[0][3] = 0.5f;
-  spec_light[0][0] = 0.5f;
-  spec_light[0][1] = 0.5f;
-  spec_light[0][2] = 0.5f;
-  spec_light[0][3] = 0.5f;
-  pos_light[0][0] = 0.0f;
-  pos_light[0][1] = 5.0f;
-  pos_light[0][2] = 0.0f;
-  pos_light[0][3] = 1.0f;
-
-  //Iniciem LIGHT1 i la resta igual
-
-  for (int i=1; i<NUM_LIGHTS;i++)
-  {
-      amb_light[i][0] = 0.15f;
-      amb_light[i][1] = 0.015f;
-      amb_light[i][2] = 0.015f;
-      amb_light[i][3] = 0.015f;
-      diff_light[i][0] = 0.3f;
-      diff_light[i][1] = 0.3f;
-      diff_light[i][2] = 0.3f;
-      diff_light[i][3] = 0.3f;
-      spec_light[i][0] = 0.3f;
-      spec_light[i][1] = 0.3f;
-      spec_light[i][2] = 0.3f;
-      spec_light[i][3] = 0.3f;
-      pos_light[i][0] = 0.0f;
-      pos_light[i][1] = 0.0f;
-      pos_light[i][2] = 0.0f;
-      pos_light[i][3] = 1.0f;
-      glLightfv(light[i],GL_AMBIENT,amb_light[i]);
-      glLightfv(light[i],GL_DIFFUSE,diff_light[i]);
-      glLightfv(light[i],GL_SPECULAR,spec_light[i]);
-  }
-  glLightfv(GL_LIGHT0,GL_AMBIENT,amb_light[0]);
-  glLightfv(GL_LIGHT0,GL_DIFFUSE,diff_light[0]);
-  glLightfv(GL_LIGHT0,GL_SPECULAR,spec_light[0]);
+  initializeLights();
 
   //Transparències
   glEnable (GL_BLEND);
   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-  //Model de colorat, GL_FLAT: ilum. constant, GL_SMOOTH: ilum. Gouraud.
-  //glShadeModel(GL_SMOOTH);
-  glEnable (GL_LIGHTING);
-  glEnable (GL_LIGHT0);
-  glEnable (GL_LIGHT1);
 
   glEnable(GL_NORMALIZE);
   scene.Init ();
@@ -511,25 +521,32 @@ void GLWidget::setMaterialObj(int idObjecte, Material * c)
 void GLWidget::setHeightFocus(int h)
 {
     pos_light[0][1] = float(h*0.1);
+    updateGL();
+}
 
+void GLWidget::redefineixLlum(int i,bool activar)
+{
+    glLightfv(light[i],GL_AMBIENT,amb_light[i]);
+    glLightfv(light[i],GL_DIFFUSE,diff_light[i]);
+    glLightfv(light[i],GL_SPECULAR,spec_light[i]);
+
+    if (activar)
+    {
+      glEnable(light[i]);
+      light_state[i] = true;
+    }
+    else
+    {
+      glDisable(light[i]);
+      light_state[i] = false;
+    }
     updateGL();
 }
 
 void GLWidget::activarDebugLlums(bool d)
 {
-    debug = d;
+    debug = d;    
     updateGL();
-}
-
-void GLWidget::setLights(std::vector<bool> llums_status)
-{
-   if (llums_status[0] == true) glEnable(GL_LIGHT0);
-       else glDisable(GL_LIGHT0);
-
-   if (llums_status[1] == true) glEnable(GL_LIGHT1);
-       else glDisable(GL_LIGHT1);
-
-   updateGL();
 }
 
 void GLWidget::modificantMaterials(bool b)
