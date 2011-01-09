@@ -352,7 +352,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="ajudaBut">
        <property name="text">
         <string>Ajuda</string>
        </property>

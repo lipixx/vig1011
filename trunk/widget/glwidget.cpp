@@ -585,7 +585,7 @@ void GLWidget::modificantMaterials(bool b)
 void
 GLWidget::pintarCub(int element)
 {
-    float x,y,z;
+    float x=0,y=0,z=0;
     //Pintar el llum 0
     switch (element)
     {

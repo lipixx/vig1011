@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <dialegmaterials.h>
+#include <ajuda.h>
 
 namespace Ui {
     class Principal;
@@ -21,6 +22,7 @@ protected:
 private:
     Ui::Principal *ui;
     DialegMaterials dm;
+    Ajuda aj;
 
 public slots:
     void setFilferrosCheckBox(bool);
@@ -31,6 +33,7 @@ public slots:
 private slots:
     void showMatDialog();
     void showLightDialog();
+    void showAjudaDialog();
 };
 
 #endif // PRINCIPAL_H
