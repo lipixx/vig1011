@@ -9,7 +9,7 @@ DialegMaterials::DialegMaterials(QWidget *parent) :
     ui->setupUi(this);
     idActual = -1;
     QDoubleValidator *validator = new QDoubleValidator(-100, 100, 3, this);
-    validator->setNotation(QDoubleValidator::ScientificNotation);
+    validator->setNotation(QDoubleValidator::StandardNotation);
     ui->xPos->setValidator(validator);
     ui->zPos->setValidator(validator);
     ui->yPos->setValidator(validator);

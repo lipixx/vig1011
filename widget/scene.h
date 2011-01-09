@@ -33,12 +33,16 @@ public:
   void calculaEsfera (Point & centreEscena, double &radi);
   void mouDarrerObjecte (int);
   void mouDarrerObjecte (Point u, Point v);
+  float getEscalat ();
+  void setEscalat(float);
+  Point getPosicio();
   void orientaDarrerObjecte (int);
   bool validarPosicio ();
   int getSeleccionat();  
   //Dialeg materials i colors
   void getMaterialObj(int idObjecte, Material * c);
   void setMaterialObj(int idObjecte, Material * c);
+  void restauraTranspas();
 };
 
 #endif

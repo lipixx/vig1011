@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>733</width>
+    <width>774</width>
     <height>712</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>714</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="focusPolicy">
    <enum>Qt::NoFocus</enum>
@@ -83,7 +89,7 @@
     </layout>
    </item>
    <item row="1" column="4" rowspan="3">
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
       <widget class="QLabel" name="RenderModeLabel">
        <property name="font">
@@ -162,39 +168,174 @@
          <height>90</height>
         </size>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>130</width>
+         <height>100</height>
+        </size>
+       </property>
        <property name="title">
         <string>Materials</string>
        </property>
-       <widget class="QPushButton" name="modMaterial">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>101</width>
-          <height>26</height>
+          <x>12</x>
+          <y>27</y>
+          <width>102</width>
+          <height>62</height>
          </rect>
         </property>
-        <property name="text">
-         <string>Modificar</string>
-        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QPushButton" name="modMaterial">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Modificar</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_8">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Restaura Trans.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
-       <widget class="QPushButton" name="pushButton_8">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>50</y>
-          <width>101</width>
-          <height>26</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Restaura Trans.</string>
-        </property>
-       </widget>
-       <zorder>modMaterial</zorder>
-       <zorder>pushButton_8</zorder>
-       <zorder>modMaterial</zorder>
-       <zorder>pushButton_8</zorder>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>90</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>130</width>
+         <height>100</height>
+        </size>
+       </property>
+       <property name="title">
+        <string>Objecte</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Y</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>Sc.</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QDoubleSpinBox" name="altura">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="decimals">
+               <number>3</number>
+              </property>
+              <property name="minimum">
+               <double>-99.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="escalat">
+              <property name="minimumSize">
+               <size>
+                <width>70</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+              <property name="decimals">
+               <number>3</number>
+              </property>
+              <property name="minimum">
+               <double>-99.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -204,8 +345,8 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>88</width>
-         <height>228</height>
+         <width>85</width>
+         <height>148</height>
         </size>
        </property>
       </spacer>
@@ -309,7 +450,7 @@
      </property>
     </spacer>
    </item>
-   <item row="4" column="0" colspan="5">
+   <item row="4" column="0" colspan="4">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="pushButton_3">
@@ -701,8 +842,8 @@
    <slot>showMatDialog()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>722</x>
-     <y>222</y>
+     <x>714</x>
+     <y>232</y>
     </hint>
     <hint type="destinationlabel">
      <x>536</x>
@@ -849,8 +990,8 @@
      <y>75</y>
     </hint>
     <hint type="destinationlabel">
-     <x>285</x>
-     <y>76</y>
+     <x>325</x>
+     <y>83</y>
     </hint>
    </hints>
   </connection>
@@ -861,8 +1002,8 @@
    <slot>setStatusLlums()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>344</x>
-     <y>44</y>
+     <x>516</x>
+     <y>54</y>
     </hint>
     <hint type="destinationlabel">
      <x>282</x>
@@ -893,12 +1034,76 @@
    <slot>resetLights()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>523</x>
-     <y>80</y>
+     <x>605</x>
+     <y>88</y>
     </hint>
     <hint type="destinationlabel">
      <x>523</x>
      <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>altura</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>gLWidget</receiver>
+   <slot>alturaObjecte(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>750</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>555</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>gLWidget</sender>
+   <signal>nouSeleccionat(double,double)</signal>
+   <receiver>Principal</receiver>
+   <slot>actualitzaParamsObj(double,double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>557</x>
+     <y>475</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>743</x>
+     <y>434</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>escalat</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>gLWidget</receiver>
+   <slot>escalatObjecte(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>750</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>485</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_8</sender>
+   <signal>clicked()</signal>
+   <receiver>gLWidget</receiver>
+   <slot>restauraTranspas()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>672</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>490</x>
+     <y>257</y>
     </hint>
    </hints>
   </connection>
@@ -909,5 +1114,6 @@
   <slot>showLightDialog()</slot>
   <slot>setStatusLlums()</slot>
   <slot>resetLights()</slot>
+  <slot>actualitzaParamsObj(double,double)</slot>
  </slots>
 </ui>

@@ -38,6 +38,7 @@ std::string getNom ();
 int getModelId ();
 Point getPosition ();
 float getScale ();
+void  setScale(float);
 float getOrientation ();
 void setSeleccionat(bool s);
 void setOrientation (float);

@@ -118,7 +118,11 @@ Objecte::getScale ()
 return scale;
 }
 
-
+void
+Objecte::setScale(float escalat)
+{
+    scale = escalat;
+}
 
 float
 Objecte::getOrientation () 
