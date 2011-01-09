@@ -30,7 +30,6 @@ pos_valid.x = pos.x;
 pos_valid.y = pos.y;
 pos_valid.z = pos.z;
 seleccionat = false;
-
 }
 
 void
@@ -51,7 +50,6 @@ void
 
 Objecte::Render (std::vector < Model > &lmodels, GLenum mode, bool seleccionant, int idobj)
 {
-  
     //L'objecte té les dades de "modificació" que aplicarem
     //al model del seu objecte: scale, position, orientation
     //per tant agafarem el model i farem la transformació

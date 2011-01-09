@@ -455,7 +455,7 @@ void GLWidget::LoadObject(QString model)
          // Aquí cal fer el codi per a carregar el model escollit
          const char *mod = (model.toStdString ()).c_str ();
          scene.carregaModel (mod);
-         //setDefaultCamera ();
+         setDefaultCamera ();
          posicionantObjecte = true;
          updateGL ();
        }

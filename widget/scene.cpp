@@ -141,9 +141,40 @@ Scene::carregaModel (const char *filename)
   Objecte obj (filename, i, Point (0, 0, 0), scale, 0, m.getModelMaterial());
   this->AddObjecte (obj);
   if (idPosicionantObjecte == -1) idPosicionantObjecte = 1;
+
   if (lobjectes.size() > 1) lobjectes[idPosicionantObjecte].setSeleccionat(false);
   idPosicionantObjecte = lobjectes.size () - 1;
-  lobjectes[idPosicionantObjecte].setSeleccionat(true);  
+  lobjectes[idPosicionantObjecte].setSeleccionat(true);
+
+  //Si l'objecte col·lisiona, el pujem per amunt
+  bool colisio = false;
+  Box capsaUltimObjectePosicionat = lobjectes[idPosicionantObjecte].getCapsaObjecte (lmodels[lobjectes[idPosicionantObjecte].getModelId ()]);
+
+  Box capsaObjecte;
+  bool final = false;
+  unsigned int j;
+
+  while (!final)
+  {
+  colisio = false;
+  for ( j = 1; j < lobjectes.size () && !colisio; j++)
+    {
+      if ((int) j != idPosicionantObjecte)
+        {
+          capsaObjecte = lobjectes[j].getCapsaObjecte (lmodels[lobjectes[j].getModelId ()]);
+          colisio = detectaColisio(capsaUltimObjectePosicionat,capsaObjecte);
+        }
+    }
+  j--;
+  if (colisio)
+  {
+      Point ul = lobjectes[j].getPosition();
+      lobjectes[idPosicionantObjecte].setPosition(Point(0,capsaObjecte.maxb.y+0.001,0));
+      capsaUltimObjectePosicionat = lobjectes[idPosicionantObjecte].getCapsaObjecte (lmodels[lobjectes[idPosicionantObjecte].getModelId ()]);
+  }
+  else
+      final = true;
+  }
 }
 
 void
@@ -181,7 +212,7 @@ Scene::mouDarrerObjecte (int sentit)
       if (capsaObjecte.maxb.x + p.x > capsaTerra.maxb.x) actual.x = actual.x - (capsaObjecte.maxb.x - capsaTerra.maxb.x) - p.x;
       if (capsaObjecte.maxb.z + p.z > capsaTerra.maxb.z) actual.z = actual.z - (capsaObjecte.maxb.z - capsaTerra.maxb.z) - p.z;
       if (capsaObjecte.minb.x + p.x < capsaTerra.minb.x) actual.x = actual.x + (capsaTerra.minb.x - capsaObjecte.minb.x) - p.x;
-      if (capsaObjecte.minb.z + p.z < capsaTerra.minb.z) actual.z = actual.z + (capsaTerra.minb.z - capsaObjecte.minb.z) - p.z;
+      if (capsaObjecte.minb.z + p.z < capsaTerra.minb.z) actual.z = actual.z + (capsaTerra.minb.z - capsaObjecte.minb.z) - p.z;      
       lobjectes[idPosicionantObjecte].setPosition (actual);
     }
 }
@@ -225,7 +256,31 @@ bool Scene::detectaColisio(Box &obj1, Box &obj2)
 {
     bool resultat = false;
 
+    Box superior;
+
+    //Pla Y
+    if (obj1.maxb.y > obj2.maxb.y)
+    {
+        if (obj1.minb.y < obj2.maxb.y) resultat = true;
+        if (obj1.minb.y == obj2.maxb.y) resultat = false;
+        if (obj1.minb.y > obj2.maxb.y) resultat = false;
+     }
+    if (obj1.maxb.y == obj2.maxb.y)
+     {
+         resultat = true;
+     }
+
+     if (obj1.maxb.y < obj2.maxb.y)
+     {
+         if (obj2.minb.y < obj1.maxb.y) resultat = true;
+         if (obj2.minb.y > obj1.maxb.y) resultat = false;
+         if (obj2.minb.y == obj1.maxb.y) resultat = false;
+     }
+
+
     //Pla X
+    if (resultat)
+    {
     if (obj1.maxb.x > obj2.maxb.x)
     {
        if (obj1.minb.x < obj2.maxb.x) resultat = true;
@@ -265,6 +320,7 @@ bool Scene::detectaColisio(Box &obj1, Box &obj2)
                if (obj2.minb.z == obj1.maxb.z) resultat = false;
            }
     }
+}
     return resultat;
 }
 

@@ -155,30 +155,46 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="minimumSize">
+        <size>
+         <width>50</width>
+         <height>90</height>
+        </size>
        </property>
-       <property name="text">
+       <property name="title">
         <string>Materials</string>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="modMaterial">
-       <property name="text">
-        <string>Modificar material</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton_8">
-       <property name="text">
-        <string>Restaurar transp.</string>
-       </property>
+       <widget class="QPushButton" name="modMaterial">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>101</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Modificar</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_8">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>50</y>
+          <width>101</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Restaura Trans.</string>
+        </property>
+       </widget>
+       <zorder>modMaterial</zorder>
+       <zorder>pushButton_8</zorder>
+       <zorder>modMaterial</zorder>
+       <zorder>pushButton_8</zorder>
       </widget>
      </item>
      <item>
