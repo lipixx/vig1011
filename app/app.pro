@@ -14,10 +14,13 @@ LIBS += ../widget/libglwidgetplugin.so
 
 SOURCES += main.cpp\
         principal.cpp \
-    dialegmaterials.cpp
+    dialegmaterials.cpp \
+    ajuda.cpp
 
 HEADERS  += principal.h \
-    dialegmaterials.h
+    dialegmaterials.h \
+    ajuda.h
 
 FORMS    += principal.ui \
-    dialegmaterials.ui
+    dialegmaterials.ui \
+    ajuda.ui

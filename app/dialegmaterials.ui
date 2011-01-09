@@ -206,8 +206,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>341</width>
-        <height>234</height>
+        <width>96</width>
+        <height>26</height>
        </rect>
       </property>
       <attribute name="label">
@@ -867,7 +867,7 @@
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>280</x>
+       <x>360</x>
        <y>470</y>
        <width>75</width>
        <height>24</height>
@@ -875,19 +875,6 @@
      </property>
      <property name="text">
       <string>Acceptar</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="closeButton_2">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>470</y>
-       <width>75</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Cancelar</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="checkBox">
@@ -1375,22 +1362,6 @@
     <hint type="destinationlabel">
      <x>501</x>
      <y>522</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>closeButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>DialegMaterials</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>449</x>
-     <y>517</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>497</x>
-     <y>511</y>
     </hint>
    </hints>
   </connection>

@@ -8,6 +8,7 @@ Principal::Principal(QWidget *parent) :
 {
     ui->setupUi(this);
     dm.initialize(ui->gLWidget);
+    connect(ui->ajudaBut, SIGNAL(clicked()),this,SLOT(showAjudaDialog()));
 }
 
 Principal::~Principal()
@@ -55,6 +56,11 @@ void Principal::showMatDialog()
     }
 }
 
+void Principal::showAjudaDialog()
+{
+    aj.show();
+}
+
 void Principal::setStatusLlums()
 {
   ui->gLWidget->redefineixLlum(0,ui->st_focus0->isChecked());
@@ -84,6 +90,7 @@ void Principal::showLightDialog()
 void Principal::closeEvent( QCloseEvent *e )
 {
     if (!dm.isHidden()) dm.close();
+    if (!aj.isHidden()) aj.close();
        e->accept();
 }
 
