@@ -256,6 +256,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
     if (scene.validarPosicio ())
       {
         posicionantObjecte = false;
+        emit nouSeleccionat(-1,-1);
         updateGL();
       }
 
@@ -302,6 +303,7 @@ GLWidget::mousePressEvent (QMouseEvent * e)
        if (scene.nouSeleccionat(pixel))
        {
            posicionantObjecte = true;
+           emit nouSeleccionat((double)scene.getEscalat(),(double)scene.getPosicio().y);
            updateGL();
        }
    }
@@ -357,6 +359,7 @@ GLWidget::keyPressEvent (QKeyEvent * e)
                 {
                  scene.mouDarrerObjecte(AL_INFINIT);
                  posicionantObjecte = false;
+                 emit nouSeleccionat(-1,-1);
                 }
               break;
 	    case Qt::Key_Escape:
@@ -364,6 +367,7 @@ GLWidget::keyPressEvent (QKeyEvent * e)
               if (scene.validarPosicio ())
               {
                   posicionantObjecte = false;
+                  emit nouSeleccionat(-1,-1);
                   updateGL();
               }
 	      break;
@@ -380,6 +384,22 @@ GLWidget::keyPressEvent (QKeyEvent * e)
       scene.mouDarrerObjecte (value);
     }
   updateGL ();
+}
+
+void
+GLWidget::alturaObjecte(double altura)
+{
+    if (posicionantObjecte)
+    scene.mouDarrerObjecte(Point(0,(float)altura,0),Point(0,0,0));
+    updateGL();
+}
+
+void
+GLWidget::escalatObjecte(double escalat)
+{
+    if (posicionantObjecte)
+    scene.setEscalat((float)escalat);
+    updateGL();
 }
 
 void
@@ -457,6 +477,7 @@ void GLWidget::LoadObject(QString model)
          scene.carregaModel (mod);
          setDefaultCamera ();
          posicionantObjecte = true;
+         emit nouSeleccionat((double)scene.getEscalat(),(double)scene.getPosicio().y);
          updateGL ();
        }
 }
@@ -521,6 +542,12 @@ void GLWidget::setMaterialObj(int idObjecte, Material * c)
 void GLWidget::setHeightFocus(int h)
 {
     pos_light[0][1] = float(h*0.1);
+    updateGL();
+}
+
+void GLWidget::restauraTranspas()
+{
+    scene.restauraTranspas();
     updateGL();
 }
 

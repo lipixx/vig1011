@@ -218,6 +218,23 @@ Scene::mouDarrerObjecte (int sentit)
 }
 
 void
+Scene::setEscalat(float escalat)
+{
+    lobjectes[idPosicionantObjecte].setScale(escalat);
+}
+
+float
+Scene::getEscalat ()
+{
+   return lobjectes[idPosicionantObjecte].getScale();
+}
+
+Point Scene::getPosicio()
+{
+    return lobjectes[idPosicionantObjecte].getPosition();
+}
+
+void
 Scene::mouDarrerObjecte (Point u, Point v)
 {
   u /= 40;
@@ -322,6 +339,22 @@ bool Scene::detectaColisio(Box &obj1, Box &obj2)
     }
 }
     return resultat;
+}
+
+void Scene::restauraTranspas()
+{
+    Material mod_m;
+    Material * obj_m;
+
+    for (unsigned int i = 1; i < lobjectes.size (); i++)
+      {
+       Model m = lmodels[lobjectes[i].getModelId ()];
+       Material mod_m = m.getModelMaterial();
+       obj_m = lobjectes[i].getMaterial();
+       obj_m->ka.a = mod_m.ka.a;
+       obj_m->kd.a = mod_m.kd.a;
+       obj_m->ks.a = mod_m.ks.a;
+      }
 }
 
 bool

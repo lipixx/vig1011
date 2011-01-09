@@ -27,6 +27,24 @@ void Principal::changeEvent(QEvent *e)
     }
 }
 
+void Principal::actualitzaParamsObj(double esc,double alt)
+{
+    if (esc == -1)
+    {
+        ui->altura->setReadOnly(true);
+        ui->escalat->setReadOnly(true);
+        ui->altura->setValue(0);
+        ui->escalat->setValue(0);
+    }
+    else
+    {
+        ui->altura->setReadOnly(false);
+        ui->altura->setValue(alt);
+        ui->escalat->setReadOnly(false);
+        ui->escalat->setValue(esc);
+    }
+}
+
 void Principal::showMatDialog()
 {
     if (ui->gLWidget->getIdPosicionantObjecte() != -1)

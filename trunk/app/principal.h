@@ -26,6 +26,7 @@ public slots:
     void setFilferrosCheckBox(bool);
     void setStatusLlums();
     void resetLights();
+    void actualitzaParamsObj(double,double);
 
 private slots:
     void showMatDialog();

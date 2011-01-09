@@ -47,6 +47,8 @@ private:
 
 signals:
     void filferrosChanged(bool);
+    void nouSeleccionat(double esc,double alt);
+
 
   public slots:
     void LoadObject ();
@@ -61,7 +63,9 @@ signals:
     void carregaPyramid();
     void setHeightFocus(int h);
     void initializeLights();
-
+    void alturaObjecte(double);
+    void escalatObjecte(double);
+    void restauraTranspas();
 public:
   int getIdPosicionantObjecte();
   void getMaterialObj(int idObjecte, Material * c);
