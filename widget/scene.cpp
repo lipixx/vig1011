@@ -169,7 +169,7 @@ Scene::carregaModel (const char *filename)
   if (colisio)
   {
       Point ul = lobjectes[j].getPosition();
-      lobjectes[idPosicionantObjecte].setPosition(Point(0,capsaObjecte.maxb.y+0.001,0));
+      lobjectes[idPosicionantObjecte].setPosition(Point(0,capsaObjecte.maxb.y,0));
       capsaUltimObjectePosicionat = lobjectes[idPosicionantObjecte].getCapsaObjecte (lmodels[lobjectes[idPosicionantObjecte].getModelId ()]);
   }
   else
