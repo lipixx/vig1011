@@ -1,0 +1,1 @@
+Completar el disseny i programació d'una app. que ens permetrà crear escenes a partir d'instàncies d emodels geomètrics de sòlids i visualitzar-la en filferros.
